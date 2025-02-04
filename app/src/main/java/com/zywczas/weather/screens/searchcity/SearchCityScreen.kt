@@ -7,24 +7,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 import com.zywczas.weather.R
 import com.zywczas.weather.models.City
-import com.zywczas.weather.navigation.Destinations
 import com.zywczas.weather.uicomponents.CityListItem
 import com.zywczas.weather.uicomponents.Toolbar
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SearchCityScreen(
-    navController: NavController,
+    onCityClick: () -> Unit,
     viewModel: SearchCityViewModel = koinViewModel()
 ) {
     LaunchedEffect(Unit) { viewModel.init() }
 
     SearchCityScreen(
         cities = viewModel.cities,
-        onCityClick = { navController.navigate(Destinations.CityWeatherDetails.name) }
+        onCityClick = onCityClick
     )
 }
 
