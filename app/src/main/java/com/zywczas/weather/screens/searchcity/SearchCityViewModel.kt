@@ -3,35 +3,35 @@ package com.zywczas.weather.screens.searchcity
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.zywczas.common_utils.StringProvider
+import com.zywczas.network_forecast.usecase.GetPlaceForecastUseCase
+import com.zywczas.networkcaller.Resource
+import com.zywczas.weather.BaseViewModel
 import com.zywczas.weather.models.City
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class SearchCityViewModel : ViewModel() {
+class SearchCityViewModel(
+    private val stringProvider: StringProvider,
+    private val getPlaceForecastUseCase: GetPlaceForecastUseCase
+) : BaseViewModel() {
 
-    private val mockedCities = listOf(
-        City(id = 67, name = "Bydgoszcz"),
-        City(id = 2, name = "Warszawa"),
-        City(id = 3, name = "Kraków"),
-        City(id = 4, name = "Gdańsk"),
-        City(id = 5, name = "Poznań"),
-        City(id = 6, name = "Wrocław"),
-        City(id = 7, name = "Zakopane"),
-        City(id = 8, name = "Karpacz"),
-    )
-
-    var cities by mutableStateOf<List<City>>(mockedCities)
+    var cities by mutableStateOf<List<City>>(emptyList())
+        private set
+    var timeZone by mutableStateOf("")
         private set
 
     fun init() {
-        loadCities()
+        viewModelScope.launch(Dispatchers.IO) {
+            getForecast()
+        }
     }
 
-    private fun loadCities() {
-        cities = mockedCities2
+    private suspend fun getForecast() {
+        when (val response = getPlaceForecastUseCase.get()) {
+            is Resource.Success -> timeZone = response.data.timezone
+            is Resource.Error -> showError(stringProvider.getString(response.message))
+        }
     }
-
-    private val mockedCities2 = listOf(
-        City(id = 3, name = "Rzeszów"),
-        City(id = 5, name = "Katowice"),
-    )
 }

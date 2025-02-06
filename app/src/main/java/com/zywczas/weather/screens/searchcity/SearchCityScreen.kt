@@ -3,6 +3,7 @@ package com.zywczas.weather.screens.searchcity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.res.stringResource
@@ -22,7 +23,8 @@ fun SearchCityScreen(
 
     SearchCityScreen(
         cities = viewModel.cities,
-        onCityClick = onCityClick
+        onCityClick = onCityClick,
+        timeZone = viewModel.timeZone
     )
 }
 
@@ -30,10 +32,11 @@ fun SearchCityScreen(
 private fun SearchCityScreen(
     cities: List<City>,
     onCityClick: () -> Unit,
+    timeZone: String,
 ) {
     Column {
         Toolbar(stringResource(R.string.search_city_screen))
-
+        Text(timeZone)
         LazyColumn {
             items(cities) { city ->
                 CityListItem(city, onClick = onCityClick)
@@ -56,6 +59,7 @@ private fun PreviewSearchCityScreen() {
             City(id = 7, name = "Zakopane"),
             City(id = 8, name = "Karpacz"),
         ),
-        onCityClick = {}
+        onCityClick = {},
+        timeZone = "Warsaw"
     )
 }
