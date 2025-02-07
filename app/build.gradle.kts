@@ -41,6 +41,10 @@ android {
 
 dependencies {
 
+    implementation(project(":networkcaller"))
+    implementation(project(":network_forecast"))
+    implementation(project(":common_util"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
