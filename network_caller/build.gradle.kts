@@ -4,13 +4,19 @@ plugins {
 }
 
 android {
-    namespace = "com.zywczas.networkcaller"
+    namespace = "com.zywczas.network_caller"
     compileSdk = 35
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        val openweathermapApiKey: String by rootProject.extra
+        buildConfigField("String", "OPENWEATHERMAP_API_KEY", "\"$openweathermapApiKey\"")
     }
 
     buildTypes {

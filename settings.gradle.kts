@@ -21,6 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Weather"
 include(":app")
-include(":networkcaller")
+include(":network_caller")
 include(":network_forecast")
 include(":common_util")
