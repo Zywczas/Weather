@@ -41,7 +41,7 @@ android {
 
 dependencies {
 
-    implementation(project(":networkcaller"))
+    implementation(project(":network_caller"))
     implementation(project(":network_forecast"))
     implementation(project(":common_util"))
 
