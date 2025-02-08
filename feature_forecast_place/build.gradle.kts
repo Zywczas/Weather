@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.zywczas.commonutil"
+    namespace = "com.zywczas.featureforecastplace"
     compileSdk = 35
 
     defaultConfig {
@@ -32,11 +32,11 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.annotation.jvm)
 
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui)
 
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
