@@ -2,7 +2,7 @@ package com.zywczas.network_forecast.usecase
 
 import com.zywczas.common_utils.logD
 import com.zywczas.network_forecast.R
-import com.zywczas.network_forecast.api.PlaceForecastApi
+import com.zywczas.network_forecast.retrofitapi.PlaceForecastApi
 import com.zywczas.network_forecast.domain.PlaceForecast
 import com.zywczas.network_forecast.domain.toDomain
 import com.zywczas.networkcaller.Resource

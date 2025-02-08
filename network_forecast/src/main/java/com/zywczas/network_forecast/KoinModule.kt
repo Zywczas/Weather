@@ -1,6 +1,6 @@
 package com.zywczas.network_forecast
 
-import com.zywczas.network_forecast.api.PlaceForecastApi
+import com.zywczas.network_forecast.retrofitapi.PlaceForecastApi
 import com.zywczas.network_forecast.usecase.GetPlaceForecastUseCase
 import org.koin.core.context.GlobalContext
 import org.koin.core.module.dsl.singleOf
