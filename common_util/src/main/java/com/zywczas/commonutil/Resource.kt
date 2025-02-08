@@ -1,4 +1,4 @@
-package com.zywczas.networkcaller
+package com.zywczas.commonutil
 
 import androidx.annotation.StringRes
 

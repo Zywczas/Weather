@@ -3,15 +3,14 @@ package com.zywczas.weather.screens.searchcity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.zywczas.commoncompose.components.CityListItem
+import com.zywczas.commoncompose.components.Toolbar
 import com.zywczas.weather.R
 import com.zywczas.weather.models.City
-import com.zywczas.weather.uicomponents.CityListItem
-import com.zywczas.weather.uicomponents.Toolbar
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -24,7 +23,6 @@ fun SearchCityScreen(
     SearchCityScreen(
         cities = viewModel.cities,
         onCityClick = onCityClick,
-        timeZone = viewModel.timeZone
     )
 }
 
@@ -32,14 +30,12 @@ fun SearchCityScreen(
 private fun SearchCityScreen(
     cities: List<City>,
     onCityClick: () -> Unit,
-    timeZone: String,
 ) {
     Column {
         Toolbar(stringResource(R.string.search_city_screen))
-        Text(timeZone)
         LazyColumn {
             items(cities) { city ->
-                CityListItem(city, onClick = onCityClick)
+                CityListItem(city.name, onClick = onCityClick)
             }
         }
     }
@@ -60,6 +56,5 @@ private fun PreviewSearchCityScreen() {
             City(id = 8, name = "Karpacz"),
         ),
         onCityClick = {},
-        timeZone = "Warsaw"
     )
 }

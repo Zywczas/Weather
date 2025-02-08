@@ -1,4 +1,4 @@
-package com.zywczas.weather
+package com.zywczas.commonutil
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

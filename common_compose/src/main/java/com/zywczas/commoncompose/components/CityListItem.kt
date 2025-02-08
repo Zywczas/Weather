@@ -1,4 +1,4 @@
-package com.zywczas.weather.uicomponents
+package com.zywczas.commoncompose.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -8,19 +8,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.zywczas.weather.models.City
-import com.zywczas.weather.ui.theme.AppTheme
-import com.zywczas.weather.ui.theme.Spacing
+import com.zywczas.commoncompose.theme.AppTheme
+import com.zywczas.commoncompose.theme.Spacing
 
 @Composable
-fun CityListItem(city: City, onClick: () -> Unit) {
-    Column(
+fun CityListItem(cityName: String, onClick: () -> Unit) {
+    Column(//todo removed unnecessary column
         Modifier
             .padding(Spacing.xxs)
             .fillMaxWidth()
             .clickable { onClick() }
     ) {
-        Text(city.name)
+        Text(cityName)
     }
 }
 
@@ -29,9 +28,7 @@ fun CityListItem(city: City, onClick: () -> Unit) {
 private fun PreviewCity() {
     AppTheme {
         CityListItem(
-            city = City(
-                name = "Bydgoszcz"
-            ),
+            cityName = "Bydgoszcz",
             onClick = {}
         )
     }
