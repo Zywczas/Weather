@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.zywczas.network_forecast"
+    namespace = "com.zywczas.networkforecast"
     compileSdk = 35
 
     defaultConfig {

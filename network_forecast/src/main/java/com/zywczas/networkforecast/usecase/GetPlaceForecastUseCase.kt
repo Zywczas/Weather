@@ -1,11 +1,11 @@
-package com.zywczas.network_forecast.usecase
+package com.zywczas.networkforecast.usecase
 
-import com.zywczas.common_utils.logD
-import com.zywczas.network_forecast.R
-import com.zywczas.network_forecast.api.PlaceForecastApi
-import com.zywczas.network_forecast.domain.PlaceForecast
-import com.zywczas.network_forecast.domain.toDomain
+import com.zywczas.commonutil.logD
 import com.zywczas.networkcaller.Resource
+import com.zywczas.networkforecast.R
+import com.zywczas.networkforecast.domain.PlaceForecast
+import com.zywczas.networkforecast.domain.toDomain
+import com.zywczas.networkforecast.retrofitapi.PlaceForecastApi
 
 class GetPlaceForecastUseCase internal constructor(private val api: PlaceForecastApi) {
 

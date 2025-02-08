@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.zywczas.common_utils"
+    namespace = "com.zywczas.commonutil"
     compileSdk = 35
 
     defaultConfig {
