@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.commoncompose"
+    namespace = "com.zywczas.commoncompose"
     compileSdk = 35
 
     defaultConfig {
