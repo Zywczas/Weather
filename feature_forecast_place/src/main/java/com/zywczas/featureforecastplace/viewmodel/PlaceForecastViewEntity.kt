@@ -1,8 +1,8 @@
-package com.zywczas.networkforecast.domain
+package com.zywczas.featureforecastplace.viewmodel
 
-import com.zywczas.commonutil.theme.TempColor
+import com.example.commoncompose.theme.TempColor
 
-data class PlaceForecast(
+data class PlaceForecastViewEntity(
     val temp: Double = 0.0,
     val humidityPercentage: Int = 0,
     val cloudsPercentage: Int = 0,

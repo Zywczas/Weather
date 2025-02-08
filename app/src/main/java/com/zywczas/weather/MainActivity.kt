@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.zywczas.weather.navigation.AppNavHost
-import com.zywczas.weather.ui.theme.AppTheme
+import com.example.commoncompose.theme.AppTheme
 import org.koin.androidx.compose.KoinAndroidContext
 
 class MainActivity : ComponentActivity() {

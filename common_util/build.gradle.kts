@@ -26,18 +26,14 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
-    implementation(libs.androidx.annotation.jvm)
-
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
+    implementation(libs.koin.compose.viewmodel)
+    implementation(libs.koin.androidx.compose)
 }

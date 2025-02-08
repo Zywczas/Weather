@@ -1,4 +1,4 @@
-package com.zywczas.commonutil.theme
+package com.example.commoncompose.theme
 
 import androidx.compose.ui.graphics.Color
 

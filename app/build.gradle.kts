@@ -40,15 +40,16 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":common_compose"))
+    implementation(project(":common_util"))
     implementation(project(":network_caller"))
     implementation(project(":network_forecast"))
-    implementation(project(":common_util"))
     implementation(project(":feature_forecast_place"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)

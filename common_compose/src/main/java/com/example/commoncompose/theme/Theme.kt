@@ -1,4 +1,4 @@
-package com.zywczas.weather.ui.theme
+package com.example.commoncompose.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
