@@ -1,6 +1,6 @@
 package com.zywczas.weather.navigation
 
-enum class Destinations {
-    SearchCity,
-    PlaceForecast,
-}
+import com.zywczas.featureforecastplace.screens.PlaceForecastArgs
+
+object DestinationSearchCity : Destination()
+object DestinationPlaceForecast : DestinationWithArgs<PlaceForecastArgs>(PlaceForecastArgs::class)

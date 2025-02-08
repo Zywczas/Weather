@@ -13,8 +13,8 @@ internal interface PlaceForecastApi {
 
     @GET(Endpoint.FORECAST)
     suspend fun getForecast(
-        @Query("lat") lat: Double = 52.2297,
-        @Query("lon") lon: Double = 21.0122,
+        @Query("lat") lat: Double,
+        @Query("lon") lon: Double,
         @Query("appid") apiKey: String = ApiKeys.OPEN_WEATHER_MAP,
         @Query("units") units: String = Units.Metric.value,
         @Query("exclude") exclude: String = "${ExcludedReports.Daily.value},${ExcludedReports.Hourly.value},${ExcludedReports.Alerts.value}",
