@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CurrentResponse(
     @SerializedName("temp")
-    val temp: Double = 0.0,
+    val temperature: Double = 0.0,
 
     @SerializedName("humidity")
     val humidityPercentage: Int = 0,
