@@ -12,6 +12,6 @@ class SearchCityViewModel : BaseViewModel() {
         private set
 
     fun init() {
-        cities = listOf(City(name = "Bydgoszcz"))
+        cities = listOf(City(name = "Bydgoszcz", lat = 52.2297, lon = 21.0122))
     }
 }

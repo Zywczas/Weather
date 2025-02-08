@@ -1,6 +1,7 @@
 package com.zywczas.weather.models
 
 data class City(
-    val id: Long = 0,
-    val name: String = ""
+    val name: String = "",
+    val lat: Double = 0.0,
+    val lon: Double = 0.0
 )

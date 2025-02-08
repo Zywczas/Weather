@@ -1,29 +1,35 @@
 package com.zywczas.featureforecastplace.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import com.zywczas.commonutil.BaseViewModel
 import com.zywczas.commonutil.Resource
 import com.zywczas.commonutil.StringProvider
-import com.zywczas.commonutil.logD
+import com.zywczas.featureforecastplace.screens.PlaceForecastArgs
+import com.zywczas.networkforecast.request.PlaceForecastRequest
 import com.zywczas.networkforecast.usecase.GetPlaceForecastUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PlaceForecastViewModel(
+internal class PlaceForecastViewModel(
     private val stringProvider: StringProvider,
     private val getPlaceForecastUseCase: GetPlaceForecastUseCase,
 ) : BaseViewModel() {
 
+    var viewEntity by mutableStateOf(PlaceForecastViewEntity())
+        private set
 
-    fun init() {
+    fun init(args: PlaceForecastArgs) {
         viewModelScope.launch(Dispatchers.IO) {
-            getForecast()
+            getForecast(PlaceForecastRequest(lat = args.lat, lon = args.lon))
         }
     }
 
-    private suspend fun getForecast() {
-        when (val response = getPlaceForecastUseCase.get()) {
-            is Resource.Success -> logD(response.data.toDomain().toString())
+    private suspend fun getForecast(request: PlaceForecastRequest) {
+        when (val response = getPlaceForecastUseCase.get(request)) {
+            is Resource.Success -> viewEntity = response.data.toDomain()
             is Resource.Error -> showError(stringProvider.getString(response.message))
         }
     }
