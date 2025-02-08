@@ -4,8 +4,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
-import com.zywczas.common_utils.StringProvider
-import com.zywczas.network_forecast.usecase.GetPlaceForecastUseCase
+import com.zywczas.commonutil.StringProvider
+import com.zywczas.commonutil.logD
+import com.zywczas.networkforecast.usecase.GetPlaceForecastUseCase
 import com.zywczas.networkcaller.Resource
 import com.zywczas.weather.BaseViewModel
 import com.zywczas.weather.models.City
@@ -30,7 +31,7 @@ class SearchCityViewModel(
 
     private suspend fun getForecast() {
         when (val response = getPlaceForecastUseCase.get()) {
-            is Resource.Success -> timeZone = response.data.timezone
+            is Resource.Success -> logD(response.data.toString())
             is Resource.Error -> showError(stringProvider.getString(response.message))
         }
     }

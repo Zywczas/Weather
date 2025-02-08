@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.zywczas.network_caller"
+    namespace = "com.zywczas.networkcaller"
     compileSdk = 35
 
     buildFeatures {

@@ -1,6 +1,6 @@
-package com.zywczas.network_forecast.domain
+package com.zywczas.networkforecast.domain
 
-import com.zywczas.network_forecast.response.PlaceForecastResponse
+import com.zywczas.networkforecast.response.PlaceForecastResponse
 
 internal fun PlaceForecastResponse.toDomain() = PlaceForecast(
     temp = current.temp,

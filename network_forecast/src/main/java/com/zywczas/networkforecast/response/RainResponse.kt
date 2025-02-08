@@ -1,4 +1,4 @@
-package com.zywczas.network_forecast.response
+package com.zywczas.networkforecast.response
 
 import com.google.gson.annotations.SerializedName
 

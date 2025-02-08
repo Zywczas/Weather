@@ -1,9 +1,9 @@
-package com.zywczas.network_forecast.retrofitapi
+package com.zywczas.networkforecast.retrofitapi
 
-import com.zywczas.network_forecast.openweatherapi.Endpoint
-import com.zywczas.network_forecast.openweatherapi.ExcludedReports
-import com.zywczas.network_forecast.openweatherapi.Units
-import com.zywczas.network_forecast.response.PlaceForecastResponse
+import com.zywczas.networkforecast.openweatherapi.Endpoint
+import com.zywczas.networkforecast.openweatherapi.ExcludedReports
+import com.zywczas.networkforecast.openweatherapi.Units
+import com.zywczas.networkforecast.response.PlaceForecastResponse
 import com.zywczas.networkcaller.ApiKeys
 import retrofit2.Response
 import retrofit2.http.GET

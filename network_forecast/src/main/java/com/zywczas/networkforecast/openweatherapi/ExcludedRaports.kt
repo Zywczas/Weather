@@ -1,4 +1,4 @@
-package com.zywczas.network_forecast.openweatherapi
+package com.zywczas.networkforecast.openweatherapi
 
 internal enum class ExcludedReports(val value: String) {
     Hourly("hourly"),

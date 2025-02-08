@@ -1,4 +1,4 @@
-package com.zywczas.network_forecast.domain
+package com.zywczas.networkforecast.domain
 
 data class PlaceForecast(
     val temp: Double = 0.0,

@@ -1,4 +1,4 @@
-package com.zywczas.common_utils
+package com.zywczas.commonutil
 
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
