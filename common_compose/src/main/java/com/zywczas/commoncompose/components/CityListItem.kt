@@ -1,4 +1,4 @@
-package com.example.commoncompose.components
+package com.zywczas.commoncompose.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -8,8 +8,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.commoncompose.theme.AppTheme
-import com.example.commoncompose.theme.Spacing
+import com.zywczas.commoncompose.theme.AppTheme
+import com.zywczas.commoncompose.theme.Spacing
 
 @Composable
 fun CityListItem(cityName: String, onClick: () -> Unit) {

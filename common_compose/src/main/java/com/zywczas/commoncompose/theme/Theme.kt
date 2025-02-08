@@ -1,4 +1,4 @@
-package com.example.commoncompose.theme
+package com.zywczas.commoncompose.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

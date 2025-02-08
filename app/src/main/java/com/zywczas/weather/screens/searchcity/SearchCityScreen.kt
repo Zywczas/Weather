@@ -7,10 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.zywczas.commoncompose.components.CityListItem
+import com.zywczas.commoncompose.components.Toolbar
 import com.zywczas.weather.R
 import com.zywczas.weather.models.City
-import com.example.commoncompose.components.CityListItem
-import com.example.commoncompose.components.Toolbar
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

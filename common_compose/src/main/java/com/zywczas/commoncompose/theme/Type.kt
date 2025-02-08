@@ -1,4 +1,4 @@
-package com.example.commoncompose.theme
+package com.zywczas.commoncompose.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
