@@ -3,6 +3,7 @@ package com.zywczas.networkforecast.response
 import com.google.gson.annotations.SerializedName
 
 data class CurrentResponse(
+
     @SerializedName("temp")
     val temperature: Double = 0.0,
 

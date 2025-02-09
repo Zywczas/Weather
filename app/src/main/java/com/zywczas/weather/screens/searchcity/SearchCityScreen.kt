@@ -9,13 +9,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.components.CityListItem
 import com.zywczas.commoncompose.components.Toolbar
+import com.zywczas.featureforecastplace.screens.PlaceForecastArgs
 import com.zywczas.weather.R
 import com.zywczas.weather.models.City
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SearchCityScreen(
-    onCityClick: () -> Unit,
+    onCityClick: (PlaceForecastArgs) -> Unit,
     viewModel: SearchCityViewModel = koinViewModel()
 ) {
     LaunchedEffect(Unit) { viewModel.init() }
@@ -29,13 +30,16 @@ fun SearchCityScreen(
 @Composable
 private fun SearchCityScreen(
     cities: List<City>,
-    onCityClick: () -> Unit,
+    onCityClick: (PlaceForecastArgs) -> Unit,
 ) {
     Column {
         Toolbar(stringResource(R.string.search_city_screen))
         LazyColumn {
             items(cities) { city ->
-                CityListItem(city.name, onClick = onCityClick)
+                CityListItem(
+                    city.name,
+                    onClick = { onCityClick(PlaceForecastArgs(lat = city.lat, lon = city.lon, placeName = city.name)) }
+                )
             }
         }
     }
@@ -46,14 +50,14 @@ private fun SearchCityScreen(
 private fun PreviewSearchCityScreen() {
     SearchCityScreen(
         cities = listOf(
-            City(id = 1, name = "Bydgoszcz"),
-            City(id = 2, name = "Warszawa"),
-            City(id = 3, name = "Kraków"),
-            City(id = 4, name = "Gdańsk"),
-            City(id = 5, name = "Poznań"),
-            City(id = 6, name = "Wrocław"),
-            City(id = 7, name = "Zakopane"),
-            City(id = 8, name = "Karpacz"),
+            City(name = "Bydgoszcz"),
+            City(name = "Warszawa"),
+            City(name = "Kraków"),
+            City(name = "Gdańsk"),
+            City(name = "Poznań"),
+            City(name = "Wrocław"),
+            City(name = "Zakopane"),
+            City(name = "Karpacz"),
         ),
         onCityClick = {},
     )

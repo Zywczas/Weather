@@ -5,25 +5,31 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import com.zywczas.commoncompose.components.Toolbar
+import com.zywczas.featureforecastplace.viewmodel.PlaceForecastViewEntity
 import com.zywczas.featureforecastplace.viewmodel.PlaceForecastViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun CityWeatherDetailsScreen(
-    viewModel: PlaceForecastViewModel = koinViewModel()
-) {
-    LaunchedEffect(Unit) { viewModel.init() }
+fun PlaceForecastScreen(args: PlaceForecastArgs) {
 
-    CityWeatherDetailsScreen("add place")//todo add place
+    val viewModel: PlaceForecastViewModel = koinViewModel()
+
+    LaunchedEffect(Unit) { viewModel.init(args) }
+
+    CityWeatherDetailsScreen(
+        toolbarTitle = args.placeName,
+        viewEntity = viewModel.viewEntity
+    )
 }
 
 @Composable
 private fun CityWeatherDetailsScreen(
-    toolbarTitle: String,
+    toolbarTitle: String,//todo move to view entity
+    viewEntity: PlaceForecastViewEntity,
 ) {
     Column {
         Toolbar(toolbarTitle)
-        Text("CityWeatherDetailsScreen")
+        Text(toolbarTitle)
 
     }
 }
