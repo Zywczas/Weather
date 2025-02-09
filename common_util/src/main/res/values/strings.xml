@@ -11,6 +11,9 @@
     <string name="precipitation_value">%1$s mm/h</string>
     <string name="humidity_value">%1$s %%</string>
 
+    <!--    screens-->
+    <string name="search_city_screen">Search City</string>
+
     <!--    errors -->
     <string name="error_forecast_download">Cannot get forecast for the place</string>
 </resources>

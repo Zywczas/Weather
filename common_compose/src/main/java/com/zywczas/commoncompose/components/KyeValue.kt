@@ -16,9 +16,7 @@ import com.zywczas.commoncompose.theme.Spacing
 import com.zywczas.commoncompose.theme.TemperatureColor
 
 @Composable
-fun KeyValue(
-    viewEntity: KeyValueViewEntity
-) {
+fun KeyValue(viewEntity: KeyValueViewEntity) {
     Column {
         Text(
             text = viewEntity.key,
