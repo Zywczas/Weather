@@ -5,7 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.zywczas.featureforecastplace.screens.PlaceForecastScreen
-import com.zywczas.weather.screens.searchcity.SearchCityScreen
+import com.zywczas.featureforecastplace.screens.SearchCityScreen
 
 @Composable
 fun AppNavHost() {

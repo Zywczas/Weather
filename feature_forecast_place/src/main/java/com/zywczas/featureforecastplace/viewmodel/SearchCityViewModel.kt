@@ -1,12 +1,11 @@
-package com.zywczas.weather.screens.searchcity
+package com.zywczas.featureforecastplace.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.zywczas.commonutil.BaseViewModel
-import com.zywczas.weather.models.City
 
-class SearchCityViewModel : BaseViewModel() {
+internal class SearchCityViewModel : BaseViewModel() {
 
     var cities by mutableStateOf<List<City>>(emptyList())
         private set

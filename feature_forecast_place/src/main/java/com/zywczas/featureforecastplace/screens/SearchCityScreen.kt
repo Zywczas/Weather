@@ -1,4 +1,4 @@
-package com.zywczas.weather.screens.searchcity
+package com.zywczas.featureforecastplace.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,16 +10,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.components.CityListItem
 import com.zywczas.commoncompose.components.Toolbar
 import com.zywczas.commoncompose.theme.PreviewTheme
-import com.zywczas.featureforecastplace.screens.PlaceForecastArgs
-import com.zywczas.weather.R
-import com.zywczas.weather.models.City
+import com.zywczas.commonutil.R
+import com.zywczas.featureforecastplace.viewmodel.City
+import com.zywczas.featureforecastplace.viewmodel.SearchCityViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SearchCityScreen(
     onCityClick: (PlaceForecastArgs) -> Unit,
-    viewModel: SearchCityViewModel = koinViewModel()
 ) {
+    val viewModel: SearchCityViewModel = koinViewModel()
+
     LaunchedEffect(Unit) { viewModel.init() }
 
     SearchCityScreen(
