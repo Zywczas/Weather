@@ -1,8 +1,8 @@
 package com.zywczas.networkforecast.usecase
 
+import com.zywczas.commonutil.R
 import com.zywczas.commonutil.Resource
 import com.zywczas.commonutil.logD
-import com.zywczas.networkforecast.R
 import com.zywczas.networkforecast.params.PlaceForecastParams
 import com.zywczas.networkforecast.response.PlaceForecastResponse
 import com.zywczas.networkforecast.retrofitapi.PlaceForecastApi

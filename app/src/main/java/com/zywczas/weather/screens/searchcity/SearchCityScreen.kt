@@ -9,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.components.CityListItem
 import com.zywczas.commoncompose.components.Toolbar
+import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.featureforecastplace.screens.PlaceForecastArgs
 import com.zywczas.weather.R
 import com.zywczas.weather.models.City
@@ -45,20 +46,22 @@ private fun SearchCityScreen(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun PreviewSearchCityScreen() {
-    SearchCityScreen(
-        cities = listOf(
-            City(name = "Bydgoszcz"),
-            City(name = "Warszawa"),
-            City(name = "Kraków"),
-            City(name = "Gdańsk"),
-            City(name = "Poznań"),
-            City(name = "Wrocław"),
-            City(name = "Zakopane"),
-            City(name = "Karpacz"),
-        ),
-        onCityClick = {},
-    )
+    PreviewTheme {
+        SearchCityScreen(
+            cities = listOf(
+                City(name = "Bydgoszcz"),
+                City(name = "Warszawa"),
+                City(name = "Kraków"),
+                City(name = "Gdańsk"),
+                City(name = "Poznań"),
+                City(name = "Wrocław"),
+                City(name = "Zakopane"),
+                City(name = "Karpacz"),
+            ),
+            onCityClick = {},
+        )
+    }
 }

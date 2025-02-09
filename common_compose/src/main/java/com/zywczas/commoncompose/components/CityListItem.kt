@@ -1,7 +1,6 @@
 package com.zywczas.commoncompose.components
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -13,14 +12,13 @@ import com.zywczas.commoncompose.theme.Spacing
 
 @Composable
 fun CityListItem(cityName: String, onClick: () -> Unit) {
-    Column(//todo removed unnecessary column
-        Modifier
+    Text(
+        text = cityName,
+        modifier = Modifier
             .padding(Spacing.xxs)
             .fillMaxWidth()
             .clickable { onClick() }
-    ) {
-        Text(cityName)
-    }
+    )
 }
 
 @Preview(showBackground = true)
