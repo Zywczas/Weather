@@ -59,7 +59,6 @@ private fun SearchCityScreen(
 
         LazyColumn {
             items(cities) { city ->
-
                 CityListItem(
                     city.name,
                     onClick = { onCityClick(PlaceForecastArgs(lat = city.lat, lon = city.lon, placeName = city.name)) }
