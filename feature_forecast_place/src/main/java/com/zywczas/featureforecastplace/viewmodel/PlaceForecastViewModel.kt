@@ -23,13 +23,13 @@ internal class PlaceForecastViewModel(
 
     fun init(args: PlaceForecastArgs) {
         viewModelScope.launch(Dispatchers.IO) {
-            getForecast(PlaceForecastParams(lat = args.lat, lon = args.lon))
+            getForecast(args)
         }
     }
 
-    private suspend fun getForecast(request: PlaceForecastParams) {
-        when (val response = getPlaceForecastUseCase.get(request)) {
-            is Resource.Success -> viewEntity = response.data.toDomain()
+    private suspend fun getForecast(args: PlaceForecastArgs) {
+        when (val response = getPlaceForecastUseCase.get((PlaceForecastParams(lat = args.lat, lon = args.lon)))) {
+            is Resource.Success -> viewEntity = response.data.toDomain(toolbarTitle = args.placeName, stringProvider = stringProvider)
             is Resource.Error -> showError(stringProvider.getString(response.message))
         }
     }

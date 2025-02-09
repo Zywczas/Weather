@@ -1,11 +1,8 @@
 package com.zywczas.featureforecastplace.viewmodel
 
-import com.zywczas.commoncompose.theme.TemperatureColor
+import com.zywczas.commoncompose.components.KeyValueViewEntity
 
 internal data class PlaceForecastViewEntity(
-    val temperature: Double = 0.0,
-    val humidityPercentage: Int = 0,
-    val cloudsPercentage: Int = 0,
-    val rainMmPerHour: Double? = null,
-    val temperatureColor: TemperatureColor = TemperatureColor.get(temperature)
+    val toolbarTitle: String = "",
+    val keyValueItems: List<KeyValueViewEntity> = emptyList()
 )
