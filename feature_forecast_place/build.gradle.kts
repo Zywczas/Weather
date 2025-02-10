@@ -35,6 +35,7 @@ dependencies {
     implementation(project(":common_compose"))
     implementation(project(":common_util"))
     implementation(project(":network_forecast"))
+    implementation(project(":network_places"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

@@ -42,9 +42,10 @@ android {
 dependencies {
     implementation(project(":common_compose"))
     implementation(project(":common_util"))
+    implementation(project(":feature_forecast_place"))
     implementation(project(":network_caller"))
     implementation(project(":network_forecast"))
-    implementation(project(":feature_forecast_place"))
+    implementation(project(":network_places"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
