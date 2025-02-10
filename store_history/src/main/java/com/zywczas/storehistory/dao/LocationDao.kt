@@ -9,7 +9,7 @@ import com.zywczas.storehistory.entity.LocationLocal
 @Dao
 interface LocationDao {
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(model: LocationLocal): Long
 
     @Query("SELECT * FROM Location")

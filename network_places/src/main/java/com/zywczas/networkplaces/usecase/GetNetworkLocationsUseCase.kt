@@ -7,7 +7,7 @@ import com.zywczas.networkplaces.params.LocationsParams
 import com.zywczas.networkplaces.response.LocationResponse
 import com.zywczas.networkplaces.retrofitapi.LocationsApi
 
-class GetLocationsUseCase internal constructor(private val api: LocationsApi) {
+class GetNetworkLocationsUseCase internal constructor(private val api: LocationsApi) {
 
     suspend fun get(params: LocationsParams): Resource<List<LocationResponse>> = try {
         Resource.Success(api.getLocations(params.placeName).body()!!)

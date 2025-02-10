@@ -8,6 +8,7 @@ import com.zywczas.commonutil.StringProvider
 import com.zywczas.featureforecastplace.domain.Location
 import com.zywczas.networkforecast.response.PlaceForecastResponse
 import com.zywczas.networkplaces.response.LocationResponse
+import com.zywczas.storehistory.entity.LocationLocal
 
 internal fun PlaceForecastResponse.toDomain(
     toolbarTitle: String,
@@ -47,5 +48,11 @@ internal fun PlaceForecastResponse.toDomain(
 internal fun LocationResponse.toDomain() = Location(
     name = "$name, $state, $country",
     lat = lat,
-    lon = lon
+    lon = lon,
+)
+
+internal fun LocationLocal.toDomain() = Location(
+    name = name,
+    lat = lat,
+    lon = lon,
 )

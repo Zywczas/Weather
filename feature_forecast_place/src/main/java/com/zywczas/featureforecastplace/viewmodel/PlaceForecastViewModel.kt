@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.zywczas.commonutil.BaseViewModel
 import com.zywczas.commonutil.Resource
 import com.zywczas.commonutil.StringProvider
-import com.zywczas.commonutil.logD
 import com.zywczas.featureforecastplace.screens.PlaceForecastArgs
 import com.zywczas.networkforecast.params.PlaceForecastParams
 import com.zywczas.networkforecast.usecase.GetPlaceForecastUseCase
@@ -27,11 +26,9 @@ internal class PlaceForecastViewModel(
 
     fun init(args: PlaceForecastArgs) {
         viewModelScope.launch(Dispatchers.IO) {
-            logD("getForecast")
             getForecast(args)
         }
         viewModelScope.launch(Dispatchers.IO) {
-            logD("saveSearchLocation")
             saveSearchLocation(args)
         }
     }
@@ -44,13 +41,12 @@ internal class PlaceForecastViewModel(
     }
 
     private suspend fun saveSearchLocation(args: PlaceForecastArgs) {
-        val result = saveLocationsUseCase.save(
+        saveLocationsUseCase.save(
             LocationLocal(
                 name = args.placeName,
                 lat = args.lat,
                 lon = args.lon
             )
         )
-        logD("zapisywanie $result")//todo usunac
     }
 }
