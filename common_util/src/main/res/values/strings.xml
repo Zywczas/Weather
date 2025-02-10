@@ -17,4 +17,5 @@
     <!--    errors -->
     <string name="error_forecast_download">Cannot get forecast for the place</string>
     <string name="error_locations_download">Cannot get locations propositions</string>
+    <string name="error_general">Something went wrong</string>
 </resources>

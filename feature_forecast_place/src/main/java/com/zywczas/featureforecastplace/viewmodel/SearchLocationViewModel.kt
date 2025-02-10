@@ -5,12 +5,24 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import com.zywczas.commonutil.BaseViewModel
+import com.zywczas.commonutil.Constants
+import com.zywczas.commonutil.R.string
 import com.zywczas.commonutil.Resource
 import com.zywczas.commonutil.StringProvider
+import com.zywczas.commonutil.logD
 import com.zywczas.networkplaces.domain.Location
 import com.zywczas.networkplaces.params.LocationsParams
 import com.zywczas.networkplaces.usecase.GetLocationsUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 internal class SearchLocationViewModel(
@@ -24,20 +36,44 @@ internal class SearchLocationViewModel(
     var locations by mutableStateOf<List<Location>>(emptyList())
         private set
 
+    private val searchQueryMutable = MutableSharedFlow<String>()
+    private val searchQueryFlow: SharedFlow<String> = searchQueryMutable
+
     fun init() {
-        viewModelScope.launch(Dispatchers.IO) {
-            getPlaces()
-        }
+        subscribeToSearchQuery()
     }
 
     fun onSearchTextChanged(text: String) {
         searchText = text
+        viewModelScope.launch(Dispatchers.IO) {
+            searchQueryMutable.emit(text)
+        }
     }
 
-    private suspend fun getPlaces() {
-        when (val result = getLocationsUseCase.get(LocationsParams(placeName = "Warszawa"))) {
-            is Resource.Success -> locations = result.data
-            is Resource.Error -> showError(stringProvider.getString(result.message))
+    @OptIn(FlowPreview::class)
+    private fun subscribeToSearchQuery() {
+        searchQueryFlow
+            .onEach { logD(it) }
+            .debounce(Constants.DEBOUNCE)
+            .distinctUntilChanged()
+            .onEach(::getPlaces)
+            .catch { cause ->
+                showError(stringProvider.getString(string.error_general))
+                logD(cause)
+            }
+            .flowOn(Dispatchers.IO)
+            .launchIn(viewModelScope)
+    }
+
+    private suspend fun getPlaces(placeName: String) {
+        val newQuery = placeName.trim()
+        if (newQuery.isNotBlank()) {
+            when (val result = getLocationsUseCase.get(LocationsParams(placeName = newQuery))) {
+                is Resource.Success -> locations = result.data
+                is Resource.Error -> showError(stringProvider.getString(result.message))
+            }
+        } else {
+            locations = emptyList()
         }
     }
 }
