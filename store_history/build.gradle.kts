@@ -34,5 +34,5 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.room)
     implementation(libs.roomktx)
-    implementation(libs.roomCompiler)
+    annotationProcessor(libs.roomCompiler)
 }
