@@ -2,6 +2,7 @@ package com.zywczas.featureforecastplace.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,9 +20,8 @@ import com.zywczas.commoncompose.components.Toolbar
 import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.commoncompose.theme.Spacing
 import com.zywczas.commonutil.R
-import com.zywczas.commonutil.RegexExps
-import com.zywczas.featureforecastplace.viewmodel.SearchLocationViewModel
 import com.zywczas.featureforecastplace.domain.Location
+import com.zywczas.featureforecastplace.viewmodel.SearchLocationViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -50,12 +50,9 @@ private fun SearchLocationScreen(
     Column {
         Toolbar(stringResource(R.string.search_city_screen))
 
-        OutlinedTextInput(
-            value = searchText,
-            onValueChange = onSearchTextChanged,
-            modifier = Modifier.padding(horizontal = Spacing.m),
-            regexFilter = RegexExps.INPUT_CITY_TYPING
-        )
+        Row(Modifier.padding(horizontal = Spacing.m)) {
+            OutlinedTextInput(value = searchText, onValueChange = onSearchTextChanged)
+        }
 
         Spacer(Modifier.height(Spacing.l))
 
