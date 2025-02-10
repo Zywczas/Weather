@@ -21,7 +21,7 @@ import com.zywczas.commoncompose.theme.Spacing
 import com.zywczas.commonutil.R
 import com.zywczas.commonutil.RegexExps
 import com.zywczas.featureforecastplace.viewmodel.SearchLocationViewModel
-import com.zywczas.networkplaces.domain.Location
+import com.zywczas.featureforecastplace.domain.Location
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

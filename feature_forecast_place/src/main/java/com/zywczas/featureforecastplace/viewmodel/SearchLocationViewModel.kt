@@ -11,7 +11,7 @@ import com.zywczas.commonutil.R
 import com.zywczas.commonutil.Resource
 import com.zywczas.commonutil.StringProvider
 import com.zywczas.commonutil.logD
-import com.zywczas.networkplaces.domain.Location
+import com.zywczas.featureforecastplace.domain.Location
 import com.zywczas.networkplaces.params.LocationsParams
 import com.zywczas.networkplaces.usecase.GetLocationsUseCase
 import kotlinx.coroutines.Dispatchers
@@ -70,7 +70,7 @@ internal class SearchLocationViewModel(
         val newQuery = placeName.trim()
         if (newQuery.isNotBlank()) {
             when (val result = getLocationsUseCase.get(LocationsParams(placeName = newQuery))) {
-                is Resource.Success -> locations = result.data
+                is Resource.Success -> locations = result.data.map { it.toDomain() }
                 is Resource.Error -> showError(stringProvider.getString(result.message))
             }
         } else {

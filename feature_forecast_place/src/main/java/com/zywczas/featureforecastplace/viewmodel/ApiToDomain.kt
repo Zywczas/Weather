@@ -5,7 +5,9 @@ import com.zywczas.commoncompose.components.KeyValueViewEntity
 import com.zywczas.commoncompose.theme.TemperatureColor
 import com.zywczas.commonutil.R
 import com.zywczas.commonutil.StringProvider
+import com.zywczas.featureforecastplace.domain.Location
 import com.zywczas.networkforecast.response.PlaceForecastResponse
+import com.zywczas.networkplaces.response.LocationResponse
 
 internal fun PlaceForecastResponse.toDomain(
     toolbarTitle: String,
@@ -41,3 +43,9 @@ internal fun PlaceForecastResponse.toDomain(
         )
     )
 }
+
+internal fun LocationResponse.toDomain() = Location(
+    name = "$name, $state, $country",
+    lat = lat,
+    lon = lon
+)
