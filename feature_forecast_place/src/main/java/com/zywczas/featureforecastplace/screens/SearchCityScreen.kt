@@ -1,5 +1,6 @@
 package com.zywczas.featureforecastplace.screens
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -11,15 +12,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.zywczas.commoncompose.components.CityListItem
+import com.zywczas.commoncompose.components.LocationListItem
 import com.zywczas.commoncompose.components.OutlinedTextInput
 import com.zywczas.commoncompose.components.Toolbar
 import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.commoncompose.theme.Spacing
 import com.zywczas.commonutil.R
 import com.zywczas.commonutil.RegexExps
-import com.zywczas.featureforecastplace.viewmodel.City
 import com.zywczas.featureforecastplace.viewmodel.SearchCityViewModel
+import com.zywczas.networkplaces.domain.Location
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -31,7 +32,7 @@ fun SearchCityScreen(
     LaunchedEffect(Unit) { viewModel.init() }
 
     SearchCityScreen(
-        cities = viewModel.cities,
+        locations = viewModel.cities,
         onCityClick = onCityClick,
         searchText = viewModel.searchText,
         onSearchTextChanged = viewModel::onSearchTextChanged
@@ -40,7 +41,7 @@ fun SearchCityScreen(
 
 @Composable
 private fun SearchCityScreen(
-    cities: List<City>,
+    locations: List<Location>,
     onCityClick: (PlaceForecastArgs) -> Unit,
     searchText: String,
     onSearchTextChanged: (String) -> Unit
@@ -55,13 +56,15 @@ private fun SearchCityScreen(
             regexFilter = RegexExps.INPUT_CITY_TYPING
         )
 
-        Spacer(Modifier.height(Spacing.s))
+        Spacer(Modifier.height(Spacing.l))
 
-        LazyColumn {
-            items(cities) { city ->
-                CityListItem(
-                    city.name,
-                    onClick = { onCityClick(PlaceForecastArgs(lat = city.lat, lon = city.lon, placeName = city.name)) }
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(Spacing.xxs)
+        ) {
+            items(locations) { location ->
+                LocationListItem(
+                    location.name,
+                    onClick = { onCityClick(PlaceForecastArgs(lat = location.lat, lon = location.lon, placeName = location.name)) }
                 )
             }
         }
@@ -73,15 +76,15 @@ private fun SearchCityScreen(
 private fun PreviewSearchCityScreen() {
     PreviewTheme {
         SearchCityScreen(
-            cities = listOf(
-                City(name = "Bydgoszcz"),
-                City(name = "Warszawa"),
-                City(name = "Kraków"),
-                City(name = "Gdańsk"),
-                City(name = "Poznań"),
-                City(name = "Wrocław"),
-                City(name = "Zakopane"),
-                City(name = "Karpacz"),
+            locations = listOf(
+                Location(name = "Bydgoszcz"),
+                Location(name = "Warszawa"),
+                Location(name = "Kraków"),
+                Location(name = "Gdańsk"),
+                Location(name = "Poznań"),
+                Location(name = "Wrocław"),
+                Location(name = "Zakopane"),
+                Location(name = "Karpacz"),
             ),
             onCityClick = {},
             searchText = "Warszawa",

@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.zywczas.commonutil.BaseViewModel
 import com.zywczas.commonutil.Resource
 import com.zywczas.commonutil.StringProvider
-import com.zywczas.commonutil.logD
+import com.zywczas.networkplaces.domain.Location
 import com.zywczas.networkplaces.params.LocationsParams
 import com.zywczas.networkplaces.usecase.GetLocationsUseCase
 import kotlinx.coroutines.Dispatchers
@@ -21,11 +21,10 @@ internal class SearchCityViewModel(
     var searchText by mutableStateOf("")
         private set
 
-    var cities by mutableStateOf<List<City>>(emptyList())
+    var cities by mutableStateOf<List<Location>>(emptyList())
         private set
 
     fun init() {
-        cities = listOf(City(name = "Bydgoszcz", lat = 52.2297, lon = 21.0122))
         viewModelScope.launch(Dispatchers.IO) {
             getPlaces()
         }
@@ -37,7 +36,7 @@ internal class SearchCityViewModel(
 
     private suspend fun getPlaces() {
         when (val result = getLocationsUseCase.get(LocationsParams(placeName = "Warszawa"))) {
-            is Resource.Success -> logD(result.data)
+            is Resource.Success -> cities = result.data
             is Resource.Error -> showError(stringProvider.getString(result.message))
         }
     }
