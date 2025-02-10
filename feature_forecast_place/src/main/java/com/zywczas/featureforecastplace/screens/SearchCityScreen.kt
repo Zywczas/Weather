@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.components.LocationListItem
 import com.zywczas.commoncompose.components.OutlinedTextInput
@@ -43,8 +44,8 @@ fun SearchLocationScreen(
 private fun SearchLocationScreen(
     locations: List<Location>,
     onCityClick: (PlaceForecastArgs) -> Unit,
-    searchText: String,
-    onSearchTextChanged: (String) -> Unit
+    searchText: TextFieldValue,
+    onSearchTextChanged: (TextFieldValue) -> Unit
 ) {
     Column {
         Toolbar(stringResource(R.string.search_city_screen))
@@ -87,7 +88,7 @@ private fun PreviewSearchCityScreen() {
                 Location(name = "Karpacz"),
             ),
             onCityClick = {},
-            searchText = "Warszawa",
+            searchText = TextFieldValue("Warszawa"),
             onSearchTextChanged = {}
         )
     }

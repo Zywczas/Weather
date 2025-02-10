@@ -5,12 +5,13 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.TextFieldValue
 import java.util.regex.Pattern
 
 @Composable
 fun OutlinedTextInput(
-    value: String,
-    onValueChange: (String) -> Unit,
+    value: TextFieldValue,
+    onValueChange: (TextFieldValue) -> Unit,
     modifier: Modifier = Modifier,
     regexFilter: String? = null
 ) {
@@ -19,7 +20,7 @@ fun OutlinedTextInput(
         value = value,
         onValueChange = { newValue ->
             if (pattern != null) {
-                if (pattern.matcher(newValue).matches()) {
+                if (pattern.matcher(newValue.text).matches()) {
                     onValueChange(newValue)
                 }
             } else {
