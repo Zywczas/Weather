@@ -11,9 +11,10 @@ import com.zywczas.commonutil.R
 import com.zywczas.commonutil.Resource
 import com.zywczas.commonutil.StringProvider
 import com.zywczas.commonutil.logD
-import com.zywczas.networkplaces.domain.Location
+import com.zywczas.featureforecastplace.domain.Location
 import com.zywczas.networkplaces.params.LocationsParams
-import com.zywczas.networkplaces.usecase.GetLocationsUseCase
+import com.zywczas.networkplaces.usecase.GetNetworkLocationsUseCase
+import com.zywczas.storehistory.usecase.GetLocationsHistoryUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -28,7 +29,8 @@ import kotlinx.coroutines.launch
 
 internal class SearchLocationViewModel(
     private val stringProvider: StringProvider,
-    private val getLocationsUseCase: GetLocationsUseCase
+    private val getNetworkLocationsUseCase: GetNetworkLocationsUseCase,
+    private val getLocationsHistoryUseCase: GetLocationsHistoryUseCase
 ) : BaseViewModel() {
 
     var searchText by mutableStateOf(TextFieldValue())
@@ -41,6 +43,9 @@ internal class SearchLocationViewModel(
     private val searchQueryFlow: SharedFlow<String> = searchQueryMutable
 
     fun init() {
+        viewModelScope.launch(Dispatchers.IO) {
+            getHistoryLocations()
+        }
         subscribeToSearchQuery()
     }
 
@@ -54,7 +59,6 @@ internal class SearchLocationViewModel(
     @OptIn(FlowPreview::class)
     private fun subscribeToSearchQuery() {
         searchQueryFlow
-            .onEach { logD(it) }
             .debounce(Constants.DEBOUNCE)
             .distinctUntilChanged()
             .onEach(::getPlaces)
@@ -69,12 +73,16 @@ internal class SearchLocationViewModel(
     private suspend fun getPlaces(placeName: String) {
         val newQuery = placeName.trim()
         if (newQuery.isNotBlank()) {
-            when (val result = getLocationsUseCase.get(LocationsParams(placeName = newQuery))) {
-                is Resource.Success -> locations = result.data
+            when (val result = getNetworkLocationsUseCase.get(LocationsParams(placeName = newQuery))) {
+                is Resource.Success -> locations = result.data.map { it.toDomain() }
                 is Resource.Error -> showError(stringProvider.getString(result.message))
             }
         } else {
-            locations = emptyList()
+            getHistoryLocations()
         }
+    }
+
+    private suspend fun getHistoryLocations() {
+        locations = getLocationsHistoryUseCase.get().map { it.toDomain() }
     }
 }

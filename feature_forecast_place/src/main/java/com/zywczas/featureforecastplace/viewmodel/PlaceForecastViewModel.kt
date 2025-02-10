@@ -10,12 +10,15 @@ import com.zywczas.commonutil.StringProvider
 import com.zywczas.featureforecastplace.screens.PlaceForecastArgs
 import com.zywczas.networkforecast.params.PlaceForecastParams
 import com.zywczas.networkforecast.usecase.GetPlaceForecastUseCase
+import com.zywczas.storehistory.entity.LocationLocal
+import com.zywczas.storehistory.usecase.SaveLocationUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 internal class PlaceForecastViewModel(
     private val stringProvider: StringProvider,
     private val getPlaceForecastUseCase: GetPlaceForecastUseCase,
+    private val saveLocationsUseCase: SaveLocationUseCase
 ) : BaseViewModel() {
 
     var viewEntity by mutableStateOf(PlaceForecastViewEntity())
@@ -25,6 +28,9 @@ internal class PlaceForecastViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             getForecast(args)
         }
+        viewModelScope.launch(Dispatchers.IO) {
+            saveSearchLocation(args)
+        }
     }
 
     private suspend fun getForecast(args: PlaceForecastArgs) {
@@ -32,5 +38,15 @@ internal class PlaceForecastViewModel(
             is Resource.Success -> viewEntity = response.data.toDomain(toolbarTitle = args.placeName, stringProvider = stringProvider)
             is Resource.Error -> showError(stringProvider.getString(response.message))
         }
+    }
+
+    private suspend fun saveSearchLocation(args: PlaceForecastArgs) {
+        saveLocationsUseCase.save(
+            LocationLocal(
+                name = args.placeName,
+                lat = args.lat,
+                lon = args.lon
+            )
+        )
     }
 }

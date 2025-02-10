@@ -1,4 +1,4 @@
-package com.zywczas.networkplaces.domain
+package com.zywczas.featureforecastplace.domain
 
 data class Location(
     val name: String = "",
