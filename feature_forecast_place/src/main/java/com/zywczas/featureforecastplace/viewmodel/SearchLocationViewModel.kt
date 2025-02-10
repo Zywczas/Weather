@@ -13,7 +13,7 @@ import com.zywczas.networkplaces.usecase.GetLocationsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-internal class SearchCityViewModel(
+internal class SearchLocationViewModel(
     private val stringProvider: StringProvider,
     private val getLocationsUseCase: GetLocationsUseCase
 ) : BaseViewModel() {
@@ -21,7 +21,7 @@ internal class SearchCityViewModel(
     var searchText by mutableStateOf("")
         private set
 
-    var cities by mutableStateOf<List<Location>>(emptyList())
+    var locations by mutableStateOf<List<Location>>(emptyList())
         private set
 
     fun init() {
@@ -36,7 +36,7 @@ internal class SearchCityViewModel(
 
     private suspend fun getPlaces() {
         when (val result = getLocationsUseCase.get(LocationsParams(placeName = "Warszawa"))) {
-            is Resource.Success -> cities = result.data
+            is Resource.Success -> locations = result.data
             is Resource.Error -> showError(stringProvider.getString(result.message))
         }
     }

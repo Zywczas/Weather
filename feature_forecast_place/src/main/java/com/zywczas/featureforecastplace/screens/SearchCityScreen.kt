@@ -19,20 +19,20 @@ import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.commoncompose.theme.Spacing
 import com.zywczas.commonutil.R
 import com.zywczas.commonutil.RegexExps
-import com.zywczas.featureforecastplace.viewmodel.SearchCityViewModel
+import com.zywczas.featureforecastplace.viewmodel.SearchLocationViewModel
 import com.zywczas.networkplaces.domain.Location
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SearchCityScreen(
+fun SearchLocationScreen(
     onCityClick: (PlaceForecastArgs) -> Unit,
 ) {
-    val viewModel: SearchCityViewModel = koinViewModel()
+    val viewModel: SearchLocationViewModel = koinViewModel()
 
     LaunchedEffect(Unit) { viewModel.init() }
 
-    SearchCityScreen(
-        locations = viewModel.cities,
+    SearchLocationScreen(
+        locations = viewModel.locations,
         onCityClick = onCityClick,
         searchText = viewModel.searchText,
         onSearchTextChanged = viewModel::onSearchTextChanged
@@ -40,7 +40,7 @@ fun SearchCityScreen(
 }
 
 @Composable
-private fun SearchCityScreen(
+private fun SearchLocationScreen(
     locations: List<Location>,
     onCityClick: (PlaceForecastArgs) -> Unit,
     searchText: String,
@@ -75,7 +75,7 @@ private fun SearchCityScreen(
 @Composable
 private fun PreviewSearchCityScreen() {
     PreviewTheme {
-        SearchCityScreen(
+        SearchLocationScreen(
             locations = listOf(
                 Location(name = "Bydgoszcz"),
                 Location(name = "Warszawa"),
