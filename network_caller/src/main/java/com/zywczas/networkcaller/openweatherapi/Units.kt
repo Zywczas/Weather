@@ -1,4 +1,4 @@
-package com.zywczas.networkforecast.openweatherapi
+package com.zywczas.networkcaller.openweatherapi
 
 enum class Units(val value: String) {
     Metric("metric")

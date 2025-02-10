@@ -35,8 +35,8 @@ android {
 
 dependencies {
 
-    api(libs.retrofit)
     api(libs.gsonConverter)
+    implementation(libs.retrofit)
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
     implementation(libs.okHttpInterceptor)
