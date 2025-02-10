@@ -10,6 +10,7 @@ koin = "4.0.2"
 retrofit = "2.11.0"
 okHttp = "4.12.0"
 annotationJvm = "1.9.1"
+room = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,6 +33,9 @@ gsonConverter = { group = "com.squareup.retrofit2", name = "converter-gson", ver
 okHttpInterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okHttp" }
 okHttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttp" }
 androidx-annotation-jvm = { group = "androidx.annotation", name = "annotation-jvm", version.ref = "annotationJvm" }
+room = { group = "androidx.room", name = "room-runtim", version.ref = "room" }
+roomktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+roomCompiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
