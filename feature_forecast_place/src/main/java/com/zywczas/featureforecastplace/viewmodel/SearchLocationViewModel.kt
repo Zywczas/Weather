@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import com.zywczas.commonutil.BaseViewModel
 import com.zywczas.commonutil.Constants
-import com.zywczas.commonutil.R.string
+import com.zywczas.commonutil.R
 import com.zywczas.commonutil.Resource
 import com.zywczas.commonutil.StringProvider
 import com.zywczas.commonutil.logD
@@ -58,7 +58,7 @@ internal class SearchLocationViewModel(
             .distinctUntilChanged()
             .onEach(::getPlaces)
             .catch { cause ->
-                showError(stringProvider.getString(string.error_general))
+                showError(stringProvider.getString(R.string.error_general))
                 logD(cause)
             }
             .flowOn(Dispatchers.IO)
