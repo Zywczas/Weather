@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.zywczas.commonutil.BaseViewModel
 import com.zywczas.commonutil.Constants
 import com.zywczas.commonutil.R
+import com.zywczas.commonutil.RegexExps
 import com.zywczas.commonutil.Resource
 import com.zywczas.commonutil.StringProvider
 import com.zywczas.commonutil.logD
@@ -26,12 +27,15 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import java.util.regex.Pattern
 
 internal class SearchLocationViewModel(
     private val stringProvider: StringProvider,
     private val getNetworkLocationsUseCase: GetNetworkLocationsUseCase,
     private val getLocationsHistoryUseCase: GetLocationsHistoryUseCase
 ) : BaseViewModel() {
+
+    private val cityNamePattern: Pattern = Pattern.compile(RegexExps.INPUT_CITY_TYPING)
 
     var searchText by mutableStateOf(TextFieldValue())
         private set
@@ -50,9 +54,11 @@ internal class SearchLocationViewModel(
     }
 
     fun onSearchTextChanged(textFieldValue: TextFieldValue) {
-        searchText = textFieldValue
-        viewModelScope.launch(Dispatchers.IO) {
-            searchQueryMutable.emit(textFieldValue.text)
+        if (cityNamePattern.matcher(textFieldValue.text).matches()) {
+            searchText = textFieldValue
+            viewModelScope.launch(Dispatchers.IO) {
+                searchQueryMutable.emit(textFieldValue.text)
+            }
         }
     }
 
