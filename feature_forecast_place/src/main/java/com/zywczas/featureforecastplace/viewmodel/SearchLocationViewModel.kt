@@ -3,6 +3,7 @@ package com.zywczas.featureforecastplace.viewmodel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.viewModelScope
 import com.zywczas.commonutil.BaseViewModel
 import com.zywczas.commonutil.Constants
@@ -30,7 +31,7 @@ internal class SearchLocationViewModel(
     private val getLocationsUseCase: GetLocationsUseCase
 ) : BaseViewModel() {
 
-    var searchText by mutableStateOf("")
+    var searchText by mutableStateOf(TextFieldValue())
         private set
 
     var locations by mutableStateOf<List<Location>>(emptyList())
@@ -43,10 +44,10 @@ internal class SearchLocationViewModel(
         subscribeToSearchQuery()
     }
 
-    fun onSearchTextChanged(text: String) {
-        searchText = text
+    fun onSearchTextChanged(textFieldValue: TextFieldValue) {
+        searchText = textFieldValue
         viewModelScope.launch(Dispatchers.IO) {
-            searchQueryMutable.emit(text)
+            searchQueryMutable.emit(textFieldValue.text)
         }
     }
 
