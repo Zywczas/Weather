@@ -1,3 +1,5 @@
+import com.zywczas.buildutils.Versions
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -6,16 +8,14 @@ plugins {
 
 android {
     namespace = "com.zywczas.weather"
-    compileSdk = 35
+    compileSdk = Versions.COMPILE_SDK
 
     defaultConfig {
         applicationId = "com.zywczas.weather"
-        minSdk = 26
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        minSdk = Versions.MIN_SDK
+        targetSdk = Versions.TARGET_SDK
+        versionCode = Versions.VERSION_CODE
+        versionName = Versions.VERSION_NAME
     }
 
     buildTypes {
@@ -28,11 +28,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = Versions.JAVA_VERSION
+        targetCompatibility = Versions.JAVA_VERSION
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = Versions.JVM_TARGET
     }
     buildFeatures {
         compose = true
