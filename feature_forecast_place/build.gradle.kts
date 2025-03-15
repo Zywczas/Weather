@@ -1,3 +1,5 @@
+import com.zywczas.buildutils.Versions
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -6,12 +8,10 @@ plugins {
 
 android {
     namespace = "com.zywczas.featureforecastplace"
-    compileSdk = 35
+    compileSdk = Versions.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 26
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        minSdk = Versions.MIN_SDK
     }
 
     buildTypes {
@@ -20,11 +20,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = Versions.JAVA_VERSION
+        targetCompatibility = Versions.JAVA_VERSION
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = Versions.JVM_TARGET
     }
     buildFeatures {
         compose = true

@@ -1,3 +1,5 @@
+import com.zywczas.buildutils.Versions
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -5,16 +7,15 @@ plugins {
 
 android {
     namespace = "com.zywczas.networkcaller"
-    compileSdk = 35
+    compileSdk = Versions.COMPILE_SDK
 
     buildFeatures {
         buildConfig = true
     }
 
     defaultConfig {
-        minSdk = 26
+        minSdk = Versions.MIN_SDK
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         val openweathermapApiKey: String by rootProject.extra
         buildConfigField("String", "OPENWEATHERMAP_API_KEY", "\"$openweathermapApiKey\"")
     }
@@ -25,11 +26,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = Versions.JAVA_VERSION
+        targetCompatibility = Versions.JAVA_VERSION
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = Versions.JVM_TARGET
     }
 }
 
