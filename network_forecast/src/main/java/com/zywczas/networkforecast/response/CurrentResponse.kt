@@ -14,5 +14,8 @@ data class CurrentResponse(
     val cloudsPercentage: Int = 0,
 
     @SerializedName("rain")
-    val rain: RainResponse? = null
+    val rain: RainResponse? = null,
+
+    @SerializedName("weather")
+    val weather: List<WeatherResponse> = emptyList(),
 )

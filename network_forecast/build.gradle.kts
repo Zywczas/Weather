@@ -31,6 +31,8 @@ dependencies {
 
     implementation(project(":network_caller"))
     implementation(project(":common_util"))
+
+    implementation(libs.androidx.core.ktx)
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
 }

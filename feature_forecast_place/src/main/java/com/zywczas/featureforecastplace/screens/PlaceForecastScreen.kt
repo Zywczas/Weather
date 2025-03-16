@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.components.KeyValue
 import com.zywczas.commoncompose.components.KeyValueViewEntity
@@ -73,21 +74,25 @@ private fun PreviewPlaceForecastScreen() {
                     KeyValueViewEntity(
                         key = "Temperature",
                         value = "35 °C",
-                        valueTextColor = TemperatureColor.Hot.value
+                        valueTextColor = TemperatureColor.Hot.value,
+                        textAlign = TextAlign.Center,
                     ),
                     KeyValueViewEntity(
                         key = "Temperature",
                         value = "5 °C",
-                        valueTextColor = TemperatureColor.Cold.value
+                        valueTextColor = TemperatureColor.Cold.value,
+                        textAlign = TextAlign.Center,
                     ),
                     KeyValueViewEntity(
                         key = "Temperature",
                         value = "15 °C",
-                        valueTextColor = TemperatureColor.Neutral.value
+                        valueTextColor = TemperatureColor.Neutral.value,
+                        textAlign = TextAlign.Center,
                     ),
                     KeyValueViewEntity(
                         key = "Clouds",
                         value = "10 %",
+                        textAlign = TextAlign.Center,
                     )
                 )
             )
