@@ -6,30 +6,43 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.components.KeyValue
 import com.zywczas.commoncompose.components.KeyValueViewEntity
+import com.zywczas.commoncompose.components.Snackbar
 import com.zywczas.commoncompose.components.Toolbar
 import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.commoncompose.theme.Spacing
 import com.zywczas.commoncompose.theme.TemperatureColor
 import com.zywczas.featureforecastplace.viewmodel.PlaceForecastViewEntity
 import com.zywczas.featureforecastplace.viewmodel.PlaceForecastViewModel
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun PlaceForecastScreen(args: PlaceForecastArgs) {
 
     val viewModel: PlaceForecastViewModel = koinViewModel()
+    val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) { viewModel.init(args) }
 
     PlaceForecastScreen(
         viewEntity = viewModel.viewEntity
     )
+
+    Snackbar(snackbarHostState)
+
+    LaunchedEffect(Unit) {
+        viewModel.announcement.collectLatest { text ->
+            snackbarHostState.showSnackbar(text)
+        }
+    }
 }
 
 @Composable
