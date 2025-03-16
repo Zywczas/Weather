@@ -8,20 +8,24 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.components.LocationListItem
 import com.zywczas.commoncompose.components.OutlinedTextInput
+import com.zywczas.commoncompose.components.Snackbar
 import com.zywczas.commoncompose.components.Toolbar
 import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.commoncompose.theme.Spacing
 import com.zywczas.commonutil.R
 import com.zywczas.featureforecastplace.domain.Location
 import com.zywczas.featureforecastplace.viewmodel.SearchLocationViewModel
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -29,6 +33,7 @@ fun SearchLocationScreen(
     onCityClick: (PlaceForecastArgs) -> Unit,
 ) {
     val viewModel: SearchLocationViewModel = koinViewModel()
+    val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) { viewModel.init() }
 
@@ -38,6 +43,14 @@ fun SearchLocationScreen(
         searchText = viewModel.searchText,
         onSearchTextChanged = viewModel::onSearchTextChanged
     )
+
+    Snackbar(snackbarHostState)
+
+    LaunchedEffect(Unit) {
+        viewModel.announcement.collectLatest { text ->
+            snackbarHostState.showSnackbar(text)
+        }
+    }
 }
 
 @Composable
