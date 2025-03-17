@@ -18,4 +18,13 @@ data class CurrentResponse(
 
     @SerializedName("weather")
     val weather: List<WeatherResponse> = emptyList(),
+
+    @SerializedName("pressure")
+    val pressure: Int = 0,
+
+    @SerializedName("visibility")
+    val visibility: Int = 0,
+
+    @SerializedName("wind_speed")
+    val windSpeed: Double = 0.0,
 )

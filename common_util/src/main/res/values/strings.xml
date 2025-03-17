@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="temperature_title">Temperature</string>
     <string name="cloud_cover_title">Cloud cover</string>
     <string name="precipitation_title">Precipitation</string>
     <string name="humidity_title">Humidity</string>
+    <string name="pressure_title">Pressure</string>
+    <string name="visibility_title">Visibility</string>
+    <string name="wind_speed_title">Wind speed</string>
 
     <string name="temperature_value">%1$s °C</string>
     <string name="cloud_cover_value">%1$s %%</string>
     <string name="precipitation_value">%1$s mm/h</string>
     <string name="humidity_value">%1$s %%</string>
+    <string name="pressure_value">%1$s hPa</string>
+    <string name="visibility_value">%1$s m</string>
+    <string name="wind_speed_value">%1$s km/h</string>
 
     <!--    screens-->
     <string name="search_city_screen">Search City</string>

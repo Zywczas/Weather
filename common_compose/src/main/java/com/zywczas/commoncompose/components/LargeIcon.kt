@@ -16,13 +16,11 @@ import com.zywczas.commonutil.R
 fun LargeIcon(
     @DrawableRes icon: Int,
     @StringRes contentDescription: Int,
-    modifier: Modifier = Modifier,
 ) {
     Image(
         painter = painterResource(icon),
         contentDescription = stringResource(contentDescription),
-        modifier = modifier
-            .size(48.dp)
+        modifier = Modifier.size(48.dp)
     )
 }
 
