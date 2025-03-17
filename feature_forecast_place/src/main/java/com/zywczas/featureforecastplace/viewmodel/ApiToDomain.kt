@@ -19,13 +19,10 @@ internal fun PlaceForecastResponse.toDomain(
     val textAlign = TextAlign.Center
     return PlaceForecastViewEntity(
         toolbarTitle = toolbarTitle,
+        weatherCondition = current.weather.firstOrNull()?.toDomain(),
+        temperatureColor = TemperatureColor.get(current.temperature).value,
+        temperatureText = stringProvider.getString(R.string.temperature_value, current.temperature),
         keyValueItems = listOfNotNull(
-            KeyValueViewEntity(
-                textAlign = textAlign,
-                key = stringProvider.getString(R.string.temperature_title),
-                value = stringProvider.getString(R.string.temperature_value, current.temperature),
-                valueTextColor = TemperatureColor.get(current.temperature).value,
-            ),
             KeyValueViewEntity(
                 textAlign = textAlign,
                 key = stringProvider.getString(R.string.cloud_cover_title),
@@ -44,7 +41,6 @@ internal fun PlaceForecastResponse.toDomain(
                 value = stringProvider.getString(R.string.humidity_value, current.humidityPercentage)
             ),
         ),
-        weatherCondition = current.weather.firstOrNull()?.toDomain()
     )
 }
 
