@@ -10,16 +10,19 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.components.KeyValue
 import com.zywczas.commoncompose.components.KeyValueViewEntity
+import com.zywczas.commoncompose.components.LargeIcon
 import com.zywczas.commoncompose.components.Snackbar
 import com.zywczas.commoncompose.components.Toolbar
 import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.commoncompose.theme.Spacing
 import com.zywczas.commoncompose.theme.TemperatureColor
+import com.zywczas.commonutil.WeatherCondition
 import com.zywczas.featureforecastplace.viewmodel.PlaceForecastViewEntity
 import com.zywczas.featureforecastplace.viewmodel.PlaceForecastViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -33,9 +36,7 @@ fun PlaceForecastScreen(args: PlaceForecastArgs) {
 
     LaunchedEffect(Unit) { viewModel.init(args) }
 
-    PlaceForecastScreen(
-        viewEntity = viewModel.viewEntity
-    )
+    PlaceForecastScreen(viewEntity = viewModel.viewEntity)
 
     Snackbar(snackbarHostState)
 
@@ -47,11 +48,19 @@ fun PlaceForecastScreen(args: PlaceForecastArgs) {
 }
 
 @Composable
-private fun PlaceForecastScreen(
-    viewEntity: PlaceForecastViewEntity,
-) {
+private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity) {
     Column {
         Toolbar(viewEntity.toolbarTitle)
+        Spacer(Modifier.height(Spacing.l))
+
+        viewEntity.weatherCondition?.let {
+            LargeIcon(
+                icon = it.icon,
+                contentDescription = it.contentDescription,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+        }
+
         Spacer(Modifier.height(Spacing.l))
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(Spacing.s)
@@ -70,6 +79,7 @@ private fun PreviewPlaceForecastScreen() {
         PlaceForecastScreen(
             viewEntity = PlaceForecastViewEntity(
                 toolbarTitle = "Bydgoszcz",
+                weatherCondition = WeatherCondition.Clear,
                 keyValueItems = listOf(
                     KeyValueViewEntity(
                         key = "Temperature",

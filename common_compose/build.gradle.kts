@@ -33,6 +33,8 @@ android {
 
 dependencies {
 
+    implementation(project(":common_util"))
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)

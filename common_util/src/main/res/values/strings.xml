@@ -18,4 +18,13 @@
     <string name="error_forecast_download">Cannot get forecast for the place</string>
     <string name="error_locations_download">Cannot get locations propositions</string>
     <string name="error_general">Something went wrong</string>
+
+    <string name="content_description_condition_sunny">Sunny</string>
+    <string name="content_description_condition_clear">Clear sky</string>
+    <string name="content_description_condition_thunderstorm">Thunderstorm</string>
+    <string name="content_description_condition_drizzle">Drizzle</string>
+    <string name="content_description_condition_rain">Rainy</string>
+    <string name="content_description_condition_snow">Snowy</string>
+    <string name="content_description_condition_clouds">Cloudy</string>
+    <string name="content_description_condition_atmosphere">Limited visibility</string>
 </resources>

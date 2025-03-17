@@ -5,8 +5,10 @@ import com.zywczas.commoncompose.components.KeyValueViewEntity
 import com.zywczas.commoncompose.theme.TemperatureColor
 import com.zywczas.commonutil.R
 import com.zywczas.commonutil.StringProvider
+import com.zywczas.commonutil.WeatherCondition
 import com.zywczas.featureforecastplace.domain.Location
 import com.zywczas.networkforecast.response.PlaceForecastResponse
+import com.zywczas.networkforecast.response.WeatherResponse
 import com.zywczas.networkplaces.response.LocationResponse
 import com.zywczas.storehistory.entity.LocationLocal
 
@@ -41,7 +43,8 @@ internal fun PlaceForecastResponse.toDomain(
                 key = stringProvider.getString(R.string.humidity_title),
                 value = stringProvider.getString(R.string.humidity_value, current.humidityPercentage)
             ),
-        )
+        ),
+        weatherCondition = current.weather.firstOrNull()?.toDomain()
     )
 }
 
@@ -56,3 +59,14 @@ internal fun LocationLocal.toDomain() = Location(
     lat = lat,
     lon = lon,
 )
+
+internal fun WeatherResponse.toDomain(): WeatherCondition? = when (condition) {
+    "Clear" -> WeatherCondition.Clear
+    "Clouds" -> WeatherCondition.Clouds
+    "Rain" -> WeatherCondition.Rain
+    "Snow" -> WeatherCondition.Snow
+    "Atmosphere" -> WeatherCondition.Atmosphere
+    "Drizzle" -> WeatherCondition.Drizzle
+    "Thunderstorm" -> WeatherCondition.Thunderstorm
+    else -> null
+}
