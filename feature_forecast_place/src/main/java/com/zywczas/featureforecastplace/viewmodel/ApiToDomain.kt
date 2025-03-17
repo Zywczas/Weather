@@ -1,11 +1,12 @@
 package com.zywczas.featureforecastplace.viewmodel
 
-import androidx.compose.ui.text.style.TextAlign
 import com.zywczas.commoncompose.components.KeyValueViewEntity
 import com.zywczas.commoncompose.theme.TemperatureColor
 import com.zywczas.commonutil.R
 import com.zywczas.commonutil.StringProvider
+import com.zywczas.commonutil.UnitsConverter
 import com.zywczas.commonutil.WeatherCondition
+import com.zywczas.commonutil.extensions.roundTo2DecimalPlaces
 import com.zywczas.featureforecastplace.domain.Location
 import com.zywczas.networkforecast.response.PlaceForecastResponse
 import com.zywczas.networkforecast.response.WeatherResponse
@@ -16,7 +17,6 @@ internal fun PlaceForecastResponse.toDomain(
     toolbarTitle: String,
     stringProvider: StringProvider
 ): PlaceForecastViewEntity {
-    val textAlign = TextAlign.Center
     return PlaceForecastViewEntity(
         toolbarTitle = toolbarTitle,
         weatherCondition = current.weather.firstOrNull()?.toDomain(),
@@ -24,21 +24,30 @@ internal fun PlaceForecastResponse.toDomain(
         temperatureText = stringProvider.getString(R.string.temperature_value, current.temperature),
         keyValueItems = listOfNotNull(
             KeyValueViewEntity(
-                textAlign = textAlign,
                 key = stringProvider.getString(R.string.cloud_cover_title),
                 value = stringProvider.getString(R.string.cloud_cover_value, current.cloudsPercentage),
             ),
             current.rain?.let { rain ->
                 KeyValueViewEntity(
-                    textAlign = textAlign,
                     key = stringProvider.getString(R.string.precipitation_title),
                     value = stringProvider.getString(R.string.precipitation_value, rain.mmPerHour)
                 )
             },
             KeyValueViewEntity(
-                textAlign = textAlign,
                 key = stringProvider.getString(R.string.humidity_title),
                 value = stringProvider.getString(R.string.humidity_value, current.humidityPercentage)
+            ),
+            KeyValueViewEntity(
+                key = stringProvider.getString(R.string.pressure_title),
+                value = stringProvider.getString(R.string.pressure_value, current.pressure)
+            ),
+            KeyValueViewEntity(
+                key = stringProvider.getString(R.string.visibility_title),
+                value = stringProvider.getString(R.string.visibility_value, current.visibility)
+            ),
+            KeyValueViewEntity(
+                key = stringProvider.getString(R.string.wind_speed_title),
+                value = stringProvider.getString(R.string.wind_speed_value, UnitsConverter.mPerSecToKmPerH(current.windSpeed).roundTo2DecimalPlaces())
             ),
         ),
     )

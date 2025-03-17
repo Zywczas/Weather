@@ -39,7 +39,7 @@ data class KeyValueViewEntity(
     val key: String,
     val value: String,
     val valueTextColor: Color = Color.Black,
-    val textAlign: TextAlign = TextAlign.Start
+    val textAlign: TextAlign = TextAlign.Center
 )
 
 @Preview(showBackground = true)
