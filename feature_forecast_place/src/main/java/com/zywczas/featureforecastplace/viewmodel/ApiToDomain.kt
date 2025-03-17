@@ -6,7 +6,7 @@ import com.zywczas.commonutil.R
 import com.zywczas.commonutil.StringProvider
 import com.zywczas.commonutil.UnitsConverter
 import com.zywczas.commonutil.WeatherCondition
-import com.zywczas.commonutil.extensions.roundTo2DecimalPlaces
+import com.zywczas.commonutil.extensions.roundTo1DecimalPlace
 import com.zywczas.featureforecastplace.domain.Location
 import com.zywczas.networkforecast.response.PlaceForecastResponse
 import com.zywczas.networkforecast.response.WeatherResponse
@@ -21,7 +21,7 @@ internal fun PlaceForecastResponse.toDomain(
         toolbarTitle = toolbarTitle,
         weatherCondition = current.weather.firstOrNull()?.toDomain(),
         temperatureColor = TemperatureColor.get(current.temperature).value,
-        temperatureText = stringProvider.getString(R.string.temperature_value, current.temperature),
+        temperatureText = stringProvider.getString(R.string.temperature_value, current.temperature.roundTo1DecimalPlace()),
         keyValueItems = listOfNotNull(
             KeyValueViewEntity(
                 key = stringProvider.getString(R.string.cloud_cover_title),
@@ -47,7 +47,7 @@ internal fun PlaceForecastResponse.toDomain(
             ),
             KeyValueViewEntity(
                 key = stringProvider.getString(R.string.wind_speed_title),
-                value = stringProvider.getString(R.string.wind_speed_value, UnitsConverter.mPerSecToKmPerH(current.windSpeed).roundTo2DecimalPlaces())
+                value = stringProvider.getString(R.string.wind_speed_value, UnitsConverter.mPerSecToKmPerH(current.windSpeed).roundTo1DecimalPlace())
             ),
         ),
     )
