@@ -35,14 +35,17 @@ import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun PlaceForecastScreen(args: PlaceForecastArgs) {
+fun PlaceForecastScreen(args: PlaceForecastArgs, goBackAction: () -> Unit) {
 
     val viewModel: PlaceForecastViewModel = koinViewModel()
     val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) { viewModel.init(args) }
 
-    PlaceForecastScreen(viewEntity = viewModel.viewEntity)
+    PlaceForecastScreen(
+        viewEntity = viewModel.viewEntity,
+        goBackAction = goBackAction
+    )
 
     Snackbar(snackbarHostState)
 
@@ -54,9 +57,12 @@ fun PlaceForecastScreen(args: PlaceForecastArgs) {
 }
 
 @Composable
-private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity) {
+private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackAction: () -> Unit) {
     Column {
-        Toolbar(viewEntity.toolbarTitle)
+        Toolbar(
+            title = viewEntity.toolbarTitle,
+            onBackClick = goBackAction
+        )
         Spacer(Modifier.height(Spacing.l))
 
         Row(
@@ -119,7 +125,8 @@ private fun PreviewPlaceForecastScreen() {
                         textAlign = TextAlign.Center,
                     )
                 )
-            )
+            ),
+            goBackAction = {}
         )
     }
 }

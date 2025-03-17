@@ -21,7 +21,10 @@ fun AppNavHost() {
         }
 
         DestinationPlaceForecast.composableWithArgs(this) { _, args ->
-            PlaceForecastScreen(args = args)
+            PlaceForecastScreen(
+                args = args,
+                goBackAction = { navController.navigateUp() },
+            )
         }
     }
 }
