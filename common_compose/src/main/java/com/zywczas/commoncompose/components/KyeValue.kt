@@ -44,7 +44,7 @@ data class KeyValueViewEntity(
 
 @Preview(showBackground = true)
 @Composable
-private fun PreviewKeyValue() {
+private fun Preview() {
     PreviewTheme {
         KeyValue(
             KeyValueViewEntity(

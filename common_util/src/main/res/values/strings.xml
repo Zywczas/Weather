@@ -7,6 +7,7 @@
     <string name="pressure_title">Pressure</string>
     <string name="visibility_title">Visibility</string>
     <string name="wind_speed_title">Wind speed</string>
+    <string name="recent_searches_title">Recent searches</string>
 
     <string name="temperature_value">%1$s °C</string>
     <string name="cloud_cover_value">%1$s %%</string>
@@ -32,6 +33,5 @@
     <string name="content_description_condition_snow">Snowy</string>
     <string name="content_description_condition_clouds">Cloudy</string>
     <string name="content_description_condition_atmosphere">Limited visibility</string>
-
     <string name="content_description_navigate_back">Navigate back</string>
 </resources>

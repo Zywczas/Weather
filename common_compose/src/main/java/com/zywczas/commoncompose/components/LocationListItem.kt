@@ -1,6 +1,7 @@
 package com.zywczas.commoncompose.components
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -13,17 +14,21 @@ import com.zywczas.commoncompose.theme.Spacing
 
 @Composable
 fun LocationListItem(cityName: String, onClick: () -> Unit) {
-    Text(
-        text = cityName,
+    Column(
         modifier = Modifier
-            .padding(
-                vertical = Spacing.xxs,
-                horizontal = Spacing.m
-            )
             .fillMaxWidth()
-            .clickable { onClick() },
-        style = MaterialTheme.typography.bodyLarge,
-    )
+            .clickable { onClick() }
+    ) {
+        Text(
+            text = cityName,
+            modifier = Modifier
+                .padding(
+                    vertical = Spacing.verticalPadding,
+                    horizontal = Spacing.horizontalPadding
+                ),
+            style = MaterialTheme.typography.bodyLarge,
+        )
+    }
 }
 
 @Preview(showBackground = true)

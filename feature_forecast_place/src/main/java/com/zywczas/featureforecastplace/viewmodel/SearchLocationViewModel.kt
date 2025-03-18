@@ -12,7 +12,7 @@ import com.zywczas.commonutil.RegexExps
 import com.zywczas.commonutil.Resource
 import com.zywczas.commonutil.StringProvider
 import com.zywczas.commonutil.logD
-import com.zywczas.featureforecastplace.domain.Location
+import com.zywczas.featureforecastplace.domain.SearchListItem
 import com.zywczas.networkplaces.params.LocationsParams
 import com.zywczas.networkplaces.usecase.GetNetworkLocationsUseCase
 import com.zywczas.storehistory.usecase.GetLocationsHistoryUseCase
@@ -40,7 +40,7 @@ internal class SearchLocationViewModel(
     var searchText by mutableStateOf(TextFieldValue())
         private set
 
-    var locations by mutableStateOf<List<Location>>(emptyList())
+    var locations by mutableStateOf<List<SearchListItem>>(emptyList())
         private set
 
     private val searchQueryMutable = MutableSharedFlow<String>()
@@ -89,6 +89,11 @@ internal class SearchLocationViewModel(
     }
 
     private suspend fun getHistoryLocations() {
-        locations = getLocationsHistoryUseCase.get().map { it.toDomain() }
+        val historyLocations = getLocationsHistoryUseCase.get().map { it.toDomain() }
+        if (historyLocations.isNotEmpty()) {
+            locations = mutableListOf<SearchListItem>(SearchListItem.Header(stringProvider.getString(R.string.recent_searches_title))).apply {
+                addAll(historyLocations)
+            }
+        }
     }
 }

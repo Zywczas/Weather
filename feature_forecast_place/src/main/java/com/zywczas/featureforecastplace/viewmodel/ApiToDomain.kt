@@ -7,7 +7,7 @@ import com.zywczas.commonutil.StringProvider
 import com.zywczas.commonutil.UnitsConverter
 import com.zywczas.commonutil.WeatherCondition
 import com.zywczas.commonutil.extensions.roundTo1DecimalPlace
-import com.zywczas.featureforecastplace.domain.Location
+import com.zywczas.featureforecastplace.domain.SearchListItem
 import com.zywczas.networkforecast.response.PlaceForecastResponse
 import com.zywczas.networkforecast.response.WeatherResponse
 import com.zywczas.networkplaces.response.LocationResponse
@@ -53,13 +53,13 @@ internal fun PlaceForecastResponse.toDomain(
     )
 }
 
-internal fun LocationResponse.toDomain() = Location(
+internal fun LocationResponse.toDomain() = SearchListItem.Location(
     name = "$name, $state, $country",
     lat = lat,
     lon = lon,
 )
 
-internal fun LocationLocal.toDomain() = Location(
+internal fun LocationLocal.toDomain() = SearchListItem.Location(
     name = name,
     lat = lat,
     lon = lon,

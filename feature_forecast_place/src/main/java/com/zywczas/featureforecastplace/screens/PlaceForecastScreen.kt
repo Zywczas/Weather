@@ -87,7 +87,7 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
 
         Spacer(Modifier.height(Spacing.l))
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(Spacing.s)
+            verticalArrangement = Arrangement.spacedBy(Spacing.verticalPadding)
         ) {
             items(viewEntity.keyValueItems) { item ->
                 KeyValue(item)
