@@ -18,6 +18,7 @@ import com.zywczas.networkplaces.usecase.GetNetworkLocationsUseCase
 import com.zywczas.storehistory.usecase.GetLocationsHistoryUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.catch
@@ -25,6 +26,7 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
@@ -43,7 +45,7 @@ internal class SearchLocationViewModel(
     var locations by mutableStateOf<List<SearchListItem>>(emptyList())
         private set
 
-    private val searchQueryMutable = MutableSharedFlow<String>()
+    private val searchQueryMutable = MutableSharedFlow<String>(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
     private val searchQueryFlow: SharedFlow<String> = searchQueryMutable
 
     fun init() {
@@ -56,9 +58,7 @@ internal class SearchLocationViewModel(
     fun onSearchTextChanged(textFieldValue: TextFieldValue) {
         if (cityNamePattern.matcher(textFieldValue.text).matches()) {
             searchText = textFieldValue
-            viewModelScope.launch(Dispatchers.IO) {
-                searchQueryMutable.emit(textFieldValue.text)
-            }
+            searchQueryMutable.tryEmit(textFieldValue.text)
         }
     }
 
@@ -66,6 +66,7 @@ internal class SearchLocationViewModel(
     private fun subscribeToSearchQuery() {
         searchQueryFlow
             .debounce(Constants.DEBOUNCE)
+            .map { it.trim() }
             .distinctUntilChanged()
             .onEach(::getPlaces)
             .catch { cause ->
