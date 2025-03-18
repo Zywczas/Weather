@@ -17,12 +17,12 @@ object Spacing {
     /**
      * 12 dp
      */
-    val s = 12.dp
+    val verticalPadding = 12.dp
 
     /**
      * 16 dp
      */
-    val m = 16.dp
+    val horizontalPadding = 16.dp
 
     /**
      * 24 dp

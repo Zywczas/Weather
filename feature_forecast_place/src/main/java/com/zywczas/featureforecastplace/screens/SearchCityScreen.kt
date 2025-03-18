@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.components.HorizontalListItemDivider
+import com.zywczas.commoncompose.components.ListHeader
 import com.zywczas.commoncompose.components.LocationListItem
 import com.zywczas.commoncompose.components.OutlinedTextInput
 import com.zywczas.commoncompose.components.Snackbar
@@ -24,7 +25,7 @@ import com.zywczas.commoncompose.components.Toolbar
 import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.commoncompose.theme.Spacing
 import com.zywczas.commonutil.R
-import com.zywczas.featureforecastplace.domain.Location
+import com.zywczas.featureforecastplace.domain.SearchListItem
 import com.zywczas.featureforecastplace.viewmodel.SearchLocationViewModel
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
@@ -56,7 +57,7 @@ fun SearchLocationScreen(
 
 @Composable
 private fun SearchLocationScreen(
-    locations: List<Location>,
+    locations: List<SearchListItem>,
     onCityClick: (PlaceForecastArgs) -> Unit,
     searchText: TextFieldValue,
     onSearchTextChanged: (TextFieldValue) -> Unit
@@ -64,7 +65,7 @@ private fun SearchLocationScreen(
     Column {
         Toolbar(stringResource(R.string.search_city_screen))
 
-        Row(Modifier.padding(horizontal = Spacing.m)) {
+        Row(Modifier.padding(horizontal = Spacing.horizontalPadding)) {
             OutlinedTextInput(value = searchText, onValueChange = onSearchTextChanged)
         }
 
@@ -74,11 +75,18 @@ private fun SearchLocationScreen(
             verticalArrangement = Arrangement.spacedBy(Spacing.xxs)
         ) {
             itemsIndexed(locations) { index, location ->
-                LocationListItem(
-                    location.name,
-                    onClick = { onCityClick(PlaceForecastArgs(lat = location.lat, lon = location.lon, placeName = location.name)) }
-                )
-                HorizontalListItemDivider(index, locations.lastIndex)
+                when (location) {
+                    is SearchListItem.Header -> ListHeader(location.text)
+                    is SearchListItem.Location -> {
+                        LocationListItem(
+                            location.name,
+                            onClick = { onCityClick(PlaceForecastArgs(lat = location.lat, lon = location.lon, placeName = location.name)) }
+                        )
+                        if (index < locations.lastIndex) {
+                            HorizontalListItemDivider()
+                        }
+                    }
+                }
             }
         }
     }
@@ -90,14 +98,15 @@ private fun PreviewSearchCityScreen() {
     PreviewTheme {
         SearchLocationScreen(
             locations = listOf(
-                Location(name = "Bydgoszcz"),
-                Location(name = "Warszawa"),
-                Location(name = "Kraków"),
-                Location(name = "Gdańsk"),
-                Location(name = "Poznań"),
-                Location(name = "Wrocław"),
-                Location(name = "Zakopane"),
-                Location(name = "Karpacz"),
+                SearchListItem.Header("Recent searches"),
+                SearchListItem.Location(name = "Bydgoszcz"),
+                SearchListItem.Location(name = "Warszawa"),
+                SearchListItem.Location(name = "Kraków"),
+                SearchListItem.Location(name = "Gdańsk"),
+                SearchListItem.Location(name = "Poznań"),
+                SearchListItem.Location(name = "Wrocław"),
+                SearchListItem.Location(name = "Zakopane"),
+                SearchListItem.Location(name = "Karpacz"),
             ),
             onCityClick = {},
             searchText = TextFieldValue("Warszawa"),

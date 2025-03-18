@@ -40,7 +40,7 @@ fun Toolbar(
 
 @Preview
 @Composable
-private fun PreviewToolbar() {
+private fun Preview() {
     PreviewTheme {
         Toolbar(
             title = "PreviewScreen",

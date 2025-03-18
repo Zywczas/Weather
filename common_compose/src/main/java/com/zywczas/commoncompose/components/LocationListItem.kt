@@ -18,7 +18,7 @@ fun LocationListItem(cityName: String, onClick: () -> Unit) {
         modifier = Modifier
             .padding(
                 vertical = Spacing.xxs,
-                horizontal = Spacing.m
+                horizontal = Spacing.horizontalPadding
             )
             .fillMaxWidth()
             .clickable { onClick() },
