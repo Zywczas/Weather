@@ -1,7 +1,7 @@
 ## Project Setup
 
 1. Download code from `master` branch.
-1. To build the project you need to add `openweathermapApiKey` field in your global `gradle.properties` file, e.g. `openweathermapApiKey=123456789`.
+2. To build the project you need to add `openweathermapApiKey` field in your global `gradle.properties` file, e.g. `openweathermapApiKey=123456789`.
 
 ## App Structure
 
