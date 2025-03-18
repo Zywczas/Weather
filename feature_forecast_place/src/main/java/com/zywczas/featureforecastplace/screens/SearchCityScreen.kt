@@ -71,9 +71,7 @@ private fun SearchLocationScreen(
 
         Spacer(Modifier.height(Spacing.l))
 
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(Spacing.xxs)
-        ) {
+        LazyColumn {
             itemsIndexed(locations) { index, location ->
                 when (location) {
                     is SearchListItem.Header -> ListHeader(location.text)
