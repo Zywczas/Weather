@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.theme.PreviewTheme
+import com.zywczas.commoncompose.theme.PrimaryColor
 import com.zywczas.commoncompose.theme.Spacing
 
 @Composable
@@ -20,7 +21,7 @@ fun ListHeader(text: String) {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary),
+            .background(PrimaryColor),
     ) {
         Text(
             text = text,
