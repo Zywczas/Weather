@@ -27,8 +27,8 @@ import com.zywczas.commoncompose.components.Snackbar
 import com.zywczas.commoncompose.components.Toolbar
 import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.commoncompose.theme.Spacing
-import com.zywczas.commoncompose.theme.TemperatureColor
-import com.zywczas.commonutil.WeatherCondition
+import com.zywczas.commonutil.weather.TemperatureColor
+import com.zywczas.commonutil.weather.WeatherCondition
 import com.zywczas.featureforecastplace.viewmodel.PlaceForecastViewEntity
 import com.zywczas.featureforecastplace.viewmodel.PlaceForecastViewModel
 import kotlinx.coroutines.flow.collectLatest
