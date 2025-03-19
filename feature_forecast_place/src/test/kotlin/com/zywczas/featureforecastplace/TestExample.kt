@@ -7,6 +7,6 @@ class TestExample {
 
     @Test
     fun exampleTest() {
-        assertEquals(4, 2 + 2)
+        assertEquals(5, 2 + 2)
     }
 }
