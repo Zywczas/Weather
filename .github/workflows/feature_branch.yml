@@ -18,5 +18,8 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 17
+    - name: get API keys
+      env:
+        openweathermapApiKey: ${{ secrets.OPENWEATHERMAPAPIKEY }}
     - name: test
       run: bash ./gradlew testDebugUnitTest --stacktrace
