@@ -1,16 +1,16 @@
-name: Feature Branch CI
+name: Unit tests
 
 on:
   push:
-    branches-ignore:
-      - master
+    branches:
+      - '**'
   pull_request:
-    branches-ignore:
-      - master
+    branches:
+      - '**'
 
 jobs:
   test:
-    name: Run unit Tests
+    name: Unit tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
