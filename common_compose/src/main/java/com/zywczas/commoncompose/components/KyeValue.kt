@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.commoncompose.theme.Spacing
-import com.zywczas.commoncompose.theme.TemperatureColor
+import com.zywczas.commonutil.weather.TemperatureColor
 
 @Composable
 fun KeyValue(viewEntity: KeyValueViewEntity) {

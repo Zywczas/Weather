@@ -1,12 +1,15 @@
 package com.zywczas.featureforecastplace.viewmodel
 
 import com.zywczas.commoncompose.components.KeyValueViewEntity
-import com.zywczas.commoncompose.theme.TemperatureColor
 import com.zywczas.commonutil.R
 import com.zywczas.commonutil.StringProvider
 import com.zywczas.commonutil.UnitsConverter
-import com.zywczas.commonutil.WeatherCondition
 import com.zywczas.commonutil.extensions.roundTo1DecimalPlace
+import com.zywczas.commonutil.weather.TemperatureColor
+import com.zywczas.commonutil.weather.TemperatureColor.Cold
+import com.zywczas.commonutil.weather.TemperatureColor.Hot
+import com.zywczas.commonutil.weather.TemperatureColor.Neutral
+import com.zywczas.commonutil.weather.WeatherCondition
 import com.zywczas.featureforecastplace.domain.SearchListItem
 import com.zywczas.networkforecast.response.PlaceForecastResponse
 import com.zywczas.networkforecast.response.WeatherResponse
@@ -20,7 +23,7 @@ internal fun PlaceForecastResponse.toDomain(
     return PlaceForecastViewEntity(
         toolbarTitle = toolbarTitle,
         weatherCondition = current.weather.firstOrNull()?.toDomain(),
-        temperatureColor = TemperatureColor.get(current.temperature).value,
+        temperatureColor = getTemperatureColor(current.temperature).value,
         temperatureText = stringProvider.getString(R.string.temperature_value, current.temperature.roundTo1DecimalPlace()),
         keyValueItems = listOfNotNull(
             KeyValueViewEntity(
@@ -65,7 +68,7 @@ internal fun LocationLocal.toDomain() = SearchListItem.Location(
     lon = lon,
 )
 
-internal fun WeatherResponse.toDomain(): WeatherCondition? = when (condition) {
+private fun WeatherResponse.toDomain(): WeatherCondition? = when (condition) {
     "Clear" -> WeatherCondition.Clear
     "Clouds" -> WeatherCondition.Clouds
     "Rain" -> WeatherCondition.Rain
@@ -75,3 +78,12 @@ internal fun WeatherResponse.toDomain(): WeatherCondition? = when (condition) {
     "Thunderstorm" -> WeatherCondition.Thunderstorm
     else -> null
 }
+
+private fun getTemperatureColor(temp: Double): TemperatureColor = when {
+    temp < MIN_NEUTRAL_TEMP -> Cold
+    temp > MAX_NEUTRAL_TEMP -> Hot
+    else -> Neutral
+}
+
+private const val MIN_NEUTRAL_TEMP = 10.0
+private const val MAX_NEUTRAL_TEMP = 20.0

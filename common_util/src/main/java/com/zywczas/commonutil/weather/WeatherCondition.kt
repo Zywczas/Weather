@@ -1,7 +1,8 @@
-package com.zywczas.commonutil
+package com.zywczas.commonutil.weather
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import com.zywczas.commonutil.R
 
 enum class WeatherCondition(@DrawableRes val icon: Int, @StringRes val contentDescription: Int) {
     Clear(R.drawable.ic_condition_sunny, R.string.content_description_condition_clear),
