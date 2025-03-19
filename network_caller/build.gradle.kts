@@ -1,4 +1,5 @@
 import com.zywczas.buildutils.Versions
+import com.zywczas.buildutils.getEnvElseLocal
 
 plugins {
     alias(libs.plugins.android.library)
@@ -16,8 +17,7 @@ android {
     defaultConfig {
         minSdk = Versions.MIN_SDK
 
-        val openweathermapApiKey: String by rootProject.extra
-        buildConfigField("String", "OPENWEATHERMAP_API_KEY", "\"$openweathermapApiKey\"")
+        buildConfigField("String", "OPENWEATHERMAP_API_KEY", "\"${getEnvElseLocal("openweathermapApiKey", project)}\"")
     }
 
     buildTypes {
