@@ -23,7 +23,7 @@ jobs:
     - name: Unit test
       env:
         openweathermapApiKey: ${{ secrets.OPENWEATHERMAPAPIKEY }}
-      run: bash ./gradlew testDebugUnitTest --stacktrace
+      run: bash ./gradlew testDebugUnitTest --stacktrace --scan
     - name: Print unit test report
       if: always()
       run: cat build/reports/tests/testDebugUnitTest/index.html
