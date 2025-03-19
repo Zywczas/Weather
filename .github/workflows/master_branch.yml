@@ -19,6 +19,6 @@ jobs:
         with:
           java-version: 17
       - name: Unit test
-        with:
+        env:
           openweathermapApiKey: ${{ secrets.OPENWEATHERMAPAPIKEY }}
         run: bash ./gradlew testDebugUnitTest --stacktrace
