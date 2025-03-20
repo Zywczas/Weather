@@ -3,6 +3,7 @@ import com.zywczas.buildutils.Versions
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.detekt)
 }
 
 android {
