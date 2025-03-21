@@ -4,6 +4,7 @@ import com.zywczas.buildutils.getEnvElseLocal
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.detekt)
 }
 
 android {

@@ -1,5 +1,5 @@
 package com.zywczas.networkcaller.openweatherapi
 
-enum class Language(val value: String) {
+enum class WeatherApiLanguage(val value: String) {
     English("en"),
 }
