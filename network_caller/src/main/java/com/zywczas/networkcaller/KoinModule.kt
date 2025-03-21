@@ -1,5 +1,6 @@
 package com.zywczas.networkcaller
 
+import com.zywczas.networkcaller.openweatherapi.WeatherApiConstants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.context.GlobalContext
@@ -21,11 +22,10 @@ val networkCallerModule = module {
     single {
         Retrofit.Builder()
             .client(get())
-            .baseUrl(apiBaseUrl)
+            .baseUrl(WeatherApiConstants.WEATHER_API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 }
 
-private const val apiBaseUrl = "https://api.openweathermap.org/"
 private const val CONNECTION_TIMEOUT_IN_SECONDS = 30L
