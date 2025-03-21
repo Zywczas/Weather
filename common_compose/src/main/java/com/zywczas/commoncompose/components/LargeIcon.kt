@@ -29,6 +29,6 @@ fun LargeIcon(
 private fun Preview() {
     LargeIcon(
         R.drawable.ic_condition_sunny,
-        0,
+        R.string.content_description_condition_sunny,
     )
 }

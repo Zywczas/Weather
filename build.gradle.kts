@@ -7,11 +7,11 @@ plugins {
     alias(libs.plugins.detekt)
 }
 
-tasks.register("detektForAllSubprojects") {
+tasks.register("detektAllModules") {
     subprojects.forEach { subproject ->
 
         require(subproject.pluginManager.hasPlugin(libs.plugins.detekt.get().pluginId)) {
-            "Subproject '${subproject.name}' doesn't use Detekt plugin. You need to add 'alias(libs.plugins.detekt)' to the module."
+            "Module '${subproject.name}' doesn't use Detekt plugin. You need to add 'alias(libs.plugins.detekt)' to the module."
         }
 
         subproject.detekt {

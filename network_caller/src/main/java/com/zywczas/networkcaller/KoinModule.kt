@@ -14,7 +14,7 @@ val networkCallerModule = module {
 
     single {
         OkHttpClient.Builder()
-            .connectTimeout(30L, TimeUnit.SECONDS)
+            .connectTimeout(CONNECTION_TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
             .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
             .build()
     }
@@ -28,3 +28,4 @@ val networkCallerModule = module {
 }
 
 private const val apiBaseUrl = "https://api.openweathermap.org/"
+private const val CONNECTION_TIMEOUT_IN_SECONDS = 30L
