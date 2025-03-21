@@ -15,9 +15,11 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 17
+    - name: Detekt
       env:
         openweathermapApiKey: ${{ secrets.OPENWEATHERMAPAPIKEY }}
-    - name: Detekt
       run: bash ./gradlew detektAllModules
     - name: Unit test
+      env:
+        openweathermapApiKey: ${{ secrets.OPENWEATHERMAPAPIKEY }}
       run: bash ./gradlew testDebugUnitTest --stacktrace
