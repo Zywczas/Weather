@@ -11,7 +11,7 @@ data class LocationResponse(
     val country: String = "",
 
     @SerializedName("state")
-    val state: String = "",
+    val state: String? = null,
 
     @SerializedName("lat")
     val lat: Double = 0.0,
