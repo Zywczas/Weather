@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.theme.PreviewTheme
-import com.zywczas.commoncompose.theme.PrimaryColor
 import com.zywczas.commoncompose.theme.Spacing
 
 @Composable
@@ -19,7 +18,7 @@ fun ListHeader(text: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(PrimaryColor),
+            .background(MaterialTheme.colorScheme.primary),
     ) {
         Text(
             text = text,

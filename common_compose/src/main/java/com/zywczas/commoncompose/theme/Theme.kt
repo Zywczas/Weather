@@ -22,7 +22,7 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = BlueGrotto,
+    primary = PrimaryColorLight,
     secondary = PurpleGrey40,
     tertiary = Pink40
 )
@@ -39,7 +39,7 @@ fun AppTheme(
     }
 
     CompositionLocalProvider(
-        LocalRippleConfiguration provides RippleConfiguration(PrimaryColor)
+        LocalRippleConfiguration provides RippleConfiguration(PrimaryColorLight)
     ) {
         MaterialTheme(
             colorScheme = colorScheme,
