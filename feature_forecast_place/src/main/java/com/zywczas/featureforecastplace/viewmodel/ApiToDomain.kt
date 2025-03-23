@@ -57,7 +57,9 @@ internal fun PlaceForecastResponse.toDomain(
 }
 
 internal fun LocationResponse.toDomain() = SearchListItem.Location(
-    name = "$name, $state, $country",
+    name = state?.let { state ->
+        "$name, $state, $country"
+    } ?: "$name, $country",
     lat = lat,
     lon = lon,
 )
