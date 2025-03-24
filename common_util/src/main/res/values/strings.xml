@@ -32,6 +32,7 @@
     <string name="content_description_condition_rain">Rainy</string>
     <string name="content_description_condition_snow">Snowy</string>
     <string name="content_description_condition_clouds">Cloudy</string>
+    <string name="content_description_condition_partial_clouds">Partly cloudy</string>
     <string name="content_description_condition_atmosphere">Limited visibility</string>
     <string name="content_description_navigate_back">Navigate back</string>
 </resources>

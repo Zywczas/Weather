@@ -22,7 +22,7 @@ internal fun PlaceForecastResponse.toDomain(
 ): PlaceForecastViewEntity {
     return PlaceForecastViewEntity(
         toolbarTitle = toolbarTitle,
-        weatherCondition = current.weather.firstOrNull()?.toDomain(),
+        weatherCondition = current.weather.firstOrNull()?.toDomain(cloudsPercentage = current.cloudsPercentage),
         temperatureColor = getTemperatureColor(current.temperature).value,
         temperatureText = stringProvider.getString(R.string.temperature_value, current.temperature.roundTo1DecimalPlace()),
         keyValueItems = listOfNotNull(
@@ -70,9 +70,9 @@ internal fun LocationLocal.toDomain() = SearchListItem.Location(
     lon = lon,
 )
 
-private fun WeatherResponse.toDomain(): WeatherCondition? = when (condition) {
+private fun WeatherResponse.toDomain(cloudsPercentage: Int): WeatherCondition? = when (condition) {
     "Clear" -> WeatherCondition.Clear
-    "Clouds" -> WeatherCondition.Clouds
+    "Clouds" -> if (cloudsPercentage < PARTIAL_CLOUDS_MAX_PERCENTAGE) WeatherCondition.PartialClouds else WeatherCondition.Clouds
     "Rain" -> WeatherCondition.Rain
     "Snow" -> WeatherCondition.Snow
     "Atmosphere" -> WeatherCondition.Atmosphere
@@ -89,3 +89,4 @@ private fun getTemperatureColor(temp: Double): TemperatureColor = when {
 
 private const val MIN_NEUTRAL_TEMP = 10.0
 private const val MAX_NEUTRAL_TEMP = 20.0
+private const val PARTIAL_CLOUDS_MAX_PERCENTAGE = 60

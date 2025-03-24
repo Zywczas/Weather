@@ -2,9 +2,9 @@
 <resources>
     <color name="blue_grotto">#FF03A9F4</color>
     <color name="logo_accent">#FFEB3B</color>
-    <color name="orange">#F39422</color>
+    <color name="sun">#F39422</color>
     <color name="cloud_light">#5267F2</color>
-    <color name="cloud_dark">#08187E</color>
+    <color name="cloud_dark">#14248E</color>
     <color name="fog">#6BB6CB</color>
     <color name="lightning">#FBD71D</color>
     <color name="black">#000000</color>

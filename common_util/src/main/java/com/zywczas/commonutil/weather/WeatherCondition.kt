@@ -12,4 +12,5 @@ enum class WeatherCondition(@DrawableRes val icon: Int, @StringRes val contentDe
     Snow(R.drawable.ic_condition_snowy, R.string.content_description_condition_snow),
     Atmosphere(R.drawable.ic_condition_fog, R.string.content_description_condition_atmosphere),
     Clouds(R.drawable.ic_condition_cloudy, R.string.content_description_condition_clouds),
+    PartialClouds(R.drawable.ic_condition_partial_cloud, R.string.content_description_condition_partial_clouds),
 }
