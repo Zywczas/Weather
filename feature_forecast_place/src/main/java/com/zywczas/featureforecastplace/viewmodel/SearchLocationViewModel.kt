@@ -13,6 +13,7 @@ import com.zywczas.commonutil.Resource
 import com.zywczas.commonutil.StringProvider
 import com.zywczas.commonutil.logD
 import com.zywczas.featureforecastplace.domain.SearchListItem
+import com.zywczas.featureforecastplace.domain.toDomain
 import com.zywczas.networkplaces.params.LocationsParams
 import com.zywczas.networkplaces.usecase.GetNetworkLocationsUseCase
 import com.zywczas.storehistory.usecase.GetLocationsHistoryUseCase

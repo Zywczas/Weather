@@ -1,4 +1,4 @@
-package com.zywczas.featureforecastplace.viewmodel
+package com.zywczas.featureforecastplace.domain
 
 import com.zywczas.commoncompose.components.KeyValueViewEntity
 import com.zywczas.commonutil.R
@@ -10,7 +10,7 @@ import com.zywczas.commonutil.weather.TemperatureColor.Cold
 import com.zywczas.commonutil.weather.TemperatureColor.Hot
 import com.zywczas.commonutil.weather.TemperatureColor.Neutral
 import com.zywczas.commonutil.weather.WeatherCondition
-import com.zywczas.featureforecastplace.domain.SearchListItem
+import com.zywczas.featureforecastplace.viewmodel.PlaceForecastViewEntity
 import com.zywczas.networkforecast.response.PlaceForecastResponse
 import com.zywczas.networkforecast.response.WeatherResponse
 import com.zywczas.networkplaces.response.LocationResponse

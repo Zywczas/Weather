@@ -9,24 +9,34 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.zywczas.commoncompose.components.BottomBarInsetSpacer
 import com.zywczas.commoncompose.components.KeyValue
 import com.zywczas.commoncompose.components.KeyValueViewEntity
 import com.zywczas.commoncompose.components.LargeIcon
+import com.zywczas.commoncompose.components.SmallIcon
 import com.zywczas.commoncompose.components.Snackbar
 import com.zywczas.commoncompose.components.Toolbar
+import com.zywczas.commoncompose.components.VerticalListItemDivider
 import com.zywczas.commoncompose.components.buttons.PrimaryButton
 import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.commoncompose.theme.Spacing
@@ -63,11 +73,14 @@ fun PlaceForecastScreen(args: PlaceForecastArgs, goBackAction: () -> Unit) {
 @Composable
 private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackAction: () -> Unit) {
     Column {
+        var showHourlyForecast by remember { mutableStateOf(false) }
+
         Toolbar(
             title = viewEntity.toolbarTitle,
             onBackClick = goBackAction
         )
-        Spacer(Modifier.height(Spacing.componentsVerticalSeparator))
+
+        Spacer(Modifier.height(Spacing.screenComponentsVertical))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -79,7 +92,7 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
                     icon = it.icon,
                     contentDescription = it.contentDescription,
                 )
-                Spacer(Modifier.width(Spacing.componentsVerticalSeparator))
+                Spacer(Modifier.width(Spacing.screenComponentsVertical))
             }
             Text(
                 text = viewEntity.temperatureText,
@@ -89,9 +102,10 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
             )
         }
 
-        Spacer(Modifier.height(Spacing.componentsVerticalSeparator))
+        Spacer(Modifier.height(Spacing.screenComponentsVertical))
+
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(Spacing.listItemVerticalBorder),
+            verticalArrangement = Arrangement.spacedBy(Spacing.listItemVerticalOuter),
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -101,16 +115,91 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
         }
 
         Spacer(Modifier.weight(1f))
-        Spacer(Modifier.height(Spacing.componentsVerticalSeparator))
+
+        Spacer(Modifier.height(Spacing.screenComponentsVertical))
+
         PrimaryButton(
             text = stringResource(R.string.next_hours_title),
             modifier = Modifier
                 .padding(horizontal = Spacing.screenBorder)
                 .fillMaxWidth(),
-            onClick = {}
+            onClick = { showHourlyForecast = true }
         )
+
         Spacer(Modifier.height(Spacing.screenBorder))
+
         BottomBarInsetSpacer()
+
+        if (showHourlyForecast) {
+            HourlyForecast(
+                onDismissRequest = { showHourlyForecast = false }
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun HourlyForecast(
+    onDismissRequest: () -> Unit,
+) {
+    ModalBottomSheet(
+        onDismissRequest = onDismissRequest,
+        content = {
+            LazyRow(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                item {
+                    Spacer(Modifier.width(Spacing.screenBorder))
+                }
+                val list = listOf("column1", "column2", "column3", "column4", "column5", "column6", "column7", "column8")
+                itemsIndexed(list) { index, item ->
+                    HourlyListItem()
+                    if (index < list.lastIndex) {
+                        VerticalListItemDivider(Modifier.height(120.dp))
+                    }
+                }
+                item {
+                    Spacer(Modifier.width(Spacing.screenBorder))
+                }
+            }
+        }
+    )
+}
+
+@Composable
+private fun HourlyListItem() {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(horizontal = 8.dp),
+    ) {
+        Text("1300")
+
+        Spacer(Modifier.height(Spacing.listItemVerticalOuter))
+
+        SmallIcon(
+            icon = WeatherCondition.Clear.icon,
+            contentDescription = WeatherCondition.Clear.contentDescription
+        )
+
+        Spacer(Modifier.height(Spacing.listItemVerticalInner))
+
+        Text(
+            text = "14°",
+        )
+
+        Spacer(Modifier.height(Spacing.listItemVerticalOuter))
+
+        SmallIcon(
+            icon = R.drawable.ic_rain_drop,
+            contentDescription = R.string.content_description_precipitation_probability
+        )
+
+        Spacer(Modifier.height(Spacing.listItemVerticalInner))
+
+        Text(
+            text = "5%",
+        )
     }
 }
 
@@ -142,4 +231,12 @@ private fun PreviewPlaceForecastScreen() {
             goBackAction = {}
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun PreviewHourlyForecast() {
+    HourlyForecast(
+        onDismissRequest = {}
+    )
 }
