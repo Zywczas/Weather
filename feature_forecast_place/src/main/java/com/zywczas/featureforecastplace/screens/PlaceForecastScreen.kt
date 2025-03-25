@@ -17,7 +17,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.zywczas.commoncompose.components.KeyValue
@@ -87,7 +86,9 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
 
         Spacer(Modifier.height(Spacing.l))
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(Spacing.verticalPadding)
+            verticalArrangement = Arrangement.spacedBy(Spacing.verticalPadding),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth()
         ) {
             items(viewEntity.keyValueItems) { item ->
                 KeyValue(item)
@@ -110,19 +111,14 @@ private fun PreviewPlaceForecastScreen() {
                     KeyValueViewEntity(
                         key = "Temperature",
                         value = "5 °C",
-                        valueTextColor = TemperatureColor.Cold.value,
-                        textAlign = TextAlign.Center,
                     ),
                     KeyValueViewEntity(
                         key = "Temperature",
                         value = "15 °C",
-                        valueTextColor = TemperatureColor.Neutral.value,
-                        textAlign = TextAlign.Center,
                     ),
                     KeyValueViewEntity(
                         key = "Clouds",
                         value = "10 %",
-                        textAlign = TextAlign.Center,
                     )
                 )
             ),
