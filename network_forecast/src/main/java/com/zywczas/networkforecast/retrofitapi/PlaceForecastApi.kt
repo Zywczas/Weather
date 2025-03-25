@@ -18,7 +18,7 @@ internal interface PlaceForecastApi {
         @Query("lon") lon: Double,
         @Query("appid") apiKey: String = ApiKeys.OPEN_WEATHER_MAP,
         @Query("units") units: String = WeatherApiUnits.Metric.value,
-        @Query("exclude") exclude: String = "${WeatherApiExcludedReports.Daily.value},${WeatherApiExcludedReports.Hourly.value},${WeatherApiExcludedReports.Alerts.value}",
+        @Query("exclude") exclude: String = "${WeatherApiExcludedReports.Daily.value},${WeatherApiExcludedReports.Alerts.value},${WeatherApiExcludedReports.Minutely.value}",
         @Query("lang") language: String = WeatherApiLanguage.English.value
     ): Response<PlaceForecastResponse>
 }
