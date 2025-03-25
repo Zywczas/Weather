@@ -68,7 +68,7 @@ private fun SearchLocationScreen(
             OutlinedTextInput(value = searchText, onValueChange = onSearchTextChanged)
         }
 
-        Spacer(Modifier.height(Spacing.screenComponents))
+        Spacer(Modifier.height(Spacing.componentsVerticalSeparator))
 
         LazyColumn {
             itemsIndexed(locations) { index, location ->

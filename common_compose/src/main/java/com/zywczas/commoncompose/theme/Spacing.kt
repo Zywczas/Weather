@@ -22,5 +22,5 @@ object Spacing {
     /**
      * 24 dp
      */
-    val screenComponents = 24.dp
+    val componentsVerticalSeparator = 24.dp
 }

@@ -67,7 +67,7 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
             title = viewEntity.toolbarTitle,
             onBackClick = goBackAction
         )
-        Spacer(Modifier.height(Spacing.screenComponents))
+        Spacer(Modifier.height(Spacing.componentsVerticalSeparator))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -79,7 +79,7 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
                     icon = it.icon,
                     contentDescription = it.contentDescription,
                 )
-                Spacer(Modifier.width(Spacing.screenComponents))
+                Spacer(Modifier.width(Spacing.componentsVerticalSeparator))
             }
             Text(
                 text = viewEntity.temperatureText,
@@ -89,7 +89,7 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
             )
         }
 
-        Spacer(Modifier.height(Spacing.screenComponents))
+        Spacer(Modifier.height(Spacing.componentsVerticalSeparator))
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(Spacing.listItemVerticalBorder),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -101,7 +101,7 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
         }
 
         Spacer(Modifier.weight(1f))
-        Spacer(Modifier.height(Spacing.screenComponents))
+        Spacer(Modifier.height(Spacing.componentsVerticalSeparator))
         PrimaryButton(
             text = stringResource(R.string.next_hours_title),
             modifier = Modifier
