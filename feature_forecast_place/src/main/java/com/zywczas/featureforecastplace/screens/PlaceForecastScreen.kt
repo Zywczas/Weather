@@ -24,8 +24,10 @@ import com.zywczas.commoncompose.components.KeyValueViewEntity
 import com.zywczas.commoncompose.components.LargeIcon
 import com.zywczas.commoncompose.components.Snackbar
 import com.zywczas.commoncompose.components.Toolbar
+import com.zywczas.commoncompose.components.buttons.PrimaryButton
 import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.commoncompose.theme.Spacing
+import com.zywczas.commonutil.R
 import com.zywczas.commonutil.weather.TemperatureColor
 import com.zywczas.commonutil.weather.WeatherCondition
 import com.zywczas.featureforecastplace.viewmodel.PlaceForecastViewEntity
@@ -94,6 +96,13 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
                 KeyValue(item)
             }
         }
+
+        Spacer(Modifier.weight(1f))
+        Spacer(Modifier.height(Spacing.l))
+        PrimaryButton(
+            text = R.string.next_hours_title,
+            onClick = {}
+        )
     }
 }
 
