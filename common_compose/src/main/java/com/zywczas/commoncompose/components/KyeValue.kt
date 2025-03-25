@@ -21,7 +21,7 @@ fun KeyValue(viewEntity: KeyValueViewEntity) {
             text = viewEntity.key,
             style = MaterialTheme.typography.labelMedium
         )
-        Spacer(Modifier.height(Spacing.tiny))
+        Spacer(Modifier.height(Spacing.listItemVerticalInner))
         Text(
             text = viewEntity.value,
             style = MaterialTheme.typography.labelLarge

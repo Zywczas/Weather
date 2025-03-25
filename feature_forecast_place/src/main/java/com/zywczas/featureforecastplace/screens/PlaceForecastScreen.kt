@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -16,9 +17,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.zywczas.commoncompose.components.BottomBarInsetSpacer
 import com.zywczas.commoncompose.components.KeyValue
 import com.zywczas.commoncompose.components.KeyValueViewEntity
 import com.zywczas.commoncompose.components.LargeIcon
@@ -64,7 +67,7 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
             title = viewEntity.toolbarTitle,
             onBackClick = goBackAction
         )
-        Spacer(Modifier.height(Spacing.l))
+        Spacer(Modifier.height(Spacing.screenComponents))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -76,7 +79,7 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
                     icon = it.icon,
                     contentDescription = it.contentDescription,
                 )
-                Spacer(Modifier.width(Spacing.l))
+                Spacer(Modifier.width(Spacing.screenComponents))
             }
             Text(
                 text = viewEntity.temperatureText,
@@ -86,9 +89,9 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
             )
         }
 
-        Spacer(Modifier.height(Spacing.l))
+        Spacer(Modifier.height(Spacing.screenComponents))
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(Spacing.verticalPadding),
+            verticalArrangement = Arrangement.spacedBy(Spacing.listItemVerticalBorder),
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -98,11 +101,16 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
         }
 
         Spacer(Modifier.weight(1f))
-        Spacer(Modifier.height(Spacing.l))
+        Spacer(Modifier.height(Spacing.screenComponents))
         PrimaryButton(
-            text = R.string.next_hours_title,
+            text = stringResource(R.string.next_hours_title),
+            modifier = Modifier
+                .padding(horizontal = Spacing.screenBorder)
+                .fillMaxWidth(),
             onClick = {}
         )
+        Spacer(Modifier.height(Spacing.screenBorder))
+        BottomBarInsetSpacer()
     }
 }
 

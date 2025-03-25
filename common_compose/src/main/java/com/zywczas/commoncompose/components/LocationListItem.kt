@@ -23,8 +23,8 @@ fun LocationListItem(cityName: String, onClick: () -> Unit) {
             text = cityName,
             modifier = Modifier
                 .padding(
-                    vertical = Spacing.verticalPadding,
-                    horizontal = Spacing.horizontalPadding
+                    vertical = Spacing.listItemVerticalBorder,
+                    horizontal = Spacing.screenBorder
                 ),
             style = MaterialTheme.typography.bodyLarge,
         )

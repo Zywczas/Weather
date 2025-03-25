@@ -64,11 +64,11 @@ private fun SearchLocationScreen(
     Column {
         Toolbar(stringResource(R.string.search_city_screen))
 
-        Row(Modifier.padding(horizontal = Spacing.horizontalPadding)) {
+        Row(Modifier.padding(horizontal = Spacing.screenBorder)) {
             OutlinedTextInput(value = searchText, onValueChange = onSearchTextChanged)
         }
 
-        Spacer(Modifier.height(Spacing.l))
+        Spacer(Modifier.height(Spacing.screenComponents))
 
         LazyColumn {
             itemsIndexed(locations) { index, location ->
