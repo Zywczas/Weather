@@ -16,6 +16,9 @@ data class HourlyResponse(
     @SerializedName("snow")
     val snow: PrecipitationResponse? = null,
 
+    @SerializedName("pop")
+    val probabilityOfPrecipitation: Double = 0.0,
+
     @SerializedName("weather")
     val weather: List<WeatherResponse> = emptyList(),
 )

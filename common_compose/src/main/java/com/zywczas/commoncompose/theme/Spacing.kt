@@ -12,7 +12,7 @@ object Spacing {
     /**
      * 12 dp
      */
-    val listItemVerticalBorder = 12.dp
+    val listItemVerticalOuter = 12.dp
 
     /**
      * 16 dp
@@ -22,5 +22,5 @@ object Spacing {
     /**
      * 24 dp
      */
-    val componentsVerticalSeparator = 24.dp
+    val screenComponentsVertical = 24.dp
 }

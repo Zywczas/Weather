@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.zywczas.commonutil.BaseViewModel
 import com.zywczas.commonutil.Resource
 import com.zywczas.commonutil.StringProvider
+import com.zywczas.featureforecastplace.domain.toDomain
 import com.zywczas.featureforecastplace.screens.PlaceForecastArgs
 import com.zywczas.networkforecast.params.PlaceForecastParams
 import com.zywczas.networkforecast.usecase.GetPlaceForecastUseCase

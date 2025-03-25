@@ -26,8 +26,29 @@ fun LargeIcon(
 
 @Preview(showBackground = true)
 @Composable
-private fun Preview() {
+private fun PreviewLargeIcon() {
     LargeIcon(
+        R.drawable.ic_condition_sunny,
+        R.string.content_description_condition_sunny,
+    )
+}
+
+@Composable
+fun SmallIcon(
+    @DrawableRes icon: Int,
+    @StringRes contentDescription: Int,
+) {
+    Image(
+        painter = painterResource(icon),
+        contentDescription = stringResource(contentDescription),
+        modifier = Modifier.size(24.dp)
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun PreviewSmallIcon() {
+    SmallIcon(
         R.drawable.ic_condition_sunny,
         R.string.content_description_condition_sunny,
     )
