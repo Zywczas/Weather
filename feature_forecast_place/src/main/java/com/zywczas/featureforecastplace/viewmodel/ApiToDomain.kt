@@ -30,11 +30,25 @@ internal fun PlaceForecastResponse.toDomain(
                 key = stringProvider.getString(R.string.cloud_cover_title),
                 value = stringProvider.getString(R.string.cloud_cover_value, current.cloudsPercentage),
             ),
-            current.rain?.let { rain ->
+            current.rain?.let {
                 KeyValueViewEntity(
-                    key = stringProvider.getString(R.string.precipitation_title),
-                    value = stringProvider.getString(R.string.precipitation_value, rain.mmPerHour)
+                    key = stringProvider.getString(R.string.precipitation_rain_title),
+                    value = stringProvider.getString(R.string.precipitation_value, it.mmPerHour)
                 )
+            },
+            current.snow?.let {
+                KeyValueViewEntity(
+                    key = stringProvider.getString(R.string.precipitation_snow_title),
+                    value = stringProvider.getString(R.string.precipitation_value, it.mmPerHour)
+                )
+            },
+            if (current.rain == null && current.snow == null) {
+                KeyValueViewEntity(
+                    key = stringProvider.getString(R.string.precipitation_rain_title),
+                    value = stringProvider.getString(R.string.precipitation_value, NO_PRECIPITATION_VALUE)
+                )
+            } else {
+                null
             },
             KeyValueViewEntity(
                 key = stringProvider.getString(R.string.humidity_title),
@@ -90,3 +104,4 @@ private fun getTemperatureColor(temp: Double): TemperatureColor = when {
 private const val MIN_NEUTRAL_TEMP = 10.0
 private const val MAX_NEUTRAL_TEMP = 20.0
 private const val PARTIAL_CLOUDS_MAX_PERCENTAGE = 60
+private const val NO_PRECIPITATION_VALUE = 0
