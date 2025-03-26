@@ -71,7 +71,7 @@ fun PlaceForecastScreen(args: PlaceForecastArgs, goBackAction: OnClick) {
     if (showHourlyForecast) {
         HourlyForecast(
             viewEntity = viewModel.hourlyForecastViewEntity,
-            onDismissRequest = { showHourlyForecast = false }
+            closeAction = { showHourlyForecast = false }
         )
     }
 
@@ -153,29 +153,39 @@ private fun PlaceForecastScreen(
 @Composable
 private fun HourlyForecast(
     viewEntity: List<HourlyForecastViewEntity>,
-    onDismissRequest: () -> Unit,
+    closeAction: OnClick,
 ) {
     ModalBottomSheet(
-        onDismissRequest = onDismissRequest,
+        onDismissRequest = closeAction,
         content = {
-            LazyRow(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                item {
-                    Spacer(Modifier.width(Spacing.screenBorder))
-                }
+            Column {
+                LazyRow(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    item {
+                        Spacer(Modifier.width(Spacing.screenBorder))
+                    }
 
-                itemsIndexed(viewEntity) { index, item ->
-                    HourlyListItem(item)
+                    itemsIndexed(viewEntity) { index, item ->
+                        HourlyListItem(item)
 
-                    if (index < viewEntity.lastIndex) {
-                        VerticalListItemDivider(Modifier.height(120.dp))
+                        if (index < viewEntity.lastIndex) {
+                            VerticalListItemDivider(Modifier.height(120.dp))
+                        }
+                    }
+
+                    item {
+                        Spacer(Modifier.width(Spacing.screenBorder))
                     }
                 }
 
-                item {
-                    Spacer(Modifier.width(Spacing.screenBorder))
-                }
+                PrimaryButton(
+                    text = stringResource(R.string.close),
+                    onClick = closeAction,
+                    modifier = Modifier
+                        .padding(Spacing.screenBorder)
+                        .fillMaxWidth()
+                )
             }
         }
     )
