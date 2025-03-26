@@ -38,28 +38,41 @@ import com.zywczas.commoncompose.components.Snackbar
 import com.zywczas.commoncompose.components.Toolbar
 import com.zywczas.commoncompose.components.VerticalListItemDivider
 import com.zywczas.commoncompose.components.buttons.PrimaryButton
+import com.zywczas.commoncompose.theme.FunctionDisabledLight
+import com.zywczas.commoncompose.theme.LightCloud
 import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.commoncompose.theme.Spacing
+import com.zywczas.commonutil.OnClick
 import com.zywczas.commonutil.R
 import com.zywczas.commonutil.weather.TemperatureColor
 import com.zywczas.commonutil.weather.WeatherCondition
+import com.zywczas.featureforecastplace.viewmodel.HourlyForecastViewEntity
 import com.zywczas.featureforecastplace.viewmodel.PlaceForecastViewEntity
 import com.zywczas.featureforecastplace.viewmodel.PlaceForecastViewModel
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun PlaceForecastScreen(args: PlaceForecastArgs, goBackAction: () -> Unit) {
+fun PlaceForecastScreen(args: PlaceForecastArgs, goBackAction: OnClick) {
 
     val viewModel: PlaceForecastViewModel = koinViewModel()
     val snackbarHostState = remember { SnackbarHostState() }
+    var showHourlyForecast by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) { viewModel.init(args) }
 
     PlaceForecastScreen(
-        viewEntity = viewModel.viewEntity,
-        goBackAction = goBackAction
+        viewEntity = viewModel.placeForecastViewEntity,
+        goBackAction = goBackAction,
+        onShowHourlyForecastClick = { showHourlyForecast = true }
     )
+
+    if (showHourlyForecast) {
+        HourlyForecast(
+            viewEntity = viewModel.hourlyForecastViewEntity,
+            onDismissRequest = { showHourlyForecast = false }
+        )
+    }
 
     Snackbar(snackbarHostState)
 
@@ -71,9 +84,12 @@ fun PlaceForecastScreen(args: PlaceForecastArgs, goBackAction: () -> Unit) {
 }
 
 @Composable
-private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackAction: () -> Unit) {
+private fun PlaceForecastScreen(
+    viewEntity: PlaceForecastViewEntity,
+    goBackAction: OnClick,
+    onShowHourlyForecastClick: OnClick
+) {
     Column {
-        var showHourlyForecast by remember { mutableStateOf(false) }
 
         Toolbar(
             title = viewEntity.toolbarTitle,
@@ -123,24 +139,19 @@ private fun PlaceForecastScreen(viewEntity: PlaceForecastViewEntity, goBackActio
             modifier = Modifier
                 .padding(horizontal = Spacing.screenBorder)
                 .fillMaxWidth(),
-            onClick = { showHourlyForecast = true }
+            onClick = onShowHourlyForecastClick
         )
 
         Spacer(Modifier.height(Spacing.screenBorder))
 
         BottomBarInsetSpacer()
-
-        if (showHourlyForecast) {
-            HourlyForecast(
-                onDismissRequest = { showHourlyForecast = false }
-            )
-        }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HourlyForecast(
+    viewEntity: List<HourlyForecastViewEntity>,
     onDismissRequest: () -> Unit,
 ) {
     ModalBottomSheet(
@@ -152,13 +163,15 @@ private fun HourlyForecast(
                 item {
                     Spacer(Modifier.width(Spacing.screenBorder))
                 }
-                val list = listOf("column1", "column2", "column3", "column4", "column5", "column6", "column7", "column8")
-                itemsIndexed(list) { index, item ->
-                    HourlyListItem()
-                    if (index < list.lastIndex) {
+
+                itemsIndexed(viewEntity) { index, item ->
+                    HourlyListItem(item)
+
+                    if (index < viewEntity.lastIndex) {
                         VerticalListItemDivider(Modifier.height(120.dp))
                     }
                 }
+
                 item {
                     Spacer(Modifier.width(Spacing.screenBorder))
                 }
@@ -168,38 +181,35 @@ private fun HourlyForecast(
 }
 
 @Composable
-private fun HourlyListItem() {
+private fun HourlyListItem(viewEntity: HourlyForecastViewEntity) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(horizontal = 8.dp),
     ) {
-        Text("1300")
+        Text(viewEntity.hour)
 
         Spacer(Modifier.height(Spacing.listItemVerticalOuter))
 
         SmallIcon(
-            icon = WeatherCondition.Clear.icon,
-            contentDescription = WeatherCondition.Clear.contentDescription
+            icon = viewEntity.weatherCondition.icon,
+            contentDescription = viewEntity.weatherCondition.contentDescription
         )
 
         Spacer(Modifier.height(Spacing.listItemVerticalInner))
 
-        Text(
-            text = "14°",
-        )
+        Text(viewEntity.temperature)
 
         Spacer(Modifier.height(Spacing.listItemVerticalOuter))
 
         SmallIcon(
             icon = R.drawable.ic_rain_drop,
-            contentDescription = R.string.content_description_precipitation_probability
+            contentDescription = R.string.content_description_precipitation_probability,
+            tint = if (viewEntity.isPrecipitationProbabilityLow) FunctionDisabledLight else LightCloud
         )
 
         Spacer(Modifier.height(Spacing.listItemVerticalInner))
 
-        Text(
-            text = "5%",
-        )
+        Text(viewEntity.precipitationProbability)
     }
 }
 
@@ -228,15 +238,22 @@ private fun PreviewPlaceForecastScreen() {
                     )
                 )
             ),
-            goBackAction = {}
+            goBackAction = {},
+            onShowHourlyForecastClick = {}
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun PreviewHourlyForecast() {
-    HourlyForecast(
-        onDismissRequest = {}
+private fun PreviewHourlyListItem() {
+    HourlyListItem(
+        viewEntity = HourlyForecastViewEntity(
+            hour = "1400",
+            weatherCondition = WeatherCondition.Clear,
+            temperature = "7°",
+            precipitationProbability = "7%",
+            isPrecipitationProbabilityLow = false
+        )
     )
 }
