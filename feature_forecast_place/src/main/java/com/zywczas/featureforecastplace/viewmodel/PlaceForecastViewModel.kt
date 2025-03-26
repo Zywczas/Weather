@@ -22,7 +22,10 @@ internal class PlaceForecastViewModel(
     private val saveLocationsUseCase: SaveLocationUseCase
 ) : BaseViewModel() {
 
-    var viewEntity by mutableStateOf(PlaceForecastViewEntity())
+    var placeForecastViewEntity by mutableStateOf(PlaceForecastViewEntity())
+        private set
+
+    var hourlyForecastViewEntity by mutableStateOf<List<HourlyForecastViewEntity>>(emptyList())
         private set
 
     fun init(args: PlaceForecastArgs) {
@@ -36,7 +39,10 @@ internal class PlaceForecastViewModel(
 
     private suspend fun getForecast(args: PlaceForecastArgs) {
         when (val response = getPlaceForecastUseCase.get((PlaceForecastParams(lat = args.lat, lon = args.lon)))) {
-            is Resource.Success -> viewEntity = response.data.toDomain(toolbarTitle = args.placeName, stringProvider = stringProvider)
+            is Resource.Success -> {
+                placeForecastViewEntity = response.data.current.toDomain(toolbarTitle = args.placeName, stringProvider = stringProvider)
+                hourlyForecastViewEntity = response.data.hourly.map { it.toDomain() }
+            }
             is Resource.Error -> showError(stringProvider.getString(response.message))
         }
     }
