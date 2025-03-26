@@ -6,11 +6,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.theme.Theme
+import com.zywczas.commonutil.OnClick
 
 @Composable
 fun PrimaryButton(
     text: String,
-    onClick: () -> Unit,
+    onClick: OnClick,
     modifier: Modifier = Modifier
 ) {
     Button(

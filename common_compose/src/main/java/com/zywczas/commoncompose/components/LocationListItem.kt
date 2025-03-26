@@ -11,9 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.theme.Spacing
 import com.zywczas.commoncompose.theme.Theme
+import com.zywczas.commonutil.OnClick
 
 @Composable
-fun LocationListItem(cityName: String, onClick: () -> Unit) {
+fun LocationListItem(cityName: String, onClick: OnClick) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
