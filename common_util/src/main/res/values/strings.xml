@@ -18,6 +18,7 @@
     <string name="pressure_value">%1$s hPa</string>
     <string name="visibility_value">%1$s m</string>
     <string name="wind_speed_value">%1$s km/h</string>
+    <string name="close">Close</string>
 
     <!--    screens-->
     <string name="search_city_screen">Search City</string>

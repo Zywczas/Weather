@@ -25,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -70,7 +71,7 @@ fun PlaceForecastScreen(args: PlaceForecastArgs, goBackAction: OnClick) {
     if (showHourlyForecast) {
         HourlyForecast(
             viewEntity = viewModel.hourlyForecastViewEntity,
-            onDismissRequest = { showHourlyForecast = false }
+            closeAction = { showHourlyForecast = false }
         )
     }
 
@@ -152,29 +153,39 @@ private fun PlaceForecastScreen(
 @Composable
 private fun HourlyForecast(
     viewEntity: List<HourlyForecastViewEntity>,
-    onDismissRequest: () -> Unit,
+    closeAction: OnClick,
 ) {
     ModalBottomSheet(
-        onDismissRequest = onDismissRequest,
+        onDismissRequest = closeAction,
         content = {
-            LazyRow(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                item {
-                    Spacer(Modifier.width(Spacing.screenBorder))
-                }
+            Column {
+                LazyRow(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    item {
+                        Spacer(Modifier.width(Spacing.screenBorder))
+                    }
 
-                itemsIndexed(viewEntity) { index, item ->
-                    HourlyListItem(item)
+                    itemsIndexed(viewEntity) { index, item ->
+                        HourlyListItem(item)
 
-                    if (index < viewEntity.lastIndex) {
-                        VerticalListItemDivider(Modifier.height(120.dp))
+                        if (index < viewEntity.lastIndex) {
+                            VerticalListItemDivider(Modifier.height(120.dp))
+                        }
+                    }
+
+                    item {
+                        Spacer(Modifier.width(Spacing.screenBorder))
                     }
                 }
 
-                item {
-                    Spacer(Modifier.width(Spacing.screenBorder))
-                }
+                PrimaryButton(
+                    text = stringResource(R.string.close),
+                    onClick = closeAction,
+                    modifier = Modifier
+                        .padding(Spacing.screenBorder)
+                        .fillMaxWidth()
+                )
             }
         }
     )
@@ -249,7 +260,7 @@ private fun PreviewPlaceForecastScreen() {
 private fun PreviewHourlyListItem() {
     HourlyListItem(
         viewEntity = HourlyForecastViewEntity(
-            hour = "1400",
+            hour = AnnotatedString("1400"),
             weatherCondition = WeatherCondition.Clear,
             temperature = "7°",
             precipitationProbability = "7%",

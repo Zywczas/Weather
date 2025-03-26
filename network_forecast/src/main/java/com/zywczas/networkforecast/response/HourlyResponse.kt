@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class HourlyResponse(
 
     @SerializedName("dt")
-    val dateTime: Long = 0,
+    val unixDateTime: Long = 0,
 
     @SerializedName("temp")
     val temperature: Double = 0.0,
