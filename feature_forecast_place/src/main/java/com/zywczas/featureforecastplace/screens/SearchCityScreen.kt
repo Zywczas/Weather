@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
+import com.zywczas.commoncompose.components.BottomBarInsetSpacer
 import com.zywczas.commoncompose.components.HorizontalListItemDivider
 import com.zywczas.commoncompose.components.ListHeader
 import com.zywczas.commoncompose.components.LocationListItem
@@ -84,6 +85,10 @@ private fun SearchLocationScreen(
                         }
                     }
                 }
+            }
+
+            item {
+                BottomBarInsetSpacer()
             }
         }
     }
