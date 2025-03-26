@@ -41,8 +41,8 @@ import com.zywczas.commoncompose.components.VerticalListItemDivider
 import com.zywczas.commoncompose.components.buttons.PrimaryButton
 import com.zywczas.commoncompose.theme.FunctionDisabledLight
 import com.zywczas.commoncompose.theme.LightCloud
-import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.commoncompose.theme.Spacing
+import com.zywczas.commoncompose.theme.Theme
 import com.zywczas.commonutil.OnClick
 import com.zywczas.commonutil.R
 import com.zywczas.commonutil.weather.TemperatureColor
@@ -227,7 +227,7 @@ private fun HourlyListItem(viewEntity: HourlyForecastViewEntity) {
 @Preview(showBackground = true)
 @Composable
 private fun PreviewPlaceForecastScreen() {
-    PreviewTheme {
+    Theme.Preview {
         PlaceForecastScreen(
             viewEntity = PlaceForecastViewEntity(
                 toolbarTitle = "Bydgoszcz",
@@ -258,13 +258,15 @@ private fun PreviewPlaceForecastScreen() {
 @Preview(showBackground = true)
 @Composable
 private fun PreviewHourlyListItem() {
-    HourlyListItem(
-        viewEntity = HourlyForecastViewEntity(
-            hour = AnnotatedString("1400"),
-            weatherCondition = WeatherCondition.Clear,
-            temperature = "7°",
-            precipitationProbability = "7%",
-            isPrecipitationProbabilityLow = false
+    Theme.Preview {
+        HourlyListItem(
+            viewEntity = HourlyForecastViewEntity(
+                hour = AnnotatedString("1400"),
+                weatherCondition = WeatherCondition.Clear,
+                temperature = "7°",
+                precipitationProbability = "7%",
+                isPrecipitationProbabilityLow = false
+            )
         )
-    )
+    }
 }

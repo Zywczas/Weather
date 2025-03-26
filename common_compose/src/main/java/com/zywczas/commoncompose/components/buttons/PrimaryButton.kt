@@ -5,7 +5,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.zywczas.commoncompose.theme.PreviewTheme
+import com.zywczas.commoncompose.theme.Theme
 
 @Composable
 fun PrimaryButton(
@@ -23,8 +23,8 @@ fun PrimaryButton(
 
 @Preview
 @Composable
-private fun Preview() {
-    PreviewTheme {
+private fun PreviewPrimaryButton() {
+    Theme.Preview {
         PrimaryButton(
             text = "Next hours",
             onClick = {}

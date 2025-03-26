@@ -11,7 +11,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.zywczas.commoncompose.theme.PreviewTheme
+import com.zywczas.commoncompose.theme.Theme
 import com.zywczas.commonutil.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,8 +40,8 @@ fun Toolbar(
 
 @Preview
 @Composable
-private fun Preview() {
-    PreviewTheme {
+private fun PreviewToolbar() {
+    Theme.Preview {
         Toolbar(
             title = "PreviewScreen",
             onBackClick = {},

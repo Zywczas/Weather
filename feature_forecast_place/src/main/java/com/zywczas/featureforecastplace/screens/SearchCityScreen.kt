@@ -21,8 +21,8 @@ import com.zywczas.commoncompose.components.LocationListItem
 import com.zywczas.commoncompose.components.OutlinedTextInput
 import com.zywczas.commoncompose.components.Snackbar
 import com.zywczas.commoncompose.components.Toolbar
-import com.zywczas.commoncompose.theme.PreviewTheme
 import com.zywczas.commoncompose.theme.Spacing
+import com.zywczas.commoncompose.theme.Theme
 import com.zywczas.commonutil.R
 import com.zywczas.featureforecastplace.domain.SearchListItem
 import com.zywczas.featureforecastplace.viewmodel.SearchLocationViewModel
@@ -92,7 +92,7 @@ private fun SearchLocationScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewSearchCityScreen() {
-    PreviewTheme {
+    Theme.Preview {
         SearchLocationScreen(
             locations = listOf(
                 SearchListItem.Header("Recent searches"),
