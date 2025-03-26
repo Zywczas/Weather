@@ -127,6 +127,6 @@ private const val MIN_NEUTRAL_TEMP = 10.0
 private const val MAX_NEUTRAL_TEMP = 20.0
 private const val PARTIAL_CLOUDS_MAX_PERCENTAGE = 60
 private const val NO_PRECIPITATION_VALUE = 0
-private const val PRECIPITATION_PROBABILITY_MIN_VALUE = 1
+private const val PRECIPITATION_PROBABILITY_MIN_VALUE = 1.5
 private val HOURS_SPAN_STYLE = SpanStyle(fontWeight = FontWeight.Bold)
 private const val DISPLAYED_MINUTES = "00"
