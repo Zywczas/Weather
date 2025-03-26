@@ -24,7 +24,7 @@ fun ListHeader(text: String) {
             text = text,
             style = MaterialTheme.typography.bodyLarge,
             color = Color.White,
-            modifier = Modifier.padding(horizontal = Spacing.horizontalPadding, vertical = Spacing.verticalPadding)
+            modifier = Modifier.padding(horizontal = Spacing.screenBorder, vertical = Spacing.listItemVerticalOuter)
         )
     }
 }

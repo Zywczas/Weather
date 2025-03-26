@@ -2,16 +2,13 @@ package com.zywczas.networkforecast.response
 
 import com.google.gson.annotations.SerializedName
 
-data class CurrentResponse(
+data class HourlyResponse(
+
+    @SerializedName("dt")
+    val unixDateTime: Long = 0,
 
     @SerializedName("temp")
     val temperature: Double = 0.0,
-
-    @SerializedName("humidity")
-    val humidityPercentage: Int = 0,
-
-    @SerializedName("clouds")
-    val cloudsPercentage: Int = 0,
 
     @SerializedName("rain")
     val rain: PrecipitationResponse? = null,
@@ -19,15 +16,12 @@ data class CurrentResponse(
     @SerializedName("snow")
     val snow: PrecipitationResponse? = null,
 
+    @SerializedName("pop")
+    val precipitationProbability: Double = 0.0,
+
     @SerializedName("weather")
     val weather: List<WeatherResponse> = emptyList(),
 
-    @SerializedName("pressure")
-    val pressure: Int = 0,
-
-    @SerializedName("visibility")
-    val visibility: Int = 0,
-
-    @SerializedName("wind_speed")
-    val windSpeed: Double = 0.0,
+    @SerializedName("clouds")
+    val cloudsPercentage: Int = 0,
 )
