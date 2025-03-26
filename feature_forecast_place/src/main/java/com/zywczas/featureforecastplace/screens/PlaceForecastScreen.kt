@@ -39,8 +39,7 @@ import com.zywczas.commoncompose.components.Snackbar
 import com.zywczas.commoncompose.components.Toolbar
 import com.zywczas.commoncompose.components.VerticalListItemDivider
 import com.zywczas.commoncompose.components.buttons.PrimaryButton
-import com.zywczas.commoncompose.theme.FunctionDisabledLight
-import com.zywczas.commoncompose.theme.LightCloud
+import com.zywczas.commoncompose.theme.Color
 import com.zywczas.commoncompose.theme.Spacing
 import com.zywczas.commoncompose.theme.Theme
 import com.zywczas.commonutil.OnClick
@@ -215,7 +214,7 @@ private fun HourlyListItem(viewEntity: HourlyForecastViewEntity) {
         SmallIcon(
             icon = R.drawable.ic_rain_drop,
             contentDescription = R.string.content_description_precipitation_probability,
-            tint = if (viewEntity.isPrecipitationProbabilityLow) FunctionDisabledLight else LightCloud
+            tint = if (viewEntity.isPrecipitationProbabilityLow) Color.FunctionDisabledLight else Color.LightCloud
         )
 
         Spacer(Modifier.height(Spacing.listItemVerticalInner))

@@ -12,7 +12,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.zywczas.commoncompose.theme.LightCloud
 import com.zywczas.commoncompose.theme.Theme
 import com.zywczas.commonutil.R
 
@@ -60,7 +59,7 @@ private fun PreviewSmallIcon() {
         SmallIcon(
             R.drawable.ic_condition_sunny,
             R.string.content_description_condition_sunny,
-            tint = LightCloud
+            tint = com.zywczas.commoncompose.theme.Color.LightCloud
         )
     }
 }

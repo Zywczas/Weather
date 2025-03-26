@@ -24,7 +24,7 @@ object Theme {
         content: @Composable () -> Unit
     ) {
         CompositionLocalProvider(
-            LocalRippleConfiguration provides RippleConfiguration(PrimaryColorLight)
+            LocalRippleConfiguration provides RippleConfiguration(Color.PrimaryColorLight)
         ) {
             MaterialTheme(
                 colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme,
@@ -41,15 +41,15 @@ object Theme {
 }
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = Color.Purple80,
+    secondary = Color.PurpleGrey80,
+    tertiary = Color.Pink80
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = PrimaryColorLight,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = Color.PrimaryColorLight,
+    secondary = Color.PurpleGrey40,
+    tertiary = Color.Pink40
 )
 
 private val typography = Typography(
