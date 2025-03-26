@@ -12,7 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.zywczas.commoncompose.theme.LightCloud
+import com.zywczas.commoncompose.theme.Theme
 import com.zywczas.commonutil.R
 
 @Composable
@@ -30,10 +30,12 @@ fun LargeIcon(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewLargeIcon() {
-    LargeIcon(
-        R.drawable.ic_condition_sunny,
-        R.string.content_description_condition_sunny,
-    )
+    Theme.Preview {
+        LargeIcon(
+            R.drawable.ic_condition_sunny,
+            R.string.content_description_condition_sunny,
+        )
+    }
 }
 
 @Composable
@@ -53,9 +55,11 @@ fun SmallIcon(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewSmallIcon() {
-    SmallIcon(
-        R.drawable.ic_condition_sunny,
-        R.string.content_description_condition_sunny,
-        tint = LightCloud
-    )
+    Theme.Preview {
+        SmallIcon(
+            R.drawable.ic_condition_sunny,
+            R.string.content_description_condition_sunny,
+            tint = com.zywczas.commoncompose.theme.Color.LightCloud
+        )
+    }
 }

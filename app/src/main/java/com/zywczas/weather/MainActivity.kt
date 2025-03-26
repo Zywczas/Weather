@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.zywczas.commoncompose.theme.AppTheme
+import com.zywczas.commoncompose.theme.Theme
 import com.zywczas.weather.navigation.AppNavHost
 import org.koin.androidx.compose.KoinAndroidContext
 
@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AppTheme {
+            Theme.App {
                 KoinAndroidContext {
                     AppNavHost()
                 }

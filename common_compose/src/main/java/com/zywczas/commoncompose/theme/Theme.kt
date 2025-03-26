@@ -15,44 +15,42 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
+object Theme {
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun App(
+        darkTheme: Boolean = isSystemInDarkTheme(),
+        content: @Composable () -> Unit
+    ) {
+        CompositionLocalProvider(
+            LocalRippleConfiguration provides RippleConfiguration(Color.PrimaryColorLight)
+        ) {
+            MaterialTheme(
+                colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme,
+                typography = typography,
+                content = content
+            )
+        }
+    }
+
+    @Composable
+    fun Preview(content: @Composable () -> Unit) {
+        App(content = content)
+    }
+}
+
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = Color.Purple80,
+    secondary = Color.PurpleGrey80,
+    tertiary = Color.Pink80
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = PrimaryColorLight,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = Color.PrimaryColorLight,
+    secondary = Color.PurpleGrey40,
+    tertiary = Color.Pink40
 )
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
-) {
-    val colorScheme = when {
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
-    CompositionLocalProvider(
-        LocalRippleConfiguration provides RippleConfiguration(PrimaryColorLight)
-    ) {
-        MaterialTheme(
-            colorScheme = colorScheme,
-            typography = typography,
-            content = content
-        )
-    }
-}
-
-@Composable
-fun PreviewTheme(content: @Composable () -> Unit) {
-    AppTheme(content = content)
-}
 
 private val typography = Typography(
     bodyLarge = TextStyle(
