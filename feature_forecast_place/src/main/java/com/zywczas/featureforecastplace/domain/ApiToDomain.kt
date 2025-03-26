@@ -1,12 +1,18 @@
 package com.zywczas.featureforecastplace.domain
 
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import com.zywczas.commoncompose.components.KeyValueViewEntity
 import com.zywczas.commonutil.Chars
 import com.zywczas.commonutil.R
 import com.zywczas.commonutil.StringProvider
 import com.zywczas.commonutil.UnitsConverter
+import com.zywczas.commonutil.extensions.hour
 import com.zywczas.commonutil.extensions.roundTo0DecimalPlaces
 import com.zywczas.commonutil.extensions.roundTo1DecimalPlace
+import com.zywczas.commonutil.extensions.unixDateTimeToDate
 import com.zywczas.commonutil.weather.TemperatureColor
 import com.zywczas.commonutil.weather.TemperatureColor.Cold
 import com.zywczas.commonutil.weather.TemperatureColor.Hot
@@ -86,8 +92,14 @@ internal fun LocationLocal.toDomain() = SearchListItem.Location(
     lon = lon,
 )
 
-internal fun HourlyResponse.toDomain() = HourlyForecastViewEntity(
-    hour = dateTime.toString(),//todo zamienic na godzine
+internal fun HourlyResponse.toDomain(): HourlyForecastViewEntity = HourlyForecastViewEntity(
+    hour = buildAnnotatedString {
+        val date = unixDateTime.unixDateTimeToDate()
+        withStyle(HOURS_SPAN_STYLE) {
+            append(date.hour)
+        }
+        append(DISPLAYED_MINUTES)
+    },
     weatherCondition = weather.firstOrNull()?.toDomain(cloudsPercentage) ?: WeatherCondition.Clear,
     temperature = temperature.roundTo0DecimalPlaces() + Chars.DEGREE,
     precipitationProbability = precipitationProbability.roundTo0DecimalPlaces() + Chars.PERCENT,
@@ -116,3 +128,5 @@ private const val MAX_NEUTRAL_TEMP = 20.0
 private const val PARTIAL_CLOUDS_MAX_PERCENTAGE = 60
 private const val NO_PRECIPITATION_VALUE = 0
 private const val PRECIPITATION_PROBABILITY_MIN_VALUE = 1
+private val HOURS_SPAN_STYLE = SpanStyle(fontWeight = FontWeight.Bold)
+private const val DISPLAYED_MINUTES = "00"
