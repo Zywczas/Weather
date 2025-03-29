@@ -18,8 +18,8 @@ The project contains following screens:
 
 |                     Search place screen: you can search here for any place on Earth                     |                   Place forecast screen: check weather conditions for selected place                    |
 |:-------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|
-| <img src="https://github.com/user-attachments/assets/36f157e1-6262-4de3-9954-ecc872804042" width="300"> | <img src="https://github.com/user-attachments/assets/652f1de0-7173-442a-ab20-f3f870ed87d8" width="300"> |
+| <img src="https://github.com/user-attachments/assets/2cdbcc17-8a2c-4302-b957-69ee7c179cf5" width="300"> | <img src="https://github.com/user-attachments/assets/e786b9a9-46ce-431b-a24b-546758e9b836" width="300"> |
 
 |                                     Hourly forecast in bottom sheet                                     |
 |:-------------------------------------------------------------------------------------------------------:|
-| <img src="https://github.com/user-attachments/assets/e229828c-a16a-4e4b-a224-e328ae31b680" width="300"> |
+| <img src="https://github.com/user-attachments/assets/2be541e9-09c8-4d42-b577-7a456facd2d7" width="300"> |
