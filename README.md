@@ -20,6 +20,6 @@ The project contains following screens:
 |:-------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|
 | <img src="https://github.com/user-attachments/assets/36f157e1-6262-4de3-9954-ecc872804042" width="300"> | <img src="https://github.com/user-attachments/assets/652f1de0-7173-442a-ab20-f3f870ed87d8" width="300"> |
 
-|                    Hourly forecast in bottom sheet                                                      |
-| ------------------------------------------------------------------------------------------------------- |
+|                                     Hourly forecast in bottom sheet                                     |
+|:-------------------------------------------------------------------------------------------------------:|
 | <img src="https://github.com/user-attachments/assets/e229828c-a16a-4e4b-a224-e328ae31b680" width="300"> |
