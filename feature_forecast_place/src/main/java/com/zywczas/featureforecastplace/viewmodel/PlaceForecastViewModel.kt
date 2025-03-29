@@ -38,7 +38,7 @@ internal class PlaceForecastViewModel(
     }
 
     private suspend fun getForecast(args: SelectedLocation) {
-        when (val response = getPlaceForecastUseCase.get((PlaceForecastParams(lat = args.lat, lon = args.lon)))) {
+        when (val response = getPlaceForecastUseCase.get(PlaceForecastParams(lat = args.lat, lon = args.lon))) {
             is Resource.Success -> {
                 placeForecastViewEntity = response.data.current.toDomain(toolbarTitle = args.name, stringProvider = stringProvider)
                 hourlyForecastViewEntity = response.data.hourly.map { it.toDomain() }

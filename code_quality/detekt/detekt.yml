@@ -566,7 +566,7 @@ style:
   ExplicitItLambdaParameter:
     active: true
   ExpressionBodySyntax:
-    active: false
+    active: true
     includeLineWrapping: false
   ForbiddenAnnotation:
     active: true
@@ -642,7 +642,7 @@ style:
     ignoreRanges: false
     ignoreExtensionFunctions: true
   MandatoryBracesLoops:
-    active: false
+    active: true
   MaxChainedCallsOnSameLine:
     active: true
     maxChainedCalls: 5
@@ -660,7 +660,7 @@ style:
   MultilineLambdaItParameter:
     active: false
   MultilineRawStringIndentation:
-    active: false
+    active: true
     indentSize: 4
     trimmingMethods:
       - 'trimIndent'
@@ -712,9 +712,9 @@ style:
     max: 2
     excludeGuardClauses: false
   TrailingWhitespace:
-    active: false
+    active: true
   TrimMultilineRawString:
-    active: false
+    active: true
     trimmingMethods:
       - 'trimIndent'
       - 'trimMargin'
@@ -739,14 +739,14 @@ style:
   UnnecessaryInnerClass:
     active: false
   UnnecessaryLet:
-    active: false
+    active: true
   UnnecessaryParentheses:
-    active: false
-    allowForUnclearPrecedence: false
+    active: true
+    allowForUnclearPrecedence: true
   UntilInsteadOfRangeTo:
     active: false
   UnusedImports:
-    active: false
+    active: true
   UnusedParameter:
     active: true
     allowedNames: 'ignored|expected'

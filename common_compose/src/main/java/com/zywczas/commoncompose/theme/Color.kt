@@ -16,4 +16,6 @@ object Color {
     val PrimaryColorLight = BlueGrotto
     val FunctionDisabledLight = Color(0xFF7F878E)
     val LightCloud: Color @Composable get() = Color(LocalContext.current.getColor(R.color.cloud_light))
+    val BaseText = Color.Black
+    val ScreenBackground = Color.White
 }
