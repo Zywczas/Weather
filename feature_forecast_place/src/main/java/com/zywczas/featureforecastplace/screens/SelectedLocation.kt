@@ -1,7 +1,7 @@
 package com.zywczas.featureforecastplace.screens
 
-data class PlaceForecastArgs(
+data class SelectedLocation(
     val lat: Double,
     val lon: Double,
-    val placeName: String,
+    val name: String,
 )

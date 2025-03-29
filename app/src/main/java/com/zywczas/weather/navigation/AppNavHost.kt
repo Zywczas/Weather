@@ -4,25 +4,28 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.zywczas.featureforecastplace.screens.PlaceForecastScreen
 import com.zywczas.featureforecastplace.screens.SearchLocationScreen
+import com.zywczas.featureforecastplace.screens.SelectedLocation
 
 @Composable
 fun AppNavHost() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = DestinationSearchCity.route) {
+    NavHost(navController = navController, startDestination = Destination.SearchCity) {
 
-        composable(DestinationSearchCity.route) {
+        composable<Destination.SearchCity> {
             SearchLocationScreen(
-                onCityClick = { navArgs ->
-                    navController.navigate(DestinationPlaceForecast.getDestinationWithArgs(navArgs))
+                onLocationClick = { location ->
+                    navController.navigate(Destination.PlaceForecast(lat = location.lat, lon = location.lon, placeName = location.name))
                 }
             )
         }
 
-        DestinationPlaceForecast.composableWithArgs(this) { _, args ->
+        composable<Destination.PlaceForecast> { backStackEntry ->
+            val route: Destination.PlaceForecast = backStackEntry.toRoute()
             PlaceForecastScreen(
-                args = args,
+                location = SelectedLocation(lat = route.lat, lon = route.lon, name = route.placeName),
                 goBackAction = { navController.navigateUp() },
             )
         }
