@@ -11,8 +11,10 @@ retrofit = "2.11.0"
 okHttp = "4.12.0"
 annotationJvm = "1.9.1"
 room = "2.6.1"
-junit = "4.13.2"
 detekt = "1.23.8"
+kotlinSerialization = "2.1.20"
+kotlinSymbolProcessing= "2.1.20-1.0.32" # First part of the lib version must be the same as kotlinSerialization version
+kotlinSerializationJson = "1.8.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,7 +40,7 @@ androidx-annotation-jvm = { group = "androidx.annotation", name = "annotation-jv
 room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 roomktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 roomCompiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
+kotlinSerializationJson = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerializationJson" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradle" }
@@ -47,3 +49,5 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "gradle" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
+kotlinSymbolProcessing = { id = "com.google.devtools.ksp", version.ref = "kotlinSymbolProcessing" }

@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.kotlinSymbolProcessing)
 }
 
 android {
@@ -36,5 +37,5 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.room)
     implementation(libs.roomktx)
-    kapt(libs.roomCompiler)
+    ksp(libs.roomCompiler)
 }

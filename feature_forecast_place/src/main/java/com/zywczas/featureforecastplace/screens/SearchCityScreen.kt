@@ -31,9 +31,7 @@ import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SearchLocationScreen(
-    onCityClick: (PlaceForecastArgs) -> Unit,
-) {
+fun SearchLocationScreen(onLocationClick: (SelectedLocation) -> Unit) {
     val viewModel: SearchLocationViewModel = koinViewModel()
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -41,7 +39,7 @@ fun SearchLocationScreen(
 
     SearchLocationScreen(
         locations = viewModel.locations,
-        onCityClick = onCityClick,
+        onLocationClick = onLocationClick,
         searchText = viewModel.searchText,
         onSearchTextChanged = viewModel::onSearchTextChanged
     )
@@ -58,7 +56,7 @@ fun SearchLocationScreen(
 @Composable
 private fun SearchLocationScreen(
     locations: List<SearchListItem>,
-    onCityClick: (PlaceForecastArgs) -> Unit,
+    onLocationClick: (SelectedLocation) -> Unit,
     searchText: TextFieldValue,
     onSearchTextChanged: (TextFieldValue) -> Unit
 ) {
@@ -78,7 +76,7 @@ private fun SearchLocationScreen(
                     is SearchListItem.Location -> {
                         LocationListItem(
                             location.name,
-                            onClick = { onCityClick(PlaceForecastArgs(lat = location.lat, lon = location.lon, placeName = location.name)) }
+                            onClick = { onLocationClick(SelectedLocation(lat = location.lat, lon = location.lon, name = location.name)) }
                         )
                         if (index < locations.lastIndex) {
                             HorizontalListItemDivider()
@@ -110,7 +108,7 @@ private fun PreviewSearchCityScreen() {
                 SearchListItem.Location(name = "Zakopane"),
                 SearchListItem.Location(name = "Karpacz"),
             ),
-            onCityClick = {},
+            onLocationClick = {},
             searchText = TextFieldValue("Warszawa"),
             onSearchTextChanged = {}
         )

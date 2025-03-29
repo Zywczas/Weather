@@ -53,13 +53,13 @@ import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun PlaceForecastScreen(args: PlaceForecastArgs, goBackAction: OnClick) {
+fun PlaceForecastScreen(location: SelectedLocation, goBackAction: OnClick) {
 
     val viewModel: PlaceForecastViewModel = koinViewModel()
     val snackbarHostState = remember { SnackbarHostState() }
     var showHourlyForecast by remember { mutableStateOf(false) }
 
-    LaunchedEffect(Unit) { viewModel.init(args) }
+    LaunchedEffect(Unit) { viewModel.init(location) }
 
     PlaceForecastScreen(
         viewEntity = viewModel.placeForecastViewEntity,
@@ -90,7 +90,6 @@ private fun PlaceForecastScreen(
     onShowHourlyForecastClick: OnClick
 ) {
     Column {
-
         Toolbar(
             title = viewEntity.toolbarTitle,
             onBackClick = goBackAction
@@ -110,6 +109,7 @@ private fun PlaceForecastScreen(
                 )
                 Spacer(Modifier.width(Spacing.screenComponentsVertical))
             }
+
             Text(
                 text = viewEntity.temperatureText,
                 color = viewEntity.temperatureColor,

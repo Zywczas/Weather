@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.detekt)
 }
 
@@ -66,4 +67,6 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.compose.viewmodel)
     implementation(libs.koin.androidx.compose)
+
+    implementation(libs.kotlinSerializationJson)
 }
