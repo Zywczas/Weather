@@ -37,7 +37,7 @@ android {
 
 dependencies {
 
-//    api(libs.gsonConverter)todo update to KMM
+    api(libs.gsonConverter)
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
 //    implementation(libs.okHttpInterceptor)todo update to KMM

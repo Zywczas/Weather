@@ -31,7 +31,6 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
 
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)

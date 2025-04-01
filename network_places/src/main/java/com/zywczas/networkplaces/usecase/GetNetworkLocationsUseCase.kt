@@ -6,11 +6,17 @@ import com.zywczas.commonutil.logD
 import com.zywczas.networkplaces.params.LocationsParams
 import com.zywczas.networkplaces.response.LocationResponse
 import com.zywczas.networkplaces.retrofitapi.LocationsApi
+//todo update to KMM
 
-class GetNetworkLocationsUseCase internal constructor(private val api: LocationsApi) {
+class GetNetworkLocationsUseCase internal constructor(
+//    private val api: LocationsApi
+) {
 
     suspend fun get(params: LocationsParams): Resource<List<LocationResponse>> = try {
-        Resource.Success(api.getLocations(params.placeName).body()!!)
+        Resource.Success(
+            emptyList()
+//            api.getLocations(params.placeName).body()!!
+        )
     } catch (e: Exception) {
         logD(e.message)
         Resource.Error(R.string.error_locations_download)
