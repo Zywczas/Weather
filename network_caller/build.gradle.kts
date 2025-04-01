@@ -4,7 +4,7 @@ import com.zywczas.buildutils.getEnvElseLocal
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.detekt)
+    // alias(libs.plugins.detekt)todo update to KMM
 }
 
 android {
@@ -38,10 +38,9 @@ android {
 dependencies {
 
     api(libs.gsonConverter)
-    implementation(libs.retrofit)
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
-    implementation(libs.okHttpInterceptor)
-    implementation(libs.okHttp)
+//    implementation(libs.okHttpInterceptor)todo update to KMM
+//    implementation(libs.okHttp)
     implementation(libs.androidx.annotation.jvm)
 }

@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlinSerialization)
-    alias(libs.plugins.detekt)
+    // alias(libs.plugins.detekt)todo update to KMM
 }
 
 android {
