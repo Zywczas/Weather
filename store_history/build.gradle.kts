@@ -3,7 +3,6 @@ import com.zywczas.buildutils.Versions
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.detekt)
     alias(libs.plugins.kotlinSymbolProcessing)
 }
