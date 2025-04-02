@@ -6,6 +6,8 @@ plugins {
 //    alias(libs.plugins.detekt)todo update to KMM
     alias(libs.plugins.kotlinSerialization) apply false
     alias(libs.plugins.kotlinSymbolProcessing) apply false
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.android.kotlin.multiplatform.library) apply false
 }
 
 //tasks.register("detektAllModules") {todo update to KMM
