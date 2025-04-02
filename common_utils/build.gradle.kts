@@ -9,12 +9,12 @@ plugins {
 
 kotlin {
     androidLibrary {
-        namespace = "com.zywczas.commonutil"
+        namespace = "com.zywczas.commonutils"
         compileSdk = Versions.COMPILE_SDK
         minSdk = Versions.MIN_SDK
     }
 
-    val xcfName = "commonutilKit"
+    val xcfName = "commonutilsKit"
 
     iosX64 {
         binaries.framework {
