@@ -53,13 +53,12 @@ kotlin {
             dependencies {
                 api(project(":common_compose"))
                 api(project(":common_util"))
+                api(project(":common_utils"))
                 api(project(":feature_forecast_place"))
                 api(project(":network_caller"))
                 api(project(":network_forecast"))
                 api(project(":network_places"))
                 api(project(":store_history"))
-
-                implementation(libs.kotlin.stdlib)
             }
         }
 

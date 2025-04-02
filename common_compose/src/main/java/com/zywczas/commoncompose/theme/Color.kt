@@ -1,9 +1,6 @@
 package com.zywczas.commoncompose.theme
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import com.zywczas.commonutil.R
 
 object Color {
 
@@ -15,7 +12,14 @@ object Color {
     val Pink40 = Color(0xFF7D5260)
     val PrimaryColorLight = BlueGrotto
     val FunctionDisabledLight = Color(0xFF7F878E)
-    val LightCloud: Color @Composable get() = Color(LocalContext.current.getColor(R.color.cloud_light))
     val BaseText = Color.Black
     val ScreenBackground = Color.White
+
+    object Weather {
+        val LightCloud = Color(0xFF5267F2)
+        val DarkCloud = Color(0xFF14248E)
+        val Sun = Color(0xFFF39422)
+        val Fog = Color(0xFF6BB6CB)
+        val Lightning = Color(0xFFFBD71D)
+    }
 }

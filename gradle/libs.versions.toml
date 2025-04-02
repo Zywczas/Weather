@@ -2,6 +2,7 @@
 agp = "8.9.1"
 kotlin = "2.1.20"
 coreKtx = "1.15.0"
+kotlinxDatetime = "0.6.2"
 lifecycleRuntimeKtx = "2.8.7"
 androidxLifecycle = "2.8.4"
 activityCompose = "1.10.0"
@@ -16,6 +17,7 @@ kotlinSerialization = "2.1.20"
 kotlinSymbolProcessing= "2.1.20-1.0.32" # First part of the lib version must be the same as kotlinSerialization version
 kotlinSerializationJson = "1.8.0"
 composeMultiplatform = "1.7.3"
+kotlinStdlib = "2.1.20"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,7 +42,9 @@ gsonConverter = { group = "com.squareup.retrofit2", name = "converter-gson", ver
 #okHttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttp" }
 androidx-annotation-jvm = { group = "androidx.annotation", name = "annotation-jvm", version.ref = "annotationJvm" }
 kotlinSerializationJson = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerializationJson" }
-kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+#todo check if needed
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlinStdlib" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -35,6 +35,7 @@ android {
 dependencies {
     implementation(project(":common_compose"))
     implementation(project(":common_util"))
+    implementation(project(":common_utils"))
     implementation(project(":network_forecast"))
     implementation(project(":network_places"))
     implementation(project(":store_history"))
