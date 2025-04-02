@@ -3,7 +3,7 @@ package com.zywczas.commonutil
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
-
+//todo update to KMM
 abstract class BaseViewModel : ViewModel() {
 
     private val _announcement = MutableSharedFlow<String>()
