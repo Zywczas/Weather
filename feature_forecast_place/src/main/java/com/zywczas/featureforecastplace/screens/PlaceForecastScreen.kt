@@ -214,7 +214,7 @@ private fun HourlyListItem(viewEntity: HourlyForecastViewEntity) {
         SmallIcon(
             icon = R.drawable.ic_rain_drop,
             contentDescription = R.string.content_description_precipitation_probability,
-            tint = if (viewEntity.isPrecipitationProbabilityLow) Color.FunctionDisabledLight else Color.LightCloud
+            tint = if (viewEntity.isPrecipitationProbabilityLow) Color.FunctionDisabledLight else Color.Weather.LightCloud
         )
 
         Spacer(Modifier.height(Spacing.listItemVerticalInner))

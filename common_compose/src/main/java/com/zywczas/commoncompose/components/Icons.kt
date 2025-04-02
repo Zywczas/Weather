@@ -59,7 +59,7 @@ private fun PreviewSmallIcon() {
         SmallIcon(
             R.drawable.ic_condition_sunny,
             R.string.content_description_condition_sunny,
-            tint = com.zywczas.commoncompose.theme.Color.LightCloud
+            tint = com.zywczas.commoncompose.theme.Color.Weather.LightCloud
         )
     }
 }
