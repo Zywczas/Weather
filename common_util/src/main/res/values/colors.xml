@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<!--   todo update to KMM -->
     <color name="blue_grotto">#FF03A9F4</color>
     <color name="logo_accent">#FFEB3B</color>
     <color name="sun">#F39422</color>
