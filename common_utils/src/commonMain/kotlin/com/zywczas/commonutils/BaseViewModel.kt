@@ -1,4 +1,4 @@
-package com.zywczas.commonutil
+package com.zywczas.commonutils
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
