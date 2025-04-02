@@ -58,8 +58,6 @@ kotlin {
                 api(project(":network_forecast"))
                 api(project(":network_places"))
                 api(project(":store_history"))
-
-                implementation(libs.kotlin.stdlib)
             }
         }
 

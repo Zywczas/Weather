@@ -40,7 +40,6 @@ gsonConverter = { group = "com.squareup.retrofit2", name = "converter-gson", ver
 #okHttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttp" }
 androidx-annotation-jvm = { group = "androidx.annotation", name = "annotation-jvm", version.ref = "annotationJvm" }
 kotlinSerializationJson = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerializationJson" }
-kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
