@@ -1,3 +1,4 @@
+import com.zywczas.buildutils.ModulesUtils
 import com.zywczas.buildutils.Versions
 
 plugins {
@@ -5,6 +6,7 @@ plugins {
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.kotlin.compose.compiler)
+    // alias(libs.plugins.detekt)todo update to KMM
 }
 
 kotlin {
@@ -40,7 +42,7 @@ kotlin {
                 implementation(libs.kotlin.stdlib)
                 implementation(compose.runtime)
                 implementation(compose.foundation)
-                implementation(compose.material)
+                implementation(compose.material3)
                 implementation(compose.ui)
                 implementation(compose.components.resources)
                 implementation(compose.components.uiToolingPreview)
@@ -65,6 +67,6 @@ kotlin {
 
 compose.resources {
     publicResClass = true
-    packageOfResClass = Versions.RESOURCES_PACKAGE
+    packageOfResClass = ModulesUtils.getResourcesPackageName("commonutils")
     generateResClass = always
 }
