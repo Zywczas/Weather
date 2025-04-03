@@ -40,7 +40,6 @@ kotlin {
             dependencies {
                 implementation(project(":common_utils"))
                 implementation(project(":network_caller"))
-                implementation(project(":common_util"))//todo usunac
 
                 implementation(libs.kotlin.stdlib)
                 implementation(compose.runtime)

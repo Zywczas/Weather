@@ -37,7 +37,6 @@ kotlin {
         commonMain {
             dependencies {
                 api(project(":common_compose"))
-                api(project(":common_util"))
                 api(project(":common_utils"))
                 api(project(":feature_forecast_place"))
                 api(project(":network_caller"))

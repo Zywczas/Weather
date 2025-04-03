@@ -23,7 +23,6 @@ rootProject.name = "Weather"
 include(":app")
 include(":network_caller")
 include(":network_forecast")
-include(":common_util")
 include(":feature_forecast_place")
 include(":common_compose")
 include(":network_places")

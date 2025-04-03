@@ -39,7 +39,6 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(project(":common_util"))
                 implementation(project(":common_utils"))
                 implementation(libs.kotlin.stdlib)
                 implementation(compose.runtime)
