@@ -39,7 +39,6 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":network_caller"))
-                implementation(project(":common_util"))
                 implementation(project(":common_utils"))
 
                 implementation(libs.kotlin.stdlib)
