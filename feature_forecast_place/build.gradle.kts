@@ -44,7 +44,6 @@ kotlin {
                 implementation(project(":network_places"))
                 implementation(project(":store_history"))
 
-                implementation(libs.kotlin.stdlib)
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)

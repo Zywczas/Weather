@@ -48,7 +48,6 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(libs.kotlin.stdlib)
                 implementation(compose.runtime)
                 implementation(compose.foundation) //todo this compose implementations not needed
                 implementation(compose.material3)

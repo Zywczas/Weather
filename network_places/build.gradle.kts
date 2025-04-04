@@ -41,7 +41,6 @@ kotlin {
                 implementation(project(":common_utils"))
                 implementation(project(":network_caller"))
 
-                implementation(libs.kotlin.stdlib)
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)

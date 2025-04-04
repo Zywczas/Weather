@@ -41,7 +41,6 @@ kotlin {
                 implementation(project(":network_caller"))
                 implementation(project(":common_utils"))
 
-                implementation(libs.kotlin.stdlib)
                 implementation(compose.runtime)
                 implementation(compose.foundation) //todo this compose implementations not needed
                 implementation(compose.material3)

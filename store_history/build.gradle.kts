@@ -40,7 +40,6 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":common_utils"))
-                implementation(libs.kotlin.stdlib)
                 implementation(compose.runtime)
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.core)

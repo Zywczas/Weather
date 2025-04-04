@@ -40,14 +40,12 @@ kotlin {
             dependencies {
                 implementation(project(":common_utils"))
 
-                implementation(libs.kotlin.stdlib)
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)
                 implementation(compose.ui)
                 implementation(compose.components.resources)
                 implementation(compose.components.uiToolingPreview)
-                implementation(libs.androidx.material3)
             }
         }
 
@@ -55,7 +53,6 @@ kotlin {
             dependencies {
             }
         }
-
 
         iosMain {
             dependencies {
