@@ -1,3 +1,4 @@
+import com.zywczas.buildutils.ModulesUtils
 import com.zywczas.buildutils.Versions
 
 plugins {
@@ -9,13 +10,15 @@ plugins {
 }
 
 kotlin {
+    val moduleName = "networkplaces"
+
     androidLibrary {
-        namespace = "com.zywczas.networkplaces"
+        namespace = ModulesUtils.getAndroidNamespace(moduleName)
         compileSdk = Versions.COMPILE_SDK
         minSdk = Versions.MIN_SDK
     }
 
-    val xcfName = "networkplacesKit"
+    val xcfName = ModulesUtils.getXcfName(moduleName)
 
     iosX64 {
         binaries.framework {
@@ -42,14 +45,7 @@ kotlin {
                 implementation(project(":network_caller"))
 
                 implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(compose.material3)
-                implementation(compose.ui)
                 implementation(compose.components.resources)
-                implementation(compose.components.uiToolingPreview)
-                implementation(libs.androidx.lifecycle.viewmodel)
-                implementation(libs.androidx.lifecycle.runtime.compose)
-                implementation(libs.kotlinx.datetime)//todo nie wiem czy potrzebne
 
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.core)

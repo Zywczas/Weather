@@ -87,7 +87,7 @@ internal suspend fun CurrentResponse.toDomain(
     ),
 )
 
-internal fun LocationResponse.toDomain() = com.zywczas.featureforecastplace.domain.SearchListItem.Location(
+internal fun LocationResponse.toDomain() = SearchListItem.Location(
     name = state?.let { state ->
         "$name, $state, $country"
     } ?: "$name, $country",
@@ -95,7 +95,7 @@ internal fun LocationResponse.toDomain() = com.zywczas.featureforecastplace.doma
     lon = lon,
 )
 
-internal fun LocationLocal.toDomain() = com.zywczas.featureforecastplace.domain.SearchListItem.Location(
+internal fun LocationLocal.toDomain() = SearchListItem.Location(
     name = name,
     lat = lat,
     lon = lon,
@@ -104,20 +104,20 @@ internal fun LocationLocal.toDomain() = com.zywczas.featureforecastplace.domain.
 internal fun HourlyResponse.toDomain(): HourlyForecastViewEntity = HourlyForecastViewEntity(
     hour = buildAnnotatedString {
         val date = unixDateTime.unixDateTimeToDate()
-        withStyle(com.zywczas.featureforecastplace.domain.HOURS_SPAN_STYLE) {
+        withStyle(HOURS_SPAN_STYLE) {
             append(date.hour.toString())//todo check how it is displayed
         }
-        append(com.zywczas.featureforecastplace.domain.DISPLAYED_MINUTES)
+        append(DISPLAYED_MINUTES)
     },
     weatherCondition = weather.firstOrNull()?.toDomain(cloudsPercentage) ?: WeatherCondition.Clear,
     temperature = temperature.roundTo0DecimalPlaces() + Chars.DEGREE,
     precipitationProbability = precipitationProbability.roundTo0DecimalPlaces() + Chars.PERCENT,
-    isPrecipitationProbabilityLow = precipitationProbability < com.zywczas.featureforecastplace.domain.PRECIPITATION_PROBABILITY_MIN_VALUE
+    isPrecipitationProbabilityLow = precipitationProbability < PRECIPITATION_PROBABILITY_MIN_VALUE
 )
 
 private fun WeatherResponse.toDomain(cloudsPercentage: Int): WeatherCondition? = when (condition) {
     "Clear" -> WeatherCondition.Clear
-    "Clouds" -> if (cloudsPercentage < com.zywczas.featureforecastplace.domain.PARTIAL_CLOUDS_MAX_PERCENTAGE) WeatherCondition.PartialClouds else WeatherCondition.Clouds
+    "Clouds" -> if (cloudsPercentage < PARTIAL_CLOUDS_MAX_PERCENTAGE) WeatherCondition.PartialClouds else WeatherCondition.Clouds
     "Rain" -> WeatherCondition.Rain
     "Snow" -> WeatherCondition.Snow
     "Atmosphere" -> WeatherCondition.Atmosphere

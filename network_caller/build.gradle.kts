@@ -49,20 +49,8 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(compose.runtime)
-                implementation(compose.foundation) //todo this compose implementations not needed
-                implementation(compose.material3)
-                implementation(compose.ui)
-                implementation(compose.components.resources)
-                implementation(compose.components.uiToolingPreview)
-
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.core)
-
-                //todo update to KMM
-                // api(libs.gsonConverter)
-                // implementation(libs.androidx.annotation.jvm)
-                //    implementation(libs.okHttpInterceptor)
-                //    implementation(libs.okHttp)
             }
         }
 

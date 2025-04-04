@@ -1,3 +1,4 @@
+import com.zywczas.buildutils.ModulesUtils
 import com.zywczas.buildutils.Versions
 
 plugins {
@@ -9,13 +10,15 @@ plugins {
 }
 
 kotlin {
+    val moduleName = "featureforecastplace"
+
     androidLibrary {
-        namespace = "com.zywczas.featureforecastplace"
+        namespace = ModulesUtils.getAndroidNamespace(moduleName)
         compileSdk = Versions.COMPILE_SDK
         minSdk = Versions.MIN_SDK
     }
 
-    val xcfName = "featureforecastplaceKit"
+    val xcfName = ModulesUtils.getXcfName(moduleName)
 
     iosX64 {
         binaries.framework {
@@ -50,14 +53,11 @@ kotlin {
                 implementation(compose.ui)
                 implementation(compose.components.resources)
                 implementation(compose.components.uiToolingPreview)
-                implementation(libs.androidx.lifecycle.viewmodel)
-                implementation(libs.androidx.lifecycle.runtime.compose)
-                implementation(libs.kotlinx.datetime)//todo nie wiem czy potrzebne
+                implementation(libs.kotlinx.datetime)
 
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.core)
                 implementation(libs.koin.compose.viewmodel)
-                implementation(libs.koin.androidx.compose)
             }
         }
 

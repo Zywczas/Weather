@@ -10,13 +10,15 @@ plugins {
 }
 
 kotlin {
+    val moduleName = "commonutils"
+
     androidLibrary {
-        namespace = "com.zywczas.commonutils"
+        namespace = ModulesUtils.getAndroidNamespace(moduleName)
         compileSdk = Versions.COMPILE_SDK
         minSdk = Versions.MIN_SDK
     }
 
-    val xcfName = "commonutilsKit"
+    val xcfName = ModulesUtils.getXcfName(moduleName)
 
     iosX64 {
         binaries.framework {
@@ -40,13 +42,9 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(compose.material3)
                 implementation(compose.ui)
                 implementation(compose.components.resources)
-                implementation(compose.components.uiToolingPreview)
                 implementation(libs.androidx.lifecycle.viewmodel)
-                implementation(libs.androidx.lifecycle.runtime.compose)
                 implementation(libs.kotlinx.datetime)
             }
         }

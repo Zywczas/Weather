@@ -1,3 +1,4 @@
+import com.zywczas.buildutils.ModulesUtils
 import com.zywczas.buildutils.Versions
 
 plugins {
@@ -9,13 +10,15 @@ plugins {
 }
 
 kotlin {
+    val moduleName = "networkforecast"
+
     androidLibrary {
-        namespace = "com.zywczas.networkforecast"
+        namespace = ModulesUtils.getAndroidNamespace(moduleName)
         compileSdk = Versions.COMPILE_SDK
         minSdk = Versions.MIN_SDK
     }
 
-    val xcfName = "networkforecastKit" //todo check all names if matches android and move out to val everywhere
+    val xcfName = ModulesUtils.getXcfName(moduleName)
 
     iosX64 {
         binaries.framework {
@@ -42,12 +45,7 @@ kotlin {
                 implementation(project(":common_utils"))
 
                 implementation(compose.runtime)
-                implementation(compose.foundation) //todo this compose implementations not needed
-                implementation(compose.material3)
-                implementation(compose.ui)
                 implementation(compose.components.resources)
-                implementation(compose.components.uiToolingPreview)
-                implementation(libs.androidx.core.ktx) //todo potrzebne?
 
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.core)
