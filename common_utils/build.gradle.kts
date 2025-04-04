@@ -10,13 +10,15 @@ plugins {
 }
 
 kotlin {
+    val moduleName = "commonutils"
+
     androidLibrary {
-        namespace = "com.zywczas.commonutils"
+        namespace = ModulesUtils.getAndroidNamespace(moduleName)
         compileSdk = Versions.COMPILE_SDK
         minSdk = Versions.MIN_SDK
     }
 
-    val xcfName = "commonutilsKit"
+    val xcfName = ModulesUtils.getXcfName(moduleName)
 
     iosX64 {
         binaries.framework {

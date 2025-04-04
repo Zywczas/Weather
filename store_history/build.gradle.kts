@@ -1,3 +1,4 @@
+import com.zywczas.buildutils.ModulesUtils
 import com.zywczas.buildutils.Versions
 
 plugins {
@@ -10,13 +11,15 @@ plugins {
 }
 
 kotlin {
+    val moduleName = "storehistory"
+
     androidLibrary {
-        namespace = "com.zywczas.storehistory"
+        namespace = ModulesUtils.getAndroidNamespace(moduleName)
         compileSdk = Versions.COMPILE_SDK
         minSdk = Versions.MIN_SDK
     }
 
-    val xcfName = "storehistoryKit" //todo check all names if matches android and move out to val everywhere
+    val xcfName = ModulesUtils.getXcfName(moduleName)
 
     iosX64 {
         binaries.framework {

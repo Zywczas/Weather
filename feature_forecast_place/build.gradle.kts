@@ -1,3 +1,4 @@
+import com.zywczas.buildutils.ModulesUtils
 import com.zywczas.buildutils.Versions
 
 plugins {
@@ -9,13 +10,15 @@ plugins {
 }
 
 kotlin {
+    val moduleName = "featureforecastplace"
+
     androidLibrary {
-        namespace = "com.zywczas.featureforecastplace"
+        namespace = ModulesUtils.getAndroidNamespace(moduleName)
         compileSdk = Versions.COMPILE_SDK
         minSdk = Versions.MIN_SDK
     }
 
-    val xcfName = "featureforecastplaceKit"
+    val xcfName = ModulesUtils.getXcfName(moduleName)
 
     iosX64 {
         binaries.framework {

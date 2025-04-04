@@ -1,3 +1,4 @@
+import com.zywczas.buildutils.ModulesUtils
 import com.zywczas.buildutils.Versions
 
 plugins {
@@ -9,13 +10,15 @@ plugins {
 }
 
 kotlin {
+    val moduleName = "networkplaces"
+
     androidLibrary {
-        namespace = "com.zywczas.networkplaces"
+        namespace = ModulesUtils.getAndroidNamespace(moduleName)
         compileSdk = Versions.COMPILE_SDK
         minSdk = Versions.MIN_SDK
     }
 
-    val xcfName = "networkplacesKit"
+    val xcfName = ModulesUtils.getXcfName(moduleName)
 
     iosX64 {
         binaries.framework {
