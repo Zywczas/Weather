@@ -44,6 +44,7 @@ kotlin {
             dependencies {
                 implementation(project(":common_utils"))
                 implementation(compose.runtime)
+
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.core)
             }

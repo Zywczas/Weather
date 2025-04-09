@@ -44,8 +44,10 @@ kotlin {
                 implementation(compose.runtime)
                 implementation(compose.ui)
                 implementation(compose.components.resources)
-                implementation(libs.androidx.lifecycle.viewmodel)
                 implementation(libs.kotlinx.datetime)
+
+                implementation(project.dependencies.platform(libs.koin.bom))
+                implementation(libs.koin.compose.viewmodel)
             }
         }
 
