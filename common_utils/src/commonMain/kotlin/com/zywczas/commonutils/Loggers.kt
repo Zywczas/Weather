@@ -1,6 +1,5 @@
 package com.zywczas.commonutils
 
+//todo update to KMM
 //fun logD(msg: Any?) = Log.d("WeatherApp", msg.toString())
-fun logD(msg: Any?){
-    //todo update to KMM
-}
+expect fun logD(msg: Any?)

@@ -1,16 +1,10 @@
 [versions]
 agp = "8.9.1"
 kotlin = "2.1.20"
-coreKtx = "1.15.0"
 kotlinxDatetime = "0.6.2"
-androidxLifecycle = "2.8.4"
-activityCompose = "1.10.0"
-composeBom = "2025.01.01"
-navigationCompose = "2.9.0-alpha15"
+navigationCompose = "2.8.0-alpha12"
 koin = "4.0.2"
-retrofit = "2.11.0"
 okHttp = "4.12.0"
-annotationJvm = "1.9.1"
 detekt = "1.23.8"
 kotlinSerialization = "2.1.20"
 kotlinSymbolProcessing= "2.1.20-1.0.32" # First part of the lib version must be the same as kotlinSerialization version
@@ -18,18 +12,14 @@ kotlinSerializationJson = "1.8.0"
 composeMultiplatform = "1.7.3"
 
 [libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidxLifecycle" }
-androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core" }
+koin-compose = { group = "io.insert-koin", name = "koin-compose" }
 koin-compose-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel" }
-koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose" }
 #gsonConverter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 #okHttpInterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okHttp" }
 #okHttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttp" }
-#androidx-annotation-jvm = { group = "androidx.annotation", name = "annotation-jvm", version.ref = "annotationJvm" }
 kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerializationJson" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 
