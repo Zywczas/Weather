@@ -30,6 +30,7 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
+            implementation(libs.koin.androidx.compose)
         }
 
         commonMain.dependencies {
@@ -38,12 +39,12 @@ kotlin {
             implementation(libs.navigation.compose)
 
             implementation(project.dependencies.platform(libs.koin.bom))
-            implementation(libs.koin.compose)
 
             implementation(libs.kotlin.serialization.json)
         }
 
         iosMain.dependencies {
+            implementation(libs.koin.compose)
         }
     }
 }

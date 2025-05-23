@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.kotlin.compose.compiler)
+    alias(libs.plugins.sqldelight)
     // alias(libs.plugins.detekt)todo update to KMM
 //    alias(libs.plugins.kotlinSymbolProcessing)todo update to KMM
 }
@@ -47,18 +48,30 @@ kotlin {
 
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.core)
+
+                implementation(libs.sqldelight.runtime)
             }
         }
 
         androidMain {
             dependencies {
+                implementation(libs.sqldelight.android.driver)
             }
         }
 
 
         iosMain {
             dependencies {
+                implementation(libs.sqldelight.native.driver)
             }
+        }
+    }
+}
+
+sqldelight {
+    databases {
+        create("HistoryDatabase") {
+            packageName = "com.zywczas.storehistory.cache"
         }
     }
 }
