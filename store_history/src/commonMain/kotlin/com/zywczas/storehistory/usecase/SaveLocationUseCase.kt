@@ -1,12 +1,14 @@
 package com.zywczas.storehistory.usecase
 
+import com.zywczas.storehistory.dao.HistoryDatabaseDao
 import com.zywczas.storehistory.entity.LocationLocal
+import com.zywczas.storehistory.entity.toCache
 
-//todo update to KMM
 class SaveLocationUseCase internal constructor(
-//    private val dao: LocationDao
+    private val dao: HistoryDatabaseDao
 ) {
 
-    suspend fun save(locationLocal: LocationLocal): Long = 1
-//        dao.insert(locationLocal) //todo update to KMM
+    fun save(location: LocationLocal) {
+        dao.dbQuery.insertLocation(location.toCache())
+    }
 }

@@ -1,14 +1,12 @@
 package com.zywczas.storehistory.usecase
 
+import com.zywczas.storehistory.dao.HistoryDatabaseDao
 import com.zywczas.storehistory.entity.LocationLocal
-
-//todo update to KMM
+import com.zywczas.storehistory.entity.toLocal
 
 class GetLocationsHistoryUseCase internal constructor(
-//    private val dao: LocationDao
+    private val dao: HistoryDatabaseDao
 ) {
 
-    suspend fun get(): List<LocationLocal> = emptyList()
-//todo update to KMM
-//        dao.getLocations()
+    fun get(): List<LocationLocal> = dao.dbQuery.getLocations().executeAsList().map { it.toLocal() }
 }
