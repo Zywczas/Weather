@@ -4,11 +4,11 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.darwin.Darwin
 import io.ktor.client.plugins.HttpTimeout
 
-actual val networkClient: HttpClient = HttpClient(Darwin) {
+actual val networkCaller: HttpClient = HttpClient(Darwin) {
 
     install(HttpTimeout) {
-        connectTimeoutMillis = NetworkParameters.TIMEOUT_MILLISECONDS
+        connectTimeoutMillis = TIMEOUT_MILLISECONDS
     }
 
-    configureNetworkClient(this)
+    configureNetworkCaller(this)
 }
