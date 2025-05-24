@@ -51,8 +51,8 @@ kotlin {
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.core)
 
+                implementation(libs.kotlin.serialization.json)
                 implementation(libs.ktor.client.core)
-                implementation(libs.kotlin.serialization.json)// todo jedno z tych dwoch chyba niepotrzebne
             }
         }
 
