@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.kotlin.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
     // alias(libs.plugins.detekt)todo update to KMM
 }
 
@@ -49,6 +50,10 @@ kotlin {
 
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.core)
+
+                implementation(libs.kotlin.serialization.json)// todo jedno z tych dwoch chyba niepotrzebne
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.serialization)// todo jedno z tych dwoch chyba niepotrzebne
             }
         }
 

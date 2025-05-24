@@ -1,10 +1,14 @@
 package com.zywczas.networkforecast.response
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class PlaceForecastResponse(
 
-    // @SerializedName("current")
+    @SerialName("current")
     val current: CurrentResponse = CurrentResponse(),
 
-    // @SerializedName("hourly")
+    @SerialName("hourly")
     val hourly: List<HourlyResponse> = emptyList()
 )

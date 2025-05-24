@@ -2,21 +2,21 @@ package com.zywczas.networkplaces.usecase
 
 import com.zywczas.commonutils.Resource
 import com.zywczas.commonutils.logD
+import com.zywczas.networkplaces.networkapi.LocationsApi
 import com.zywczas.networkplaces.params.LocationsParams
 import com.zywczas.networkplaces.response.LocationResponse
 import com.zywczas.weather.resources.commonutils.Res
 import com.zywczas.weather.resources.commonutils.error_locations_download
+import io.ktor.client.HttpClient
+import io.ktor.client.request.get
 
-//todo update to KMM
-
-class GetNetworkLocationsUseCase internal constructor(
-//    private val api: LocationsApi
-) {
+class GetNetworkLocationsUseCase internal constructor(private val api: LocationsApi) {
 
     suspend fun get(params: LocationsParams): Resource<List<LocationResponse>> = try {
+//        val cos = api.getLocations(params.placeName).
         Resource.Success(
-            emptyList()
-//            api.getLocations(params.placeName).body()!!
+            api.getLocations(params.placeName)
+//            emptyList()
         )
     } catch (e: Exception) {
         logD(e.message)
