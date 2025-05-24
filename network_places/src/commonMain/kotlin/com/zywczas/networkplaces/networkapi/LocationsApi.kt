@@ -3,10 +3,11 @@ package com.zywczas.networkplaces.networkapi
 import com.zywczas.networkcaller.ApiKeys
 import com.zywczas.networkcaller.openweatherapi.WeatherApiConstants
 import com.zywczas.networkcaller.openweatherapi.WeatherApiEndpoint
-import com.zywczas.networkplaces.response.LocationResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
 import io.ktor.http.URLProtocol
+import io.ktor.http.path
 
 internal class LocationsApi(private val networkCaller: HttpClient) {
 
@@ -14,8 +15,7 @@ internal class LocationsApi(private val networkCaller: HttpClient) {
         cityName: String,
         resultsLimit: Int = WeatherApiConstants.LOCATIONS_RESULTS_LIMIT,
         apiKey: String = ApiKeys.OPEN_WEATHER_MAP,
-//    ):  HttpResponse = client.get {
-    ):  List<LocationResponse> = networkCaller.get { //todo jak zadziala to zamienic na response
+    ): HttpResponse = networkCaller.get {
         url {
             protocol = URLProtocol.HTTPS
             host = WeatherApiConstants.WEATHER_API_BASE_URL

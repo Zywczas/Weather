@@ -7,17 +7,14 @@ import com.zywczas.networkplaces.params.LocationsParams
 import com.zywczas.networkplaces.response.LocationResponse
 import com.zywczas.weather.resources.commonutils.Res
 import com.zywczas.weather.resources.commonutils.error_locations_download
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
+import io.ktor.client.call.body
+import io.ktor.client.statement.HttpResponse
 
 class GetNetworkLocationsUseCase internal constructor(private val api: LocationsApi) {
 
     suspend fun get(params: LocationsParams): Resource<List<LocationResponse>> = try {
-//        val cos = api.getLocations(params.placeName).
-        Resource.Success(
-            api.getLocations(params.placeName)
-//            emptyList()
-        )
+        val response: HttpResponse = api.getLocations(params.placeName)
+        Resource.Success(response.body())
     } catch (e: Exception) {
         logD(e.message)
         Resource.Error(Res.string.error_locations_download)

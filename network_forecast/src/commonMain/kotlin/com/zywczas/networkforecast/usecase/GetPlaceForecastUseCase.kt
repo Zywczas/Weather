@@ -7,13 +7,14 @@ import com.zywczas.networkforecast.params.PlaceForecastParams
 import com.zywczas.networkforecast.response.PlaceForecastResponse
 import com.zywczas.weather.resources.commonutils.Res
 import com.zywczas.weather.resources.commonutils.error_forecast_download
+import io.ktor.client.call.body
+import io.ktor.client.statement.HttpResponse
 
 class GetPlaceForecastUseCase internal constructor(private val api: PlaceForecastApi) {
 
     suspend fun get(params: PlaceForecastParams): Resource<PlaceForecastResponse> = try {
-        Resource.Success(
-            api.getForecast(lat = params.lat, lon = params.lon)
-        )
+        val response: HttpResponse = api.getForecast(lat = params.lat, lon = params.lon)
+        Resource.Success(response.body())
     } catch (e: Exception) {
         logD(e.message)
         Resource.Error(Res.string.error_forecast_download)

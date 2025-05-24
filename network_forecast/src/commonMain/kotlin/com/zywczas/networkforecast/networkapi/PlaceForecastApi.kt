@@ -6,10 +6,11 @@ import com.zywczas.networkcaller.openweatherapi.WeatherApiEndpoint
 import com.zywczas.networkcaller.openweatherapi.WeatherApiExcludedReports
 import com.zywczas.networkcaller.openweatherapi.WeatherApiLanguage
 import com.zywczas.networkcaller.openweatherapi.WeatherApiUnits
-import com.zywczas.networkforecast.response.PlaceForecastResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
 import io.ktor.http.URLProtocol
+import io.ktor.http.path
 
 internal class PlaceForecastApi(private val networkCaller: HttpClient) {
 
@@ -20,8 +21,7 @@ internal class PlaceForecastApi(private val networkCaller: HttpClient) {
         units: String = WeatherApiUnits.Metric.value,
         exclude: String = "${WeatherApiExcludedReports.Daily.value},${WeatherApiExcludedReports.Alerts.value},${WeatherApiExcludedReports.Minutely.value}",
         language: String = WeatherApiLanguage.English.value
-        //    ):  HttpResponse = client.get {
-    ): PlaceForecastResponse = networkCaller.get { //todo jak zadziala to zamienic na response
+    ): HttpResponse = networkCaller.get {
         url {
             protocol = URLProtocol.HTTPS
             host = WeatherApiConstants.WEATHER_API_BASE_URL

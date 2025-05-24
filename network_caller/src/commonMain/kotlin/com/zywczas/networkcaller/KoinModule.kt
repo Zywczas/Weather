@@ -1,10 +1,10 @@
 package com.zywczas.networkcaller
 
 import io.ktor.client.HttpClient
+import io.ktor.serialization.kotlinx.json.*
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import kotlinx.serialization.serializer
 import org.koin.dsl.module
-
-//inline fun <reified T> createRetrofitService(): T = GlobalContext.get().get<Retrofit>().create(T::class.java)
 
 val networkCallerModule = module {
 
@@ -29,19 +29,27 @@ private const val CONNECTION_TIMEOUT_IN_SECONDS = 30L //todo usunac?
 
 internal expect val httpClient: HttpClient
 
-//fun getKtorClient(): HttpClient = HttpClient {
-//    install(ContentNegotiation) {
-//
-//    }
-//    engine {
-//
-//    }
-
-//    install(JsonFeature) {
-//        serializer = KotlinxSerializer(
+//internal val networkCaller: HttpClient = HttpClient {
+//    serializer(
+//        KotlinxSerializer(
 //            kotlinx.serialization.json.Json {
 //                ignoreUnknownKeys = true // if the server sends extra fields, ignore them
 //            }
 //        )
+//    )
+//    install(ContentNegotiation) {
+//        seria
+//        serializer() = KotlinxSerializer(
+//            kotlinx.serialization.json.Json {
+//                ignoreUnknownKeys = true // if the server sends extra fields, ignore them
+//            }
+//        )
+//    }
+//    engine {
+//
+//    }
+//
+//    install(JsonFeature) {
+//
 //    }
 //}
