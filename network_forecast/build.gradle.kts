@@ -53,7 +53,7 @@ kotlin {
 
                 implementation(libs.kotlin.serialization.json)// todo jedno z tych dwoch chyba niepotrzebne
                 implementation(libs.ktor.client.core)
-                implementation(libs.ktor.client.serialization)// todo jedno z tych dwoch chyba niepotrzebne
+//                implementation(libs.ktor.client.serialization)// todo jedno z tych dwoch chyba niepotrzebne
             }
         }
 

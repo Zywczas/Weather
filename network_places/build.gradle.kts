@@ -52,7 +52,6 @@ kotlin {
                 implementation(libs.koin.core)
 
                 implementation(libs.ktor.client.core)
-//                implementation(libs.ktor.client.serialization)
                 implementation(libs.kotlin.serialization.json)// todo jedno z tych dwoch chyba niepotrzebne
             }
         }
