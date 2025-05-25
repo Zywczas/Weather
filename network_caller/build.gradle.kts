@@ -9,7 +9,7 @@ plugins {
     // alias(libs.plugins.detekt)todo update to KMM
 }
 
-//android {
+////android {
 //    buildFeatures {
 //        buildConfig = true //todo update to KMM
 //    }
