@@ -2,6 +2,7 @@
 agp = "8.9.1"
 composeMultiplatform = "1.7.3"
 detekt = "1.23.8"
+gmazzo = "5.6.5"
 koin = "4.0.2"
 kotlin = "2.1.20"
 kotlinSerialization = "2.1.20"
@@ -32,10 +33,11 @@ sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sq
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-#detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
-kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+gmazzo = { id = "com.github.gmazzo.buildconfig", version.ref = "gmazzo"}
+kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+#detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
