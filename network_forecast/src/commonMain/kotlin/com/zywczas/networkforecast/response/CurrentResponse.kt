@@ -1,31 +1,35 @@
 package com.zywczas.networkforecast.response
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class CurrentResponse(
-//todo update to KMM
-//    @SerializedName("temp")
+
+    @SerialName("temp")
     val temperature: Double = 0.0,
 
-//    @SerializedName("humidity")
+    @SerialName("humidity")
     val humidityPercentage: Int = 0,
 
-//    @SerializedName("clouds")
+    @SerialName("clouds")
     val cloudsPercentage: Int = 0,
 
-//    @SerializedName("rain")
+    @SerialName("rain")
     val rain: PrecipitationResponse? = null,
 
-//    @SerializedName("snow")
+    @SerialName("snow")
     val snow: PrecipitationResponse? = null,
 
-//    @SerializedName("weather")
+    @SerialName("weather")
     val weather: List<WeatherResponse> = emptyList(),
 
-//    @SerializedName("pressure")
+    @SerialName("pressure")
     val pressure: Int = 0,
 
-//    @SerializedName("visibility")
+    @SerialName("visibility")
     val visibility: Int = 0,
 
-//    @SerializedName("wind_speed")
+    @SerialName("wind_speed")
     val windSpeed: Double = 0.0,
 )

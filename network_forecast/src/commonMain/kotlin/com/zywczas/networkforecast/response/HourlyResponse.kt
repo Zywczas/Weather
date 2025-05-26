@@ -1,25 +1,29 @@
 package com.zywczas.networkforecast.response
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class HourlyResponse(
 
-    // @SerializedName("dt")
+    @SerialName("dt")
     val unixDateTime: Long = 0,
 
-    // @SerializedName("temp")
+    @SerialName("temp")
     val temperature: Double = 0.0,
 
-    // @SerializedName("rain")
+    @SerialName("rain")
     val rain: PrecipitationResponse? = null,
 
-    // @SerializedName("snow")
+    @SerialName("snow")
     val snow: PrecipitationResponse? = null,
 
-    // @SerializedName("pop")
+    @SerialName("pop")
     val precipitationProbability: Double = 0.0,
 
-    // @SerializedName("weather")
+    @SerialName("weather")
     val weather: List<WeatherResponse> = emptyList(),
 
-    // @SerializedName("clouds")
+    @SerialName("clouds")
     val cloudsPercentage: Int = 0,
 )

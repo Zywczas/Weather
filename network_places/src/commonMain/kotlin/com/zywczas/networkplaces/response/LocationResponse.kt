@@ -1,19 +1,23 @@
 package com.zywczas.networkplaces.response
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class LocationResponse(
-//todo update to KMM
-//    @SerializedName("name")
+
+    @SerialName("name")
     val name: String = "",
 
-//    @SerializedName("country")
+    @SerialName("country")
     val country: String = "",
 
-//    @SerializedName("state")
+    @SerialName("state")
     val state: String? = null,
 
-//    @SerializedName("lat")
+    @SerialName("lat")
     val lat: Double = 0.0,
 
-//    @SerializedName("lon")
+    @SerialName("lon")
     val lon: Double = 0.0
 )

@@ -78,7 +78,7 @@ fun PlaceForecastScreen(location: SelectedLocation, goBackAction: OnClick) {
         )
     }
 
-    Snackbar(snackbarHostState)
+    Snackbar(snackbarHostState) //todo snackbar is shown under bottom bar atm
 
     LaunchedEffect(Unit) {
         viewModel.announcement.collectLatest { text ->
@@ -95,7 +95,7 @@ private fun PlaceForecastScreen(
 ) {
     Column {
         Toolbar(
-            title = viewEntity.toolbarTitle,
+            title = viewEntity.toolbarTitle, // todo it cuts text from bottom as is too long, should ellipsize text
             onBackClick = goBackAction
         )
 
