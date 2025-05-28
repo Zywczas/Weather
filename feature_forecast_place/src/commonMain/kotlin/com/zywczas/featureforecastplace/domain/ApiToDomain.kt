@@ -105,7 +105,7 @@ internal fun HourlyResponse.toDomain(): HourlyForecastViewEntity = HourlyForecas
     hour = buildAnnotatedString {
         val date = unixDateTime.unixDateTimeToDate()
         withStyle(HOURS_SPAN_STYLE) {
-            append(date.hour.toString())//todo check how it is displayed
+            append(date.hour.toString())
         }
         append(DISPLAYED_MINUTES)
     },
