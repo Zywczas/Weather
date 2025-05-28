@@ -7,6 +7,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.viewModelScope
 import com.zywczas.commonutils.BaseViewModel
 import com.zywczas.commonutils.Constants
+import com.zywczas.commonutils.RegexExps
 import com.zywczas.commonutils.Resource
 import com.zywczas.commonutils.logD
 import com.zywczas.featureforecastplace.domain.SearchListItem
@@ -38,7 +39,7 @@ internal class SearchLocationViewModel(
     private val getLocationsHistoryUseCase: GetLocationsHistoryUseCase
 ) : BaseViewModel() {
 
-//    private val cityNamePattern: Pattern = Pattern.compile(RegexExps.INPUT_CITY_TYPING)//todo update to KMM
+    private val cityNamePattern: Regex = Regex(RegexExps.INPUT_CITY_TYPING)
 
     var searchText by mutableStateOf(TextFieldValue())
         private set
@@ -57,10 +58,10 @@ internal class SearchLocationViewModel(
     }
 
     fun onSearchTextChanged(textFieldValue: TextFieldValue) {
-//        if (cityNamePattern.matcher(textFieldValue.text).matches()) {//todo update to KMM
-        searchText = textFieldValue
-        searchQueryMutable.tryEmit(textFieldValue.text)
-//        }
+        if (cityNamePattern.matches(textFieldValue.text)) {
+            searchText = textFieldValue
+            searchQueryMutable.tryEmit(textFieldValue.text)
+        }
     }
 
     @OptIn(FlowPreview::class)
