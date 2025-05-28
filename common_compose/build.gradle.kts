@@ -18,7 +18,7 @@ kotlin {
         minSdk = Versions.MIN_SDK
     }
 
-    val xcfName = ModulesUtils.getXcfName(moduleName)
+    val xcfName = ModulesUtils.getAndroidNamespace(moduleName)
 
     iosX64 {
         binaries.framework {

@@ -1,3 +1,4 @@
+import com.zywczas.buildutils.ModulesUtils
 import com.zywczas.buildutils.Versions
 import com.zywczas.buildutils.getEnvElseLocal
 
@@ -15,13 +16,15 @@ buildConfig {
 }
 
 kotlin {
+    val moduleName = "networkcaller"
+
     androidLibrary {
-        namespace = "com.zywczas.networkcaller"
+        namespace = ModulesUtils.getAndroidNamespace(moduleName)
         compileSdk = Versions.COMPILE_SDK
         minSdk = Versions.MIN_SDK
     }
 
-    val xcfName = "networkcallerKit" //todo check all names if matches android and move out to val everywhere
+    val xcfName = ModulesUtils.getAndroidNamespace(moduleName)
 
     iosX64 {
         binaries.framework {
