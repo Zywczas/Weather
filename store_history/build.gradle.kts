@@ -7,8 +7,7 @@ plugins {
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.kotlin.compose.compiler)
     alias(libs.plugins.sqldelight)
-    // alias(libs.plugins.detekt)todo update to KMM
-//    alias(libs.plugins.kotlinSymbolProcessing)todo update to KMM
+    alias(libs.plugins.detekt)
 }
 
 kotlin {

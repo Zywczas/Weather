@@ -37,7 +37,7 @@ android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 gmazzo = { id = "com.github.gmazzo.buildconfig", version.ref = "gmazzo"}
 kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-#detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }

@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.gmazzo)
     alias(libs.plugins.kotlin.compose.compiler)
-    // alias(libs.plugins.detekt)todo update to KMM
+    alias(libs.plugins.detekt)
 }
 
 buildConfig {
