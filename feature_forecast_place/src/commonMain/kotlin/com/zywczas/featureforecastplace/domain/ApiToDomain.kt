@@ -7,8 +7,7 @@ import androidx.compose.ui.text.withStyle
 import com.zywczas.commoncompose.components.KeyValueViewEntity
 import com.zywczas.commonutils.Chars
 import com.zywczas.commonutils.UnitsConverter
-import com.zywczas.commonutils.extensions.roundTo0DecimalPlaces
-import com.zywczas.commonutils.extensions.roundTo1DecimalPlace
+import com.zywczas.commonutils.extensions.round
 import com.zywczas.commonutils.extensions.unixDateTimeToDate
 import com.zywczas.commonutils.weather.TemperatureColor
 import com.zywczas.commonutils.weather.WeatherCondition
@@ -42,7 +41,7 @@ internal suspend fun CurrentResponse.toDomain(
     toolbarTitle = toolbarTitle,
     weatherCondition = weather.firstOrNull()?.toDomain(cloudsPercentage = cloudsPercentage),
     temperatureColor = getTemperatureColor(temperature).value,
-    temperatureText = getString(Res.string.temperature_value, temperature.roundTo1DecimalPlace()),
+    temperatureText = getString(Res.string.temperature_value, temperature.round(decimalPlaces = 1)),
     keyValueItems = listOfNotNull(
         KeyValueViewEntity(
             key = getString(Res.string.cloud_cover_title),
@@ -63,7 +62,7 @@ internal suspend fun CurrentResponse.toDomain(
         if (rain == null && snow == null) {
             KeyValueViewEntity(
                 key = getString(Res.string.precipitation_rain_title),
-                value = getString(Res.string.precipitation_value, com.zywczas.featureforecastplace.domain.NO_PRECIPITATION_VALUE)
+                value = getString(Res.string.precipitation_value, NO_PRECIPITATION_VALUE)
             )
         } else {
             null
@@ -82,7 +81,7 @@ internal suspend fun CurrentResponse.toDomain(
         ),
         KeyValueViewEntity(
             key = getString(Res.string.wind_speed_title),
-            value = getString(Res.string.wind_speed_value, UnitsConverter.mPerSecToKmPerH(windSpeed).roundTo1DecimalPlace())
+            value = getString(Res.string.wind_speed_value, UnitsConverter.mPerSecToKmPerH(windSpeed).round(decimalPlaces = 1))
         ),
     ),
 )
@@ -110,8 +109,8 @@ internal fun HourlyResponse.toDomain(): HourlyForecastViewEntity = HourlyForecas
         append(DISPLAYED_MINUTES)
     },
     weatherCondition = weather.firstOrNull()?.toDomain(cloudsPercentage) ?: WeatherCondition.Clear,
-    temperature = temperature.roundTo0DecimalPlaces() + Chars.DEGREE,
-    precipitationProbability = precipitationProbability.roundTo0DecimalPlaces() + Chars.PERCENT,
+    temperature = temperature.round(decimalPlaces = 0).toString() + Chars.DEGREE,
+    precipitationProbability = precipitationProbability.round(decimalPlaces = 0).toString() + Chars.PERCENT,
     isPrecipitationProbabilityLow = precipitationProbability < PRECIPITATION_PROBABILITY_MIN_VALUE
 )
 
