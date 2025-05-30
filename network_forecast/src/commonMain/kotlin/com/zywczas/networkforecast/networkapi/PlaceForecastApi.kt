@@ -1,11 +1,11 @@
 package com.zywczas.networkforecast.networkapi
 
-import com.zywczas.networkcaller.ApiKeys
-import com.zywczas.networkcaller.openweatherapi.WeatherApiConstants
-import com.zywczas.networkcaller.openweatherapi.WeatherApiEndpoint
-import com.zywczas.networkcaller.openweatherapi.WeatherApiExcludedReports
-import com.zywczas.networkcaller.openweatherapi.WeatherApiLanguage
-import com.zywczas.networkcaller.openweatherapi.WeatherApiUnits
+import com.zywczas.networkopenweatherapi.WeatherApiKeys
+import com.zywczas.networkopenweatherapi.WeatherApiConstants
+import com.zywczas.networkopenweatherapi.WeatherApiEndpoint
+import com.zywczas.networkopenweatherapi.WeatherApiExcludedReports
+import com.zywczas.networkopenweatherapi.WeatherApiLanguage
+import com.zywczas.networkopenweatherapi.WeatherApiUnits
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
@@ -17,7 +17,7 @@ internal class PlaceForecastApi(private val networkCaller: HttpClient) {
     suspend fun getForecast(
         lat: Double,
         lon: Double,
-        apiKey: String = ApiKeys.OPEN_WEATHER_MAP,
+        apiKey: String = WeatherApiKeys.OPEN_WEATHER_MAP,
         units: String = WeatherApiUnits.Metric.value,
         exclude: String = "${WeatherApiExcludedReports.Daily.value},${WeatherApiExcludedReports.Alerts.value},${WeatherApiExcludedReports.Minutely.value}",
         language: String = WeatherApiLanguage.English.value

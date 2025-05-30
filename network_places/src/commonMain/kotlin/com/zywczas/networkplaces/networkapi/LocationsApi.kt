@@ -1,8 +1,8 @@
 package com.zywczas.networkplaces.networkapi
 
-import com.zywczas.networkcaller.ApiKeys
-import com.zywczas.networkcaller.openweatherapi.WeatherApiConstants
-import com.zywczas.networkcaller.openweatherapi.WeatherApiEndpoint
+import com.zywczas.networkopenweatherapi.WeatherApiKeys
+import com.zywczas.networkopenweatherapi.WeatherApiConstants
+import com.zywczas.networkopenweatherapi.WeatherApiEndpoint
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
@@ -14,7 +14,7 @@ internal class LocationsApi(private val networkCaller: HttpClient) {
     suspend fun getLocations(
         cityName: String,
         resultsLimit: Int = WeatherApiConstants.LOCATIONS_RESULTS_LIMIT,
-        apiKey: String = ApiKeys.OPEN_WEATHER_MAP,
+        apiKey: String = WeatherApiKeys.OPEN_WEATHER_MAP,
     ): HttpResponse = networkCaller.get {
         url {
             protocol = URLProtocol.HTTPS

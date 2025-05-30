@@ -1,17 +1,22 @@
 import com.zywczas.buildutils.ModulesUtils
 import com.zywczas.buildutils.Versions
+import com.zywczas.buildutils.getEnvElseLocal
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.gmazzo)
     alias(libs.plugins.kotlin.compose.compiler)
-    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.detekt)
 }
 
+buildConfig {
+    buildConfigField("OPENWEATHERMAP_API_KEY", getEnvElseLocal("openweathermapApiKey", project))
+}
+
 kotlin {
-    val moduleName = "networkforecast"
+    val moduleName = "networkopenweatherapi"
 
     androidLibrary {
         namespace = ModulesUtils.getAndroidNamespace(moduleName)
@@ -19,7 +24,7 @@ kotlin {
         minSdk = Versions.MIN_SDK
     }
 
-    val xcfName = ModulesUtils.getXcfName(moduleName)
+    val xcfName = ModulesUtils.getAndroidNamespace(moduleName)
 
     iosX64 {
         binaries.framework {
@@ -42,29 +47,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(project(":common_utils"))
-                implementation(project(":network_caller"))
-                implementation(project(":network_open_weather_api"))
-
                 implementation(compose.runtime)
-                implementation(compose.components.resources)
-
-                implementation(project.dependencies.platform(libs.koin.bom))
-                implementation(libs.koin.core)
-
-                implementation(libs.kotlin.serialization.json)
-                implementation(libs.ktor.client.core)
-            }
-        }
-
-        androidMain {
-            dependencies {
-            }
-        }
-
-
-        iosMain {
-            dependencies {
             }
         }
     }

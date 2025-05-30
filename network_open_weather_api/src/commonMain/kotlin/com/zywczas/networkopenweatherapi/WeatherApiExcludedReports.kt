@@ -1,4 +1,4 @@
-package com.zywczas.networkcaller.openweatherapi
+package com.zywczas.networkopenweatherapi
 
 enum class WeatherApiExcludedReports(val value: String) {
     Hourly("hourly"),

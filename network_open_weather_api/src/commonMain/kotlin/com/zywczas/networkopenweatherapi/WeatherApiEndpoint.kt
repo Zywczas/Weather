@@ -1,4 +1,4 @@
-package com.zywczas.networkcaller.openweatherapi
+package com.zywczas.networkopenweatherapi
 
 object WeatherApiEndpoint {
     const val FORECAST = "data/3.0/onecall"
