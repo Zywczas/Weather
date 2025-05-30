@@ -12,10 +12,9 @@
     <string name="next_hours_title">Next hours</string>
 
     <string name="temperature_value">%1$s °C</string>
-<!--    todo double % is displayed in KMM-->
-    <string name="cloud_cover_value">%1$s %%</string>
+    <string name="cloud_cover_value">%1$s %</string>
     <string name="precipitation_value">%1$s mm/h</string>
-    <string name="humidity_value">%1$s %%</string>
+    <string name="humidity_value">%1$s %</string>
     <string name="pressure_value">%1$s hPa</string>
     <string name="visibility_value">%1$s m</string>
     <string name="wind_speed_value">%1$s km/h</string>
