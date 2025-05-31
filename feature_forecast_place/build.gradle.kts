@@ -44,6 +44,7 @@ kotlin {
                 implementation(project(":common_compose"))
                 implementation(project(":common_utils"))
                 implementation(project(":network_forecast"))
+                implementation(project(":network_open_weather_api"))
                 implementation(project(":network_places"))
                 implementation(project(":store_history"))
 
