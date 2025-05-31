@@ -48,15 +48,5 @@ kotlin {
                 api(project(":store_history"))
             }
         }
-
-        androidMain {
-            dependencies {
-            }
-        }
-
-        iosMain {
-            dependencies {
-            }
-        }
     }
 }

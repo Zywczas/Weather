@@ -61,16 +61,5 @@ kotlin {
                 implementation(libs.koin.compose.viewmodel)
             }
         }
-
-        androidMain {
-            dependencies {
-            }
-        }
-
-
-        iosMain {
-            dependencies {
-            }
-        }
     }
 }
