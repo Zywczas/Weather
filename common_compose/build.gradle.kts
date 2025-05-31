@@ -51,15 +51,5 @@ kotlin {
                 implementation(compose.components.uiToolingPreview)
             }
         }
-
-        androidMain {
-            dependencies {
-            }
-        }
-
-        iosMain {
-            dependencies {
-            }
-        }
     }
 }

@@ -56,16 +56,5 @@ kotlin {
                 implementation(libs.ktor.client.core)
             }
         }
-
-        androidMain {
-            dependencies {
-            }
-        }
-
-
-        iosMain {
-            dependencies {
-            }
-        }
     }
 }
