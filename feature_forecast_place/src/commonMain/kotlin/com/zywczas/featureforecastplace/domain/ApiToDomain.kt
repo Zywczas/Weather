@@ -16,6 +16,7 @@ import com.zywczas.featureforecastplace.viewmodel.PlaceForecastViewEntity
 import com.zywczas.networkforecast.response.CurrentResponse
 import com.zywczas.networkforecast.response.HourlyResponse
 import com.zywczas.networkforecast.response.WeatherResponse
+import com.zywczas.networkopenweatherapi.WeatherApiWeatherCondition
 import com.zywczas.networkplaces.response.LocationResponse
 import com.zywczas.storehistory.entity.LocationLocal
 import com.zywczas.weather.resources.commonutils.Res
@@ -115,13 +116,13 @@ internal fun HourlyResponse.toDomain(): HourlyForecastViewEntity = HourlyForecas
 )
 
 private fun WeatherResponse.toDomain(cloudsPercentage: Int): WeatherCondition? = when (condition) {
-    "Clear" -> WeatherCondition.Clear
-    "Clouds" -> if (cloudsPercentage < PARTIAL_CLOUDS_MAX_PERCENTAGE) WeatherCondition.PartialClouds else WeatherCondition.Clouds
-    "Rain" -> WeatherCondition.Rain
-    "Snow" -> WeatherCondition.Snow
-    "Atmosphere" -> WeatherCondition.Atmosphere
-    "Drizzle" -> WeatherCondition.Drizzle
-    "Thunderstorm" -> WeatherCondition.Thunderstorm
+    WeatherApiWeatherCondition.Clear -> WeatherCondition.Clear
+    WeatherApiWeatherCondition.Clouds -> if (cloudsPercentage < PARTIAL_CLOUDS_MAX_PERCENTAGE) WeatherCondition.PartialClouds else WeatherCondition.Clouds
+    WeatherApiWeatherCondition.Rain -> WeatherCondition.Rain
+    WeatherApiWeatherCondition.Snow -> WeatherCondition.Snow
+    WeatherApiWeatherCondition.Atmosphere -> WeatherCondition.Atmosphere
+    WeatherApiWeatherCondition.Drizzle -> WeatherCondition.Drizzle
+    WeatherApiWeatherCondition.Thunderstorm -> WeatherCondition.Thunderstorm
     else -> null
 }
 

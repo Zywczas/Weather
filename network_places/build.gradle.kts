@@ -44,6 +44,7 @@ kotlin {
             dependencies {
                 implementation(project(":common_utils"))
                 implementation(project(":network_caller"))
+                implementation(project(":network_open_weather_api"))
 
                 implementation(compose.runtime)
                 implementation(compose.components.resources)
