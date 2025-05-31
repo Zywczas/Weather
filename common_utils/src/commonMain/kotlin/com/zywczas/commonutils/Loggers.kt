@@ -1,5 +1,5 @@
 package com.zywczas.commonutils
 
-//todo update to KMM
-//fun logD(msg: Any?) = Log.d("WeatherApp", msg.toString())
+internal const val LOG_TAG = "WeatherApp"
+
 expect fun logD(msg: Any?)
