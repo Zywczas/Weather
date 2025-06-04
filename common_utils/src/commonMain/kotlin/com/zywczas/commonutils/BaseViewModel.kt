@@ -1,15 +1,16 @@
 package com.zywczas.commonutils
 
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.receiveAsFlow
 
 abstract class BaseViewModel : ViewModel() {
 
-    private val _announcement = MutableSharedFlow<String>()
-    val announcement: SharedFlow<String> = _announcement
+    private val _announcement = Channel<String>(capacity = Channel.BUFFERED)
+    val announcement: Flow<String> = _announcement.receiveAsFlow()
 
     suspend fun showError(msg: String) {
-        _announcement.emit(msg)
+        _announcement.send(msg)
     }
 }
