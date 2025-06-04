@@ -45,7 +45,7 @@ fun SearchLocationScreen(onLocationClick: (SelectedLocation) -> Unit) {
         onSearchTextChanged = viewModel::onSearchTextChanged
     )
 
-    Snackbar(snackbarHostState)
+    Snackbar(snackbarHostState, withBottomBarInsetSpacer = true)
 
     LaunchedEffect(Unit) {
         viewModel.announcement.collectLatest { text ->
