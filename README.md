@@ -5,6 +5,7 @@
    You can get your own OpenWeather API key from https://home.openweather.co.uk/api_keys, they have free plan for starters.
 
 ## Project structure
+This project is build fully on Compose Multi Platform framework. It is set up to run on Android and iOS.<br>
 This is a multi-module project. There are few types of modules:
    - "app" - container for core settings, like manifest or navigation
    - "feature" - containers for screens and logic, one feature can have many few screens, e.g. feature "weather forecast" can have screen for searching city and another screen for weather details of the city
@@ -14,7 +15,7 @@ This is a multi-module project. There are few types of modules:
 
 ## App Structure
 
-The project contains following screens:
+The app contains following screens:
 
 |                     Search place screen: you can search here for any place on Earth                     |                   Place forecast screen: check weather conditions for selected place                    |
 |:-------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|
