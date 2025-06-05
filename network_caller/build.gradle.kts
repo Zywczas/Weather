@@ -1,47 +1,69 @@
+import com.zywczas.buildutils.ModulesUtils
 import com.zywczas.buildutils.Versions
-import com.zywczas.buildutils.getEnvElseLocal
 
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
+    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.kotlin.compose.compiler)
     alias(libs.plugins.detekt)
 }
 
-android {
-    namespace = "com.zywczas.networkcaller"
-    compileSdk = Versions.COMPILE_SDK
+kotlin {
+    val moduleName = "networkcaller"
 
-    buildFeatures {
-        buildConfig = true
-    }
-
-    defaultConfig {
+    androidLibrary {
+        namespace = ModulesUtils.getAndroidNamespace(moduleName)
+        compileSdk = Versions.COMPILE_SDK
         minSdk = Versions.MIN_SDK
-
-        buildConfigField("String", "OPENWEATHERMAP_API_KEY", "\"${getEnvElseLocal("openweathermapApiKey", project)}\"")
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
+    val xcfName = ModulesUtils.getAndroidNamespace(moduleName)
+
+    iosX64 {
+        binaries.framework {
+            baseName = xcfName
         }
     }
-    compileOptions {
-        sourceCompatibility = Versions.JAVA_VERSION
-        targetCompatibility = Versions.JAVA_VERSION
-    }
-    kotlinOptions {
-        jvmTarget = Versions.JVM_TARGET
-    }
-}
 
-dependencies {
+    iosArm64 {
+        binaries.framework {
+            baseName = xcfName
+        }
+    }
 
-    api(libs.gsonConverter)
-    implementation(libs.retrofit)
-    implementation(platform(libs.koin.bom))
-    implementation(libs.koin.core)
-    implementation(libs.okHttpInterceptor)
-    implementation(libs.okHttp)
-    implementation(libs.androidx.annotation.jvm)
+    iosSimulatorArm64 {
+        binaries.framework {
+            baseName = xcfName
+        }
+    }
+
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation(compose.runtime)
+
+                implementation(project.dependencies.platform(libs.koin.bom))
+                implementation(libs.koin.core)
+
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.serialization.kotlinx.json)
+                implementation(libs.ktor.client.content.negotiation)
+                implementation(libs.ktor.client.logging)
+            }
+        }
+
+        androidMain {
+            dependencies {
+                implementation(libs.ktor.client.okhttp)
+            }
+        }
+
+
+        iosMain {
+            dependencies {
+                implementation(libs.ktor.client.darwin)
+            }
+        }
+    }
 }

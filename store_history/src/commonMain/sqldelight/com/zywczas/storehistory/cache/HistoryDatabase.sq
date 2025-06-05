@@ -1,0 +1,17 @@
+CREATE TABLE Location (
+	name TEXT NOT NULL PRIMARY KEY,
+	lat REAL NOT NULL,
+	lon REAL NOT NULL
+);
+
+getLocations:
+SELECT *
+FROM Location;
+
+insertLocation:
+INSERT OR REPLACE
+INTO Location (
+	name,
+	lat,
+	lon
+) VALUES ?;

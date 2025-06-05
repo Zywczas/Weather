@@ -1,40 +1,76 @@
+import com.zywczas.buildutils.ModulesUtils
 import com.zywczas.buildutils.Versions
 
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
+    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.kotlin.compose.compiler)
+    alias(libs.plugins.sqldelight)
     alias(libs.plugins.detekt)
-    alias(libs.plugins.kotlinSymbolProcessing)
 }
 
-android {
-    namespace = "com.zywczas.storehistory"
-    compileSdk = Versions.COMPILE_SDK
+kotlin {
+    val moduleName = "storehistory"
 
-    defaultConfig {
+    androidLibrary {
+        namespace = ModulesUtils.getAndroidNamespace(moduleName)
+        compileSdk = Versions.COMPILE_SDK
         minSdk = Versions.MIN_SDK
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
+    val xcfName = ModulesUtils.getXcfName(moduleName)
+
+    iosX64 {
+        binaries.framework {
+            baseName = xcfName
         }
     }
-    compileOptions {
-        sourceCompatibility = Versions.JAVA_VERSION
-        targetCompatibility = Versions.JAVA_VERSION
+
+    iosArm64 {
+        binaries.framework {
+            baseName = xcfName
+        }
     }
-    kotlinOptions {
-        jvmTarget = Versions.JVM_TARGET
+
+    iosSimulatorArm64 {
+        binaries.framework {
+            baseName = xcfName
+        }
+    }
+
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation(project(":common_utils"))
+                implementation(compose.runtime)
+
+                implementation(project.dependencies.platform(libs.koin.bom))
+                implementation(libs.koin.core)
+
+                implementation(libs.sqldelight.runtime)
+            }
+        }
+
+        androidMain {
+            dependencies {
+                implementation(libs.sqldelight.android.driver)
+            }
+        }
+
+
+        iosMain {
+            dependencies {
+                implementation(libs.sqldelight.native.driver)
+            }
+        }
     }
 }
 
-dependencies {
-
-    implementation(project(":common_util"))
-    implementation(platform(libs.koin.bom))
-    implementation(libs.koin.core)
-    implementation(libs.room)
-    implementation(libs.roomktx)
-    ksp(libs.roomCompiler)
+sqldelight {
+    databases {
+        create("HistoryDatabase") {
+            packageName = "com.zywczas.storehistory.cache"
+        }
+    }
 }

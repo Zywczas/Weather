@@ -1,56 +1,65 @@
+import com.zywczas.buildutils.ModulesUtils
 import com.zywczas.buildutils.Versions
 
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
+    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.kotlin.compose.compiler)
     alias(libs.plugins.detekt)
 }
 
-android {
-    namespace = "com.zywczas.featureforecastplace"
-    compileSdk = Versions.COMPILE_SDK
+kotlin {
+    val moduleName = "featureforecastplace"
 
-    defaultConfig {
+    androidLibrary {
+        namespace = ModulesUtils.getAndroidNamespace(moduleName)
+        compileSdk = Versions.COMPILE_SDK
         minSdk = Versions.MIN_SDK
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
+    val xcfName = ModulesUtils.getXcfName(moduleName)
+
+    iosX64 {
+        binaries.framework {
+            baseName = xcfName
         }
     }
-    compileOptions {
-        sourceCompatibility = Versions.JAVA_VERSION
-        targetCompatibility = Versions.JAVA_VERSION
+
+    iosArm64 {
+        binaries.framework {
+            baseName = xcfName
+        }
     }
-    kotlinOptions {
-        jvmTarget = Versions.JVM_TARGET
+
+    iosSimulatorArm64 {
+        binaries.framework {
+            baseName = xcfName
+        }
     }
-    buildFeatures {
-        compose = true
+
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation(project(":common_compose"))
+                implementation(project(":common_utils"))
+                implementation(project(":network_forecast"))
+                implementation(project(":network_open_weather_api"))
+                implementation(project(":network_places"))
+                implementation(project(":store_history"))
+
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                implementation(compose.ui)
+                implementation(compose.components.resources)
+                implementation(compose.components.uiToolingPreview)
+                implementation(libs.kotlinx.datetime)
+
+                implementation(project.dependencies.platform(libs.koin.bom))
+                implementation(libs.koin.core)
+                implementation(libs.koin.compose.viewmodel)
+            }
+        }
     }
-}
-
-dependencies {
-    implementation(project(":common_compose"))
-    implementation(project(":common_util"))
-    implementation(project(":network_forecast"))
-    implementation(project(":network_places"))
-    implementation(project(":store_history"))
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.material3)
-    debugImplementation(libs.androidx.ui.tooling.preview)
-    debugImplementation(libs.androidx.ui.tooling)
-
-    implementation(platform(libs.koin.bom))
-    implementation(libs.koin.core)
-    implementation(libs.koin.compose.viewmodel)
-    implementation(libs.koin.androidx.compose)
 }

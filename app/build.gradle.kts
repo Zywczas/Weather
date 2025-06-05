@@ -1,11 +1,52 @@
 import com.zywczas.buildutils.Versions
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.kotlin.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.detekt)
+}
+
+kotlin {
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "app"
+            isStatic = true
+        }
+    }
+
+    sourceSets {
+        androidMain.dependencies {
+            implementation(libs.koin.androidx.compose)
+        }
+
+        commonMain.dependencies {
+            implementation(project(":umbrella"))
+            implementation(compose.runtime)
+            implementation(libs.navigation.compose)
+
+            implementation(project.dependencies.platform(libs.koin.bom))
+
+            implementation(libs.kotlin.serialization.json)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.koin.compose)
+        }
+    }
 }
 
 android {
@@ -19,54 +60,18 @@ android {
         versionCode = Versions.VERSION_CODE
         versionName = Versions.VERSION_NAME
     }
-
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
         }
     }
     compileOptions {
         sourceCompatibility = Versions.JAVA_VERSION
         targetCompatibility = Versions.JAVA_VERSION
     }
-    kotlinOptions {
-        jvmTarget = Versions.JVM_TARGET
-    }
-    buildFeatures {
-        compose = true
-    }
-}
-
-dependencies {
-    implementation(project(":common_compose"))
-    implementation(project(":common_util"))
-    implementation(project(":feature_forecast_place"))
-    implementation(project(":network_caller"))
-    implementation(project(":network_forecast"))
-    implementation(project(":network_places"))
-    implementation(project(":store_history"))
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.navigation.compose)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
-
-    implementation(platform(libs.koin.bom))
-    implementation(libs.koin.core)
-    implementation(libs.koin.compose.viewmodel)
-    implementation(libs.koin.androidx.compose)
-
-    implementation(libs.kotlinSerializationJson)
 }
