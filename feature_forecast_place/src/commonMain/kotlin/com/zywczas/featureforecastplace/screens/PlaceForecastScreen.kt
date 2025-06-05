@@ -95,7 +95,7 @@ private fun PlaceForecastScreen(
 ) {
     Column {
         Toolbar(
-            title = viewEntity.toolbarTitle, // todo it cuts text from bottom as is too long, should ellipsize text
+            title = viewEntity.toolbarTitle,
             onBackClick = goBackAction
         )
 
