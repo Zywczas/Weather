@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.style.TextOverflow
 import com.zywczas.commoncompose.theme.Color
 import com.zywczas.commoncompose.theme.Theme
 import com.zywczas.weather.resources.commonutils.Res
@@ -30,7 +31,9 @@ fun Toolbar(
         title = {
             Text(
                 text = title,
-                style = textStyle
+                style = textStyle,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
             )
         },
         navigationIcon = onBackClick?.let {
