@@ -78,7 +78,7 @@ fun PlaceForecastScreen(location: SelectedLocation, goBackAction: OnClick) {
         )
     }
 
-    Snackbar(snackbarHostState) //todo snackbar is shown under bottom bar atm
+    Snackbar(snackbarHostState, withBottomBarInsetSpacer = true)
 
     LaunchedEffect(Unit) {
         viewModel.announcement.collectLatest { text ->
