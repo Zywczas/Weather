@@ -1,6 +1,8 @@
 package com.zywczas.featureforecastplace.viewmodel
 
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
@@ -17,6 +19,7 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 
+@Stable
 internal class PlaceForecastViewModel(
     private val getPlaceForecastUseCase: GetPlaceForecastUseCase,
     private val saveLocationsUseCase: SaveLocationUseCase
@@ -25,8 +28,8 @@ internal class PlaceForecastViewModel(
     var placeForecastViewEntity by mutableStateOf(PlaceForecastViewEntity())
         private set
 
-    var hourlyForecastViewEntity by mutableStateOf<List<HourlyForecastViewEntity>>(emptyList())
-        private set
+    private val _hourlyForecastViewEntity = mutableStateListOf<HourlyForecastViewEntity>()
+    val hourlyForecastViewEntity: List<HourlyForecastViewEntity> = _hourlyForecastViewEntity
 
     fun init(location: SelectedLocation) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -41,7 +44,9 @@ internal class PlaceForecastViewModel(
         when (val response = getPlaceForecastUseCase.get(PlaceForecastParams(lat = args.lat, lon = args.lon))) {
             is Resource.Success -> {
                 placeForecastViewEntity = response.data.current.toDomain(toolbarTitle = args.name)
-                hourlyForecastViewEntity = response.data.hourly.map { it.toDomain() }
+                _hourlyForecastViewEntity.clear()
+                val list = response.data.hourly.map { it.toDomain() }
+                _hourlyForecastViewEntity.addAll(list)
             }
             is Resource.Error -> showError(getString(response.message))
         }

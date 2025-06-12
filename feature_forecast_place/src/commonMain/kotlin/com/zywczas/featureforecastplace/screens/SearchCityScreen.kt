@@ -71,7 +71,10 @@ private fun SearchLocationScreen(
         Spacer(Modifier.height(Spacing.screenComponentsVertical))
 
         LazyColumn {
-            itemsIndexed(locations) { index, location ->
+            itemsIndexed(
+                items = locations,
+                key = { index, item -> item.hashCode() }
+            ) { index, location ->
                 when (location) {
                     is SearchListItem.Header -> ListHeader(location.text)
                     is SearchListItem.Location -> {

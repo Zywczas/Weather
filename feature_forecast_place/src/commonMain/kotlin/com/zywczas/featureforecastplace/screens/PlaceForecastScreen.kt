@@ -169,7 +169,10 @@ private fun HourlyForecast(
                         Spacer(Modifier.width(Spacing.screenBorder))
                     }
 
-                    itemsIndexed(viewEntity) { index, item ->
+                    itemsIndexed(
+                        items = viewEntity,
+                        key = { index, item -> item.hashCode() }
+                    ) { index, item ->
                         HourlyListItem(item)
 
                         if (index < viewEntity.lastIndex) {
