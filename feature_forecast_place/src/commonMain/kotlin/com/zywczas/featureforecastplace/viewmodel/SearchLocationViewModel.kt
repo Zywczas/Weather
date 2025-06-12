@@ -1,6 +1,8 @@
 package com.zywczas.featureforecastplace.viewmodel
 
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.TextFieldValue
@@ -34,6 +36,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 
+@Stable
 internal class SearchLocationViewModel(
     private val getNetworkLocationsUseCase: GetNetworkLocationsUseCase,
     private val getLocationsHistoryUseCase: GetLocationsHistoryUseCase
@@ -44,8 +47,8 @@ internal class SearchLocationViewModel(
     var searchText by mutableStateOf(TextFieldValue())
         private set
 
-    var locations by mutableStateOf<List<SearchListItem>>(emptyList())
-        private set
+    private val _locations = mutableStateListOf<SearchListItem>()
+    val locations: List<SearchListItem> = _locations
 
     private val searchQueryMutable = MutableSharedFlow<String>(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
     private val searchQueryFlow: SharedFlow<String> = searchQueryMutable
@@ -83,7 +86,11 @@ internal class SearchLocationViewModel(
         val newQuery = placeName.trim()
         if (newQuery.isNotBlank()) {
             when (val result = getNetworkLocationsUseCase.get(LocationsParams(placeName = newQuery))) {
-                is Resource.Success -> locations = result.data.map { it.toDomain() }
+                is Resource.Success -> {
+                    val list = result.data.map { it.toDomain() }
+                    _locations.clear()
+                    _locations.addAll(list)
+                }
                 is Resource.Error -> showError(getString(result.message))
             }
         } else {
@@ -94,9 +101,11 @@ internal class SearchLocationViewModel(
     private suspend fun getHistoryLocations() {
         val historyLocations = getLocationsHistoryUseCase.get().map { it.toDomain() }
         if (historyLocations.isNotEmpty()) {
-            locations = mutableListOf<SearchListItem>(SearchListItem.Header(getString(Res.string.recent_searches_title))).apply {
+            val list = mutableListOf<SearchListItem>(SearchListItem.Header(getString(Res.string.recent_searches_title))).apply {
                 addAll(historyLocations)
             }
+            _locations.clear()
+            _locations.addAll(list)
         }
     }
 }
