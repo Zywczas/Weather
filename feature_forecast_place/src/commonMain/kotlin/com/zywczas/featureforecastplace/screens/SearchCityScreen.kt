@@ -10,8 +10,14 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import com.zywczas.commoncompose.components.BottomBarInsetSpacer
 import com.zywczas.commoncompose.components.HorizontalListItemDivider
@@ -22,6 +28,7 @@ import com.zywczas.commoncompose.components.Snackbar
 import com.zywczas.commoncompose.components.Toolbar
 import com.zywczas.commoncompose.theme.Spacing
 import com.zywczas.commoncompose.theme.Theme
+import com.zywczas.commonutils.RegexExps
 import com.zywczas.featureforecastplace.domain.SearchListItem
 import com.zywczas.featureforecastplace.viewmodel.SearchLocationViewModel
 import com.zywczas.weather.resources.commonutils.Res
@@ -33,16 +40,29 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun SearchLocationScreen(onLocationClick: (SelectedLocation) -> Unit) {
+
     val viewModel: SearchLocationViewModel = koinViewModel()
     val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) { viewModel.init() }
 
+    var searchText by rememberSaveable { mutableStateOf("") }
+    var searchTextSelectionEnd by rememberSaveable { mutableStateOf(0) }
+    val textFieldValue by derivedStateOf { TextFieldValue(searchText, TextRange(searchTextSelectionEnd)) }
+
+    val onSearchTextChanged: (TextFieldValue) -> Unit = { textFieldValue ->
+        if (CITY_NAME_PATTERN.matches(textFieldValue.text)) {
+            searchText = textFieldValue.text
+            searchTextSelectionEnd = textFieldValue.selection.end
+            viewModel.onSearchTextChanged(textFieldValue.text)
+        }
+    }
+
     SearchLocationScreen(
         locations = viewModel.locations,
         onLocationClick = onLocationClick,
-        searchText = viewModel.searchText,
-        onSearchTextChanged = viewModel::onSearchTextChanged
+        searchText = textFieldValue,
+        onSearchTextChanged = onSearchTextChanged
     )
 
     Snackbar(snackbarHostState, withBottomBarInsetSpacer = true)
@@ -118,3 +138,5 @@ private fun PreviewSearchCityScreen() {
         )
     }
 }
+
+private val CITY_NAME_PATTERN = Regex(RegexExps.INPUT_CITY_TYPING)
