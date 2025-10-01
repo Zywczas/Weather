@@ -1,15 +1,9 @@
 package com.zywczas.featureforecastplace.viewmodel
 
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.viewModelScope
 import com.zywczas.commonutils.BaseViewModel
 import com.zywczas.commonutils.Constants
-import com.zywczas.commonutils.RegexExps
 import com.zywczas.commonutils.Resource
 import com.zywczas.commonutils.logD
 import com.zywczas.featureforecastplace.domain.SearchListItem
@@ -25,7 +19,8 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -42,16 +37,10 @@ internal class SearchLocationViewModel(
     private val getLocationsHistoryUseCase: GetLocationsHistoryUseCase
 ) : BaseViewModel() {
 
-    private val cityNamePattern: Regex = Regex(RegexExps.INPUT_CITY_TYPING)
+    private val _locations = MutableStateFlow<List<SearchListItem>>(emptyList())
+    val locations: StateFlow<List<SearchListItem>> = _locations
 
-    var searchText by mutableStateOf(TextFieldValue())
-        private set
-
-    private val _locations = mutableStateListOf<SearchListItem>()
-    val locations: List<SearchListItem> = _locations
-
-    private val searchQueryMutable = MutableSharedFlow<String>(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    private val searchQueryFlow: SharedFlow<String> = searchQueryMutable
+    private val searchQueryFlow = MutableSharedFlow<String>(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
     fun init() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -60,11 +49,8 @@ internal class SearchLocationViewModel(
         subscribeToSearchQuery()
     }
 
-    fun onSearchTextChanged(textFieldValue: TextFieldValue) {
-        if (cityNamePattern.matches(textFieldValue.text)) {
-            searchText = textFieldValue
-            searchQueryMutable.tryEmit(textFieldValue.text)
-        }
+    fun onSearchTextChanged(text: String) {
+        searchQueryFlow.tryEmit(text)
     }
 
     @OptIn(FlowPreview::class)
@@ -88,8 +74,7 @@ internal class SearchLocationViewModel(
             when (val result = getNetworkLocationsUseCase.get(LocationsParams(placeName = newQuery))) {
                 is Resource.Success -> {
                     val list = result.data.map { it.toDomain() }
-                    _locations.clear()
-                    _locations.addAll(list)
+                    _locations.value = list
                 }
                 is Resource.Error -> showError(getString(result.message))
             }
@@ -104,8 +89,7 @@ internal class SearchLocationViewModel(
             val list = mutableListOf<SearchListItem>(SearchListItem.Header(getString(Res.string.recent_searches_title))).apply {
                 addAll(historyLocations)
             }
-            _locations.clear()
-            _locations.addAll(list)
+            _locations.value = list
         }
     }
 }
