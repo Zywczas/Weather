@@ -1,7 +1,6 @@
 package com.zywczas.featureforecastplace.viewmodel
 
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.viewModelScope
 import com.zywczas.commonutils.BaseViewModel
 import com.zywczas.commonutils.Constants
@@ -20,6 +19,8 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -36,8 +37,8 @@ internal class SearchLocationViewModel(
     private val getLocationsHistoryUseCase: GetLocationsHistoryUseCase
 ) : BaseViewModel() {
 
-    private val _locations = mutableStateListOf<SearchListItem>()
-    val locations: List<SearchListItem> = _locations
+    private val _locations = MutableStateFlow<List<SearchListItem>>(emptyList())
+    val locations: StateFlow<List<SearchListItem>> = _locations
 
     private val searchQueryFlow = MutableSharedFlow<String>(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
@@ -73,8 +74,7 @@ internal class SearchLocationViewModel(
             when (val result = getNetworkLocationsUseCase.get(LocationsParams(placeName = newQuery))) {
                 is Resource.Success -> {
                     val list = result.data.map { it.toDomain() }
-                    _locations.clear()
-                    _locations.addAll(list)
+                    _locations.value = list
                 }
                 is Resource.Error -> showError(getString(result.message))
             }
@@ -89,8 +89,7 @@ internal class SearchLocationViewModel(
             val list = mutableListOf<SearchListItem>(SearchListItem.Header(getString(Res.string.recent_searches_title))).apply {
                 addAll(historyLocations)
             }
-            _locations.clear()
-            _locations.addAll(list)
+            _locations.value = list
         }
     }
 }

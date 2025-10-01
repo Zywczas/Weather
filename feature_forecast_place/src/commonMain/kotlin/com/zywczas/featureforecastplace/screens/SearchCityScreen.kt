@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -59,7 +60,7 @@ fun SearchLocationScreen(onLocationClick: (SelectedLocation) -> Unit) {
     }
 
     SearchLocationScreen(
-        locations = viewModel.locations,
+        locations = viewModel.locations.collectAsState().value,
         onLocationClick = onLocationClick,
         searchText = textFieldValue,
         onSearchTextChanged = onSearchTextChanged

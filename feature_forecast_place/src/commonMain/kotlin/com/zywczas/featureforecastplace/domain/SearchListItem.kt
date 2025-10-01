@@ -1,5 +1,8 @@
 package com.zywczas.featureforecastplace.domain
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 internal sealed class SearchListItem {
 
     data class Header(val text: String) : SearchListItem()
