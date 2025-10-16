@@ -13,4 +13,9 @@ abstract class BaseViewModel : ViewModel() {
     suspend fun showError(msg: String) {
         _announcement.send(msg)
     }
+
+    override fun onCleared() {
+        _announcement.close()
+        super.onCleared()
+    }
 }
